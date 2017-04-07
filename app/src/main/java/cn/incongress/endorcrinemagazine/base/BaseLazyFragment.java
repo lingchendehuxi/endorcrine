@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 
 /**
  * Created by Jacky on 2017/4/7.
- * <p>
- * 实现懒加载的BaseFragment
  */
 
 public abstract class BaseLazyFragment extends Fragment {
@@ -20,8 +18,6 @@ public abstract class BaseLazyFragment extends Fragment {
     protected boolean isVisible;
     private boolean isPrepared;
     private boolean isFirst = true;
-
-    //--------------------system method callback------------------------//
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -66,11 +62,6 @@ public abstract class BaseLazyFragment extends Fragment {
         return mRootView;
     }
 
-    //--------------------------------method---------------------------//
-
-    /**
-     * 懒加载
-     */
     protected void lazyLoad() {
         if (!isPrepared || !isVisible || !isFirst) {
             return;
@@ -79,29 +70,13 @@ public abstract class BaseLazyFragment extends Fragment {
         isFirst = false;
     }
 
-    //--------------------------abstract method------------------------//
-
-    /**
-     * 在onActivityCreated中调用的方法，可以用来进行初始化操作。
-     */
     protected abstract void initPrepare();
 
-    /**
-     * fragment被设置为不可见时调用
-     */
     protected abstract void onInvisible();
 
-    /**
-     * 这里获取数据，刷新界面
-     */
     protected abstract void initData();
 
-    /**
-     * 初始化布局，请不要把耗时操作放在这个方法里，这个方法用来提供一个
-     * 基本的布局而非一个完整的布局，以免ViewPager预加载消耗大量的资源。
-     */
     protected abstract View initView(LayoutInflater inflater,
                                      @Nullable ViewGroup container,
                                      @Nullable Bundle savedInstanceState);
-
 }
