@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yinglan.alphatabs.AlphaTabsIndicator
+        android:id="@+id/ati_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <!--app:tabIconNormal=""-->
+        <!--app:tabIconSelected=""-->
+        <!--app:badgeBackgroundColor=""-->
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabText="@string/home_bottomChoose"
+            app:tabTextSize="@dimen/text_size_media"
+            app:textColorNormal="@color/gray"
+            app:textColorSelected="@color/black" />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+
+            app:tabText="@string/home_bottomCurrent"
+            app:tabTextSize="@dimen/text_size_media"
+            app:textColorNormal="@color/gray"
+            app:textColorSelected="@color/black" />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabText="@string/home_bottomPast"
+            app:tabTextSize="@dimen/text_size_media"
+            app:textColorNormal="@color/gray"
+            app:textColorSelected="@color/black" />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:tabText="@string/home_bottomMe"
+            app:tabTextSize="@dimen/text_size_media"
+            app:textColorNormal="@color/gray"
+            app:textColorSelected="@color/black" />
+
+    </com.yinglan.alphatabs.AlphaTabsIndicator>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_above="@id/ati_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+</RelativeLayout>
