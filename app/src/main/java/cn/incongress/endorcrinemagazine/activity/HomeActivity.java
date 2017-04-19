@@ -5,6 +5,7 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
+
 import com.yinglan.alphatabs.AlphaTabsIndicator;
 import com.yinglan.alphatabs.OnTabChangedListner;
 
@@ -57,7 +58,6 @@ public class HomeActivity extends BaseActivity {
 
         mHomeAdapter = new HomeFragmentAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mHomeAdapter);
-
         mIndicator.setViewPager(mViewPager);
         mIndicator.setOnTabChangedListner(new OnTabChangedListner() {
             @Override

@@ -22,24 +22,21 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     //底部导航栏
     compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.yinglan.alphatabs:library:1.0.3'
-
     //注解
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.jakewharton:butterknife:8.2.1'
-
     //图片加载器
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-
+    compile 'com.github.bumptech.glide:glide:3.7.0'/*
     //materialDesign主题适配到2.2+
-    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-
+    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'*/
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:recyclerview-v7:25.2.0'
+    compile project(path: ':library')
+    compile 'com.android.support:design:25.2.0'
 }

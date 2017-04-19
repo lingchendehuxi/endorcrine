@@ -3,18 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<LinearLayout
+    android:id="@+id/title_layout"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        />
     <com.yinglan.alphatabs.AlphaTabsIndicator
         android:id="@+id/ati_navigation"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
         <!--app:tabIconNormal=""-->
         <!--app:tabIconSelected=""-->
         <!--app:badgeBackgroundColor=""-->
-
         <com.yinglan.alphatabs.AlphaTabView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -57,10 +66,10 @@
             app:textColorSelected="@color/black" />
 
     </com.yinglan.alphatabs.AlphaTabsIndicator>
-
+</LinearLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_content"
-        android:layout_above="@id/ati_navigation"
+        android:layout_above="@id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 

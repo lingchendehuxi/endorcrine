@@ -40,6 +40,58 @@ public class Constants {
      */
     public static final String CACHE_FILE_NAME = "endorcrine_magazine_folder";
 
+    //所有接口再加一个输入参数：lan，中文传cn,英文传en
+    //测试服：
+    public static final String TEST_SERVICE = "http://incongress.cn";
+
+    //正式服：
+    public static final String FORMAL_SERVICE = "http://xhy.incongress.cn";
+
+    /*列表精选
+      输入参数：int proId,Integer lastNotesId
+      返回参数：state，msg,pageState,notesArray；
+      notesArray:notesId,notesTitle,smallTitle,authors,notesType,readCount,lanmu
+    */
+    public static final String SELECTED = "/notesApi.do?method=getNotesByJingxuan";
+
+    /*期次下列表
+      输入参数：int proId,int state（0：当期；1，往期）,String notesType（state为0时不需要）
+      返回参数：state，msg,notesType，lanmuArray
+      lanmuArray：lanmuId，lanmu，notesArray
+      notesArray：同接口1
+    */
+    public static final String PERIOD_LIST  = "/notesApi.do?method=getNotesByNotesType";
+
+
+    /*往期期次
+      输入参数：int proId
+      返回参数：state，msg,yearArray
+      yearArray:year,notesTypeArray
+      notesTypeArray：notesType
+    */
+    public static final String PREVIOUS_PERIOD = "/notesApi.do?method=getNotesQici";
+
+    /*获取所有栏目、年份（搜索）
+      新接口：/notesApi.do?method=getNotesLmnf
+      输入参数：int proId
+      返回参数：years，lanmuArray
+      lanmuArray：lanmuId，lanmu
+    */
+    public static final String GET_COLUMN_YEAR = "http://xhy.incongress.cn";
+
+    /*搜索
+      输入参数：int proId,Integer textType,String text,String lanmus,String years
+      返回参数：state,msg，name，notesArray
+      notesArray：同接口1
+    */
+    public static final String SEARCH = "/notesApi.do?method=getNotesBySearch";
+
+
+    /*详情页
+      输入参数：userState(已登录为1；未登录为0),notesId(item ID)
+    */
+    public static final String DETAILS="/notesApi.do?method=getNotesById";
+
     //个人信息字段
     public static final String SP_PERSON_LOGO = "person_logo";
     public static final String SP_PERSON_NAME = "person_name";
