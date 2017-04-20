@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_past_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.incongress.endorcrinemagazine.activity.PastDetailsActivity">
+    <include
+        android:id="@+id/past_details_ictitle"
+        layout="@layout/activity_title"/>
+
+    <ExpandableListView
+        android:id="@+id/past_details_expandable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/layout_padding"
+        android:paddingRight="@dimen/layout_padding"
+        android:layout_below="@+id/past_details_ictitle" />
+    <ProgressBar
+        android:id="@+id/past_details_pgb"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

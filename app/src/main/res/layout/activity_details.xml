@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_details"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="cn.incongress.endorcrinemagazine.activity.DetailsActivity">
+    <include layout="@layout/activity_title"/>
+<cn.incongress.endorcrinemagazine.utils.ProgressWebView
+    android:id="@+id/details_web"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:scrollbars="none"
+    ></cn.incongress.endorcrinemagazine.utils.ProgressWebView>
+    <TextView
+        android:id="@+id/details_title"
+        android:layout_width="match_parent"
+        android:background="@color/details"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_height="40dp" />
+</LinearLayout>
