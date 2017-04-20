@@ -46,6 +46,13 @@
     <string name="register_next">下一步</string>
 
 
+    <!--搜索-->
+    <string name="search_column">栏目</string>
+    <string name="search_year">年份</string>
+    <string name="search_title">标题</string>
+    <string name="search_author">作者</string>
+
+    
     <string name="choose_piecemeal_text2">期</string>
     <string name="choose_piecemeal_text3">▪</string>
     <string name="choose_piecemeal_text4">人查看</string>

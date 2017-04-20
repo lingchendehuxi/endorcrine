@@ -1,5 +1,6 @@
 package cn.incongress.endorcrinemagazine.fragment;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import cn.incongress.endorcrinemagazine.R;
+import cn.incongress.endorcrinemagazine.activity.PastDetailsActivity;
 import cn.incongress.endorcrinemagazine.adapter.PastAdapter;
 
 public class MonthFragment extends Fragment {
@@ -45,8 +47,9 @@ public class MonthFragment extends Fragment {
 
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), mArrayList.get(position) ,
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), PastDetailsActivity.class);
+                intent.putExtra("detailsTitle",mArrayList.get(position));
+                startActivity(intent);
             }
         });
         return view;

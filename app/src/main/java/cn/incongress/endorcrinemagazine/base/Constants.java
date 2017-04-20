@@ -77,7 +77,7 @@ public class Constants {
       返回参数：years，lanmuArray
       lanmuArray：lanmuId，lanmu
     */
-    public static final String GET_COLUMN_YEAR = "http://xhy.incongress.cn";
+    public static final String GET_COLUMN_YEAR = "/notesApi.do?method=getNotesLmnf";
 
     /*搜索
       输入参数：int proId,Integer textType,String text,String lanmus,String years

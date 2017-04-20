@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import java.util.Map;
 
 import cn.incongress.endorcrinemagazine.R;
 import cn.incongress.endorcrinemagazine.activity.DetailsActivity;
+import cn.incongress.endorcrinemagazine.activity.SearchActivity;
 import cn.incongress.endorcrinemagazine.adapter.ChooseAdapater;
 import cn.incongress.endorcrinemagazine.base.BaseLazyFragment;
 import cn.incongress.endorcrinemagazine.base.Constants;
@@ -49,6 +51,7 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
     private int lastVisibleItem;
     private List<ChooseBean> list;
     private boolean FIRST = true;
+    private LinearLayout mSearchLayout;
 
 @Override
     protected void initPrepare() {
@@ -70,6 +73,12 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
          * 上拉加载   就是监听RecyclerView的滚动事件 判断是不是最后一条，如果是最后一条就去加载数据
          * -------->然后给适配器 添加数据
          * */
+        mSearchLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+            }
+        });
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -113,6 +122,7 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
         View view = inflater.inflate(R.layout.fragment_choose, container, false);
         mSwipeRefreshWidget = (SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh_widget);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.lisr);
+        mSearchLayout = (LinearLayout) view.findViewById(R.id.search_layout);
         mpgb = (ProgressBar) view.findViewById(R.id.choose_pgb);
         list = new ArrayList<ChooseBean>();
         /**

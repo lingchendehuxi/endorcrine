@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ public class PastFragment extends BaseLazyFragment {
     private ViewPager vpg;
     private TabLayout tab;
     private List<PastBean> pastList;
+    private ProgressBar mPgb;
     @Override
     protected void initPrepare() {
 
@@ -57,6 +59,7 @@ public class PastFragment extends BaseLazyFragment {
         View view = inflater.inflate(R.layout.fragment_past, container, false);
          vpg = (ViewPager) view.findViewById(R.id.viewpager);
         tab = (TabLayout) view.findViewById(R.id.tabLayout);
+        mPgb = (ProgressBar) view.findViewById(R.id.past_pgb);
         return view;
     }
 
@@ -67,7 +70,6 @@ public class PastFragment extends BaseLazyFragment {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("proId", "18");
                 params.put("lan", "cn");
-
                 try {
                     JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE+Constants.PREVIOUS_PERIOD,params, "utf8"));
                     JSONArray array = jsonObject.getJSONArray("yearArray");
@@ -100,6 +102,7 @@ public class PastFragment extends BaseLazyFragment {
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
+                    mPgb.setVisibility(View.GONE);
                     MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getActivity().getSupportFragmentManager());
                     Log.e("GYW","----1-"+pastList.size());
                     for(int i = 0;i<pastList.size();i++){
