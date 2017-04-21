@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import java.util.Map;
 
 import cn.incongress.endorcrinemagazine.R;
 import cn.incongress.endorcrinemagazine.activity.DetailsActivity;
+import cn.incongress.endorcrinemagazine.activity.SearchActivity;
 import cn.incongress.endorcrinemagazine.adapter.CurrentAdapater;
 import cn.incongress.endorcrinemagazine.base.BaseLazyFragment;
 import cn.incongress.endorcrinemagazine.base.Constants;
@@ -44,6 +46,8 @@ public class CurrentFragment extends BaseLazyFragment {
     private ExpandableListView mExpandableListView;
     private CurrentAdapater adapter;
     private ProgressBar mPgb;
+    private LinearLayout mSearchLayout;
+
     @Override
     protected void initPrepare() {
 
@@ -57,7 +61,12 @@ public class CurrentFragment extends BaseLazyFragment {
     @Override
     protected void initData() {
         initHttp();
-
+        mSearchLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+            }
+        });
     }
     private Handler handler = new Handler(){
         @Override
@@ -95,6 +104,7 @@ public class CurrentFragment extends BaseLazyFragment {
         mExpandableListView = (ExpandableListView)view.findViewById(R.id.listView);
         mExpandableListView.setGroupIndicator(null);
         mPgb = (ProgressBar) view.findViewById(R.id.current_pgb);
+        mSearchLayout = (LinearLayout) view.findViewById(R.id.search_layout);
         adapter = new CurrentAdapater(getActivity());
         current_list = new ArrayList<CurrentBean>();
         choose_list = new ArrayList<ChooseBean>();

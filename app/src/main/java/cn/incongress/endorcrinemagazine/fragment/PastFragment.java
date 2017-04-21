@@ -1,5 +1,6 @@
 package cn.incongress.endorcrinemagazine.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import org.json.JSONArray;
@@ -22,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.incongress.endorcrinemagazine.R;
+import cn.incongress.endorcrinemagazine.activity.SearchActivity;
 import cn.incongress.endorcrinemagazine.adapter.MyViewPagerAdapter;
 import cn.incongress.endorcrinemagazine.base.BaseLazyFragment;
 import cn.incongress.endorcrinemagazine.base.Constants;
@@ -38,6 +41,7 @@ public class PastFragment extends BaseLazyFragment {
     private TabLayout tab;
     private List<PastBean> pastList;
     private ProgressBar mPgb;
+    private LinearLayout mSearchLayout;
     @Override
     protected void initPrepare() {
 
@@ -52,11 +56,17 @@ public class PastFragment extends BaseLazyFragment {
     protected void initData() {
         pastList = new ArrayList<>();
         initHttp();
-
+        mSearchLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+            }
+        });
     }
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_past, container, false);
+        mSearchLayout = (LinearLayout) view.findViewById(R.id.search_layout);
          vpg = (ViewPager) view.findViewById(R.id.viewpager);
         tab = (TabLayout) view.findViewById(R.id.tabLayout);
         mPgb = (ProgressBar) view.findViewById(R.id.past_pgb);

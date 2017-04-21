@@ -10,19 +10,77 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal"
-    android:background="@color/red"
-    ></LinearLayout>
-    <ExpandableListView
+    android:gravity="center_vertical"
+    >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/search_gray"
+        android:layout_marginLeft="@dimen/layout_padding"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="@dimen/layout_padding"
+        >
+        <Spinner
+            android:id="@+id/search_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:overlapAnchor="false"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="@dimen/layout_padding"
+            android:layout_marginRight="@dimen/layout_padding"
+            android:entries="@array/searhArray"
+            />
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="16dp"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:ellipsize="end"
+            android:layout_height="match_parent"
+            android:background="@null"
+            />
+    </LinearLayout>
+    <TextView
+        android:onClick="back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/search_back"
+        android:text="@string/search_back"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+</LinearLayout>
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/search_result_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/search_back"
+        android:text="未找到匹配数据\n请点击重新搜索"
+        />
+    <android.support.v7.widget.RecyclerView
         android:visibility="gone"
         android:id="@+id/search_expandable"
         android:paddingLeft="@dimen/layout_padding"
         android:paddingRight="@dimen/layout_padding"
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_titlelayout"
-        ></ExpandableListView>
+        ></android.support.v7.widget.RecyclerView>
     <ScrollView
+        android:visibility="gone"
+        android:id="@+id/choiceLayout"
         android:layout_below="@+id/search_titlelayout"
         android:layout_width="match_parent"
         android:fillViewport="true"
@@ -30,19 +88,21 @@
     <LinearLayout
         android:paddingLeft="@dimen/layout_padding"
         android:paddingRight="@dimen/layout_padding"
-        android:layout_marginTop="30dp"
-        android:id="@+id/choiceLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        ><TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_column"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        />
+        >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_column"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:textColor="@color/search_back"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,15 +112,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_year"
-            android:textSize="20dp"
-            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/search_back"
             android:textStyle="bold"
             />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/search_year_recycler"
-            android:layout_marginBottom="30dp"
-            /></LinearLayout>
+            />
+        <Button
+            android:id="@+id/go_search"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/search_search"
+            android:textSize="18dp"
+            android:textColor="@color/search_back"
+            android:background="@drawable/btn_me_login"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            />
+    </LinearLayout>
     </ScrollView>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_pgb"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>

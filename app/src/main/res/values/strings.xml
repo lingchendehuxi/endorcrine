@@ -47,6 +47,8 @@
 
 
     <!--搜索-->
+    <string name="search_search">搜    索</string>
+    <string name="search_back">取消</string>
     <string name="search_column">栏目</string>
     <string name="search_year">年份</string>
     <string name="search_title">标题</string>
