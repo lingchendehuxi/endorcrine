@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_register"
+    android:id="@+id/ll_whole_area"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -33,11 +33,15 @@
                     android:text="@string/login_name1"
                     />
                 <EditText
+                    android:id="@+id/regist_name"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/login_name2"
+                    android:singleLine="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     />
             </LinearLayout>
             <LinearLayout
@@ -58,11 +62,18 @@
                     android:text="@string/register_sex1"
                     />
                 <EditText
+                    android:id="@+id/regist_sex"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:focusable="false"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_sex2"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/me_next"
                     />
             </LinearLayout>
             <LinearLayout
@@ -83,11 +94,15 @@
                     android:text="@string/register_email1"
                     />
                 <EditText
+                    android:id="@+id/regist_email"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_email2"
+                    android:singleLine="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     />
             </LinearLayout>
             <LinearLayout
@@ -108,11 +123,15 @@
                     android:text="@string/register_phone1"
                     />
                 <EditText
+                    android:id="@+id/regist_phone"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_phone2"
+                    android:singleLine="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     />
             </LinearLayout>
             <LinearLayout
@@ -133,11 +152,19 @@
                     android:text="@string/register_region1"
                     />
                 <EditText
+                    android:id="@+id/regist_city"
                     android:layout_width="0dp"
+                    android:focusable="false"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_region2"
+                    android:singleLine="true"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/me_next"
                     />
             </LinearLayout>
             <LinearLayout
@@ -158,11 +185,15 @@
                     android:text="@string/register_district1"
                     />
                 <EditText
+                    android:id="@+id/regist_city_qx"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:singleLine="true"
                     android:hint="@string/register_district2"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     />
             </LinearLayout>
             <LinearLayout
@@ -183,11 +214,20 @@
                     android:text="@string/register_danw1"
                     />
                 <EditText
+                    android:id="@+id/regist_dw"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:focusable="false"
                     android:hint="@string/register_danw2"
+                    android:singleLine="true"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/me_next"
                     />
             </LinearLayout>
             <LinearLayout
@@ -208,11 +248,19 @@
                     android:text="@string/register_danwgrades1"
                     />
                 <EditText
+                    android:id="@+id/regist_dwdj"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:singleLine="true"
+                    android:focusable="false"
                     android:hint="@string/register_danwgrades2"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/me_next"
                     />
             </LinearLayout>
             <LinearLayout
@@ -233,11 +281,20 @@
                     android:text="@string/register_keshi1"
                     />
                 <EditText
+                    android:id="@+id/regist_ks"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:singleLine="true"
+                    android:focusable="false"
                     android:hint="@string/register_keshi2"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/me_next"
                     />
             </LinearLayout>
             <LinearLayout
@@ -258,11 +315,20 @@
                     android:text="@string/register_title1"
                     />
                 <EditText
+                    android:id="@+id/regist_zc"
                     android:layout_width="0dp"
+                    android:focusable="false"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_title2"
+                    android:singleLine="true"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/me_next"
                     />
             </LinearLayout>
             <LinearLayout
@@ -283,15 +349,25 @@
                     android:text="@string/register_post1"
                     />
                 <EditText
+                    android:id="@+id/regist_zw"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:focusable="false"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_post2"
+                    android:singleLine="true"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/me_next"
                     />
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_regist_next"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="15dp"

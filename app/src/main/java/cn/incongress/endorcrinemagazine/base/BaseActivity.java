@@ -40,6 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private InputMethodManager manager;
     /**
+     * 个人信息sp文件名
+     **/
+    private static final String SP_PERSON_INFO = "personInfo";
+    /**
      * 基类维护的Handler助手
      */
     protected Handler mHandler = new Handler() {
@@ -56,8 +60,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         mSharedPreference = getSharedPreferences(Constants.DEFAULT_SP_NAME, MODE_PRIVATE);
 
         ActivityUtils.addActivity(this);
-        setContentView(savedInstanceState);
 
+        setContentView(savedInstanceState);
         ButterKnife.bind(this);
 
         initializeViews(savedInstanceState);
@@ -140,7 +144,16 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
-
+    protected void setSPStringValue(String key, String value) {
+        SharedPreferences sp = getSharedPreferences(SP_PERSON_INFO, MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString(key, value);
+        edit.commit();
+    }
+    protected String getSPStringValue(String key) {
+        SharedPreferences sp = getSharedPreferences(SP_PERSON_INFO, MODE_PRIVATE);
+        return sp.getString(key, "");
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

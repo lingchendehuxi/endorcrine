@@ -62,6 +62,8 @@ public class SearchActivity extends BaseActivity {
     Button mGoSearch;
     @BindView(R.id.search_result_null)
     TextView mResultNull;
+    @BindView(R.id.search_back)
+    TextView mBack;
 
     private SearchColumnAdapater mColumnAdapter;
     private SearchYearAdapater mYearAdapter;
@@ -69,10 +71,10 @@ public class SearchActivity extends BaseActivity {
 
     private List<SearchColumnBean> mColumnList = new ArrayList<>();
     private List<SearchYearBean> mYearList = new ArrayList<>();
-    private List<ChooseBean> mResultList = new ArrayList<>();
+    private List<ChooseBean> mResultList;
 
     private String TEXTTYPE;
-    private String lanmus,years,text;
+    private String lanmus = "",years ="",text;
     @Override
     protected void setContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_search);
@@ -80,6 +82,19 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
         initHttp(true);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if("取消".equals(mBack.getText().toString())){
+                    finish();
+                }else if("返回".equals(mBack.getText().toString())){
+                    mBack.setText("取消");
+                    lanmus = ""; years = "";
+                    mLinaearLayout.setVisibility(View.VISIBLE);
+                    mRecyclerView.setVisibility(View.GONE);
+                }
+            }
+        });
         mGoSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +137,7 @@ public class SearchActivity extends BaseActivity {
                 public void run() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("proId", "18");
+                    params.put("lan", "cn");
                     try {
                         JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.GET_COLUMN_YEAR, params, "GBK"));
                         Log.e("GYW", jsonObject.toString());
@@ -159,6 +175,7 @@ public class SearchActivity extends BaseActivity {
                     params.put("textType",TEXTTYPE);
                     params.put("lanmus", lanmus);
                     params.put("years", years);
+                    params.put("lan", "cn");
                     try {
                         JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.SEARCH, params, "utf-8"));
                         if(jsonObject.getInt("state")==1){
@@ -237,28 +254,45 @@ public class SearchActivity extends BaseActivity {
                     });
                     break;
                 case 2:
-                    mLinaearLayout.setVisibility(View.GONE);
-                    mPgb.setVisibility(View.VISIBLE);
-                    text = mEdit.getText().toString();
-                    for(int i = 0;i<mColumnList.size();i++){
-                        if(mColumnList.get(i).isSelected()){
-                            if(lanmus == null) {
-                                lanmus =  mColumnList.get(i).getLanmuId();
-                            }else{
-                                lanmus = lanmus + "," + mColumnList.get(i).getLanmuId();
+                    mResultList = new ArrayList<>();
+                    if(mEdit.getText().toString() != null){
+                        text = mEdit.getText().toString();
+                    }else{
+                        text = "";
+                    }
+                        for (int i = 0; i < mColumnList.size(); i++) {
+                            if (mColumnList.get(i).isSelected()) {
+                                if ("".equals(lanmus)) {
+                                    lanmus = mColumnList.get(i).getLanmuId();
+                                } else {
+                                    lanmus = lanmus + "," + mColumnList.get(i).getLanmuId();
+                                }
                             }
                         }
-                    }
                     for(int i = 0;i<mYearList.size();i++){
                         if(mYearList.get(i).isSelected()){
-                            if(years == null){
+                            if("".equals(years)){
                                 years = mYearList.get(i).getYear();
                             }else{
                                 years = years+","+mYearList.get(i).getYear();
                             }
                         }
                     }
-                    initHttp(false);
+                    if(lanmus == null){
+                        lanmus = "";
+                    }
+                    if(years == null){
+                        years = "";
+                }
+                    Log.e("GYW","--"+text+ "**"+lanmus +"&&"+years+"##"+ TEXTTYPE);
+                    if(!"".equals(text)||!"".equals(lanmus)||!"".equals(years)){
+                        mBack.setText("返回");
+                        mLinaearLayout.setVisibility(View.GONE);
+                        mPgb.setVisibility(View.VISIBLE);
+                        initHttp(false);
+                    }else{
+                        Toast.makeText(getApplication(),"请选择搜索内容",Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case 3:
                     mPgb.setVisibility(View.GONE);
@@ -293,15 +327,13 @@ public class SearchActivity extends BaseActivity {
                     break;
                 case 5:
                     mEdit.setText("");
+                    mBack.setText("取消");
                     mResultNull.setVisibility(View.GONE);
                     mLinaearLayout.setVisibility(View.VISIBLE);
                     break;
             }
         }
     };
-    public void back(View view){
-        finish();
-    }
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){

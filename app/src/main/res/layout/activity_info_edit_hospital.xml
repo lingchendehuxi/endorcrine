@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_info_edit_hospital"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="cn.incongress.endorcrinemagazine.activity.info.InfoEditHospitalActivity">
+    <include layout="@layout/activity_title"/>
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:dividerHeight="1dp"
+        android:headerDividersEnabled="false"
+        android:id="@+id/lv_hospitals"
+        android:divider="@color/md_divider_black"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

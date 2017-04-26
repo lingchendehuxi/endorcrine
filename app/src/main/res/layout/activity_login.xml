@@ -25,6 +25,7 @@
             android:gravity="center"
             />
         <EditText
+            android:id="@+id/login_name"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -51,8 +52,10 @@
             android:gravity="center"
             />
         <EditText
+            android:id="@+id/login_phone"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:numeric="integer"
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="@string/login_phone2"
@@ -84,10 +87,12 @@
             android:gravity="center"
             />
         <EditText
+            android:id="@+id/login_yzm"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:numeric="integer"
             android:hint="@string/login_yz2"
             />
         </LinearLayout>
@@ -98,16 +103,19 @@
             android:layout_marginBottom="5dp"
             android:background="@color/black"
             />
-        <TextView
+        <Button
+            android:id="@+id/login_haveyzm"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/login_yz3"
+            android:background="@drawable/btn_login_yzm"
             android:textColor="@color/black"
             android:textSize="16dp"/>
     </LinearLayout>
     <Button
+        android:id="@+id/btn_login"
     android:layout_marginLeft="40dp"
     android:layout_marginRight="40dp"
     android:layout_marginTop="50dp"

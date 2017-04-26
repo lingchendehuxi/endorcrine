@@ -4,6 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="umeng_white">#ffffff</color>
+    <color name="umeng_blue">#0086DC</color>
+    <color name="umeng_black">#000000</color>
+    <color name="umeng_background">#D4E0E5</color>
+    <color name="umeng_text_color">#575A5C</color>
+    <color name="umeng_divide">#C3C6C9</color>
     <!-- 常用颜色值 -->
     <color name="background">#ECF1F5</color>
     <color name="white40">#40FFFFFF</color>
@@ -22,7 +28,8 @@
     <color name="grayslate">#708090</color>
     <color name="lightblue">#0083FF</color>
     <color name="transplant">#00ffffff</color>
-
+    <color name="theme_blue">#3569AF</color>
+    <color name="md_divider_black">#10000000</color>
     <color name="details">#FD075A</color>
     <color name="search_back">#4A4A4A</color>
     <color name="search_gray">#EFEFEF</color>

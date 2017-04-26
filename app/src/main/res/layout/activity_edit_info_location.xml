@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAEFF3"
+    android:orientation="vertical">
+<include layout="@layout/activity_title"/>
+
+    <cn.incongress.endorcrinemagazine.utils.IndexableListView
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:dividerHeight="1dp"
+        android:divider="@color/md_divider_black"
+        android:id="@+id/lv_city"
+        android:layout_height="match_parent">
+        </cn.incongress.endorcrinemagazine.utils.IndexableListView>
+
+</LinearLayout>

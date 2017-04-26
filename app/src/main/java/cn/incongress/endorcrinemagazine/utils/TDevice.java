@@ -358,7 +358,7 @@ public class TDevice {
 
     public static void gotoMarket(Context context, String pck) {
         if (!isHaveMarket(context)) {
-            ToastUtils.showShorToast("你手机中没有安装应用市场！");
+            ToastUtils.showShortToast("你手机中没有安装应用市场！",context);
             return;
         }
         Intent intent = new Intent();
@@ -592,7 +592,7 @@ public class TDevice {
             return;
         ClipboardManager clip = (ClipboardManager) BaseApplication.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         clip.setText(string);
-        ToastUtils.showShorToast(BaseApplication.getContext().getResources().getString(R.string.copy_success));
+        //ToastUtils.showShorToast(BaseApplication.getContext().getResources().getString(R.string.copy_success));
     }
 
     /**

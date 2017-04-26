@@ -10,9 +10,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
 import cn.incongress.endorcrinemagazine.R;
+import cn.incongress.endorcrinemagazine.activity.FeedbackActivity;
 import cn.incongress.endorcrinemagazine.activity.LoginActivity;
+import cn.incongress.endorcrinemagazine.activity.MyCollectionActivity;
 import cn.incongress.endorcrinemagazine.base.BaseLazyFragment;
+import cn.incongress.endorcrinemagazine.utils.ShareUtils;
 
 /**
  * Created by Jacky on 2017/4/7.
@@ -54,18 +60,38 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         login_btn.setOnClickListener(this);
         return view;
     }
+private UMShareListener listener = new UMShareListener() {
+    @Override
+    public void onStart(SHARE_MEDIA share_media) {
 
+    }
+
+    @Override
+    public void onResult(SHARE_MEDIA share_media) {
+
+    }
+
+    @Override
+    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+    }
+
+    @Override
+    public void onCancel(SHARE_MEDIA share_media) {
+
+    }
+};
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.myCollection:
-
+                startActivity( new Intent(getActivity(), MyCollectionActivity.class));
                 break;
             case R.id.feedback:
-
+                startActivity( new Intent(getActivity(), FeedbackActivity.class));
                 break;
             case R.id.recommend:
-
+              new ShareUtils().shareTextWithUrl(getActivity(),"分享","分享内容","http://www.baidu.com",listener);
                 break;
             case R.id.img_tx:
 

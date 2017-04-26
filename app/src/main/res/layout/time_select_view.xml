@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/rl_background"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="12dp"
+        android:id="@+id/rl_operation"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tv_time_save"
+            android:text="保存"
+            android:textColor="@color/theme_blue"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="取消"
+            android:id="@+id/tv_time_cancel"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <cn.incongress.endorcrinemagazine.utils.WheelView
+        android:id="@+id/time_picker"
+        android:layout_below="@id/rl_operation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemNumber="5"
+        app:lineColor_="@color/gray"
+        app:maskHight="32dp"
+        app:noEmpty="true"
+        app:normalTextColor="#777"
+        app:normalTextSize="14sp"
+        app:selectedTextColor="#ff000000"
+        app:selectedTextSize="22sp"
+        app:unitHight="38dp" />
+</RelativeLayout>

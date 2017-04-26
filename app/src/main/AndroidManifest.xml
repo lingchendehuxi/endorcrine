@@ -23,7 +23,22 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.DetailsActivity" />
         <activity android:name=".activity.PastDetailsActivity" />
-        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.info.InfoEditLocationActivity" />
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58ff0cc93eae257b3200186f" />
+
+        <activity android:name=".activity.MyCollectionActivity" />
+        <activity android:name=".activity.info.InfoEditHospitalActivity"></activity>
     </application>
 
 </manifest>

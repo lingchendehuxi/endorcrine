@@ -44,8 +44,11 @@ public class Constants {
     //测试服：
     public static final String TEST_SERVICE = "http://incongress.cn";
 
-    //正式服：
-    public static final String FORMAL_SERVICE = "http://xhy.incongress.cn";
+    /*//正式服：
+    public static final String TEST_SERVICE = "http://xhy.incongress.cn";*/
+
+    //意见反馈
+    public static final String FEEDBACK = "http://weixin.incongress.cn/xhy/xhyHtml5/html/feedback.html";//  ?userId=&project=
 
     /*列表精选
       输入参数：int proId,Integer lastNotesId
@@ -86,37 +89,51 @@ public class Constants {
     */
     public static final String SEARCH = "/notesApi.do?method=getNotesBySearch";
 
+    /*登录
+    输入参数：int proId,String trueName,String mobilePhone,String sms,String lan*/
+    public static final String LOGIN = "/notesApi.do?method=login";
+
+    /*注册、修改个人信息
+    输入参数：int proId,int userId,String trueName,String sex,
+    String mobilePhone,String email,String province,String provinceName,
+    String city,String cityName,String hospital,String hospitalName,
+    String hospitalLevel,String keshi,String zhicheng,String zhiwu*/
+    public static final String REGISTER = "/notesApi.do?method=regOrUpdateUser";
+
+    /*验证码
+    输入参数：String mobilePhone,String lan,Integer proId;*/
+    public static final String LOGINYZM = "/notesApi.do?method=getSmsMobile";
 
     /*详情页
       输入参数：userState(已登录为1；未登录为0),notesId(item ID)
     */
     public static final String DETAILS="/notesApi.do?method=getNotesById";
 
-    //个人信息字段
-    public static final String SP_PERSON_LOGO = "person_logo";
-    public static final String SP_PERSON_NAME = "person_name";
-    public static final String SP_PERSON_EMAIL = "person_email";
-    public static final String SP_PERSON_BIRTHDAY = "person_birthday";
-    public static final String SP_PERSON_BIRTHDAY_YEAR = "person_birthday_year";
-    public static final String SP_PERSON_BIRTHDAY_MONTH = "person_birthday_month";
-    public static final String SP_PERSON_CIRTIFICATION = "person_cirtifacation";
-    public static final String SP_PERSON_MOBILE = "person_mobile";
 
-    public static final String SP_ZHICHENG = "person_zhicheng";
-    public static final String SP_ZHIWU = "person_zhiwu";
-    public static final String SP_CITY_ID = "person_city_id";
-    public static final String SP_PROVINCE_ID = "person_province_id";
-    public static final String SP_PROVINCE_CITY_NAME = "person_province_city";
-    public static final String SP_PROVINCE_LOCATION = "person_province_location";
-    public static final String SP_HOSPITAL = "person_hospital";
-    public static final String SP_HOSPITAL_LEVEL = "person_hospital_level";
-    public static final String SP_KESHI = "person_keshi";
-    public static final String SP_ADJUST_KESHI = "person_adjust_keshi";
-    public static final String SP_PHONE = "person_phone";
-    public static final String SP_EDUCATION = "person_education";
-    public static final String SP_ZIP_CODE = "person_zip_code";
-    public static final String SP_ADDRESS = "person_address";
 
+    /** 个人信息相关的字段 **/
+    public static String USER_LOGIN_MOBILE = "loginMobile";
+    public static String USER_LOGIN_PWD = "loginPwd";
+    public static String USER_USER_ID = "userId";
+    public static String USER_TRUE_NAME = "trueName";
+    public static String USER_PIC = "userPic";
+    public static String USER_NICKNAME = "nickname";
+    public static String USER_SEX = "sex";
+    public static String USER_MOBILE = "mobilePhone";
+    public static String USER_EMAIL = "email";
+    public static String USER_KESHI = "keshi";
+    public static String USER_ZHICHENG = "zhicheng";
+    public static String USER_PROVINCE_ID = "province";
+    public static String USER_PROVINCE_NAME = "provinceName";
+    public static String USER_CITY_NAME = "cityName";
+    public static String USER_CITY_ID = "city";
+    public static String USER_HOSPITAL_ID = "hospital";
+    public static String USER_HOSPITAL_NAME = "hospitalName";
+    public static String USER_UNIV = "univ";
+    public static String USER_UNIV_ID = "univsId";
+    public static String USER_UNIV_YEAR = "univYear";
+    public static String USER_HIGHEST_SCHOOL = "highestSchool";
+    public static String USER_REMARK = "remark";
     public static final String SP_RECIPIENT_NAME = "person_recipient_name";
     public static final String SP_RECIPIENT_MOBILE ="person_recipient_mobile";
     public static final String SP_RECIPIENT_ZIP_CODE = "person_recipient_zip_code";

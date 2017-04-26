@@ -1,7 +1,9 @@
 package cn.incongress.endorcrinemagazine.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -80,6 +82,7 @@ public class DetailsActivity extends AppCompatActivity {
         mOnlyWebview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                mOnlyWebview.loadUrl(url);
                 return true;
             }
 

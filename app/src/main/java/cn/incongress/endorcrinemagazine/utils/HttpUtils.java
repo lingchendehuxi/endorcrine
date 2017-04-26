@@ -58,36 +58,20 @@ public class HttpUtils {
         }
         return "";
     }
-    public static InputStream submitPostData1(String url1, Map<String, String> params, String encode) {
+    public static String submitGetData(String url,String encode) {
 
         try {
-            url = new URL(url1);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        byte[] data = getRequestData(params, encode).toString().getBytes();//获得请求体
-        try {
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-            httpURLConnection.setConnectTimeout(10000);           //设置连接超时时间
-            httpURLConnection.setDoInput(true);                  //打开输入流，以便从服务器获取数据
-            httpURLConnection.setDoOutput(true);                 //打开输出流，以便向服务器提交数据
-            httpURLConnection.setRequestMethod("POST");          //设置以Post方式提交数据
-            httpURLConnection.setUseCaches(false);               //使用Post方式不能使用缓存
-            //设置请求体的类型是文本类型
-            httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            //设置请求体的长度
-            //httpURLConnection.setRequestProperty("Content-Length", String.valueOf(data.length));
-            //获得输出流，向服务器写入数据
-            OutputStream outputStream = httpURLConnection.getOutputStream();
 
-            outputStream.write(data);
-
-            int response = httpURLConnection.getResponseCode();            //获得服务器的响应码
-            if(response == HttpURLConnection.HTTP_OK) {
-                InputStream inptStream = httpURLConnection.getInputStream();
-                return inptStream;                     //处理服务器的响应结果
+            HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();
+            urlConnection.setRequestMethod("GET");// 设置请求的方式
+            urlConnection.setReadTimeout(5000);// 设置超时的时间
+            urlConnection.setConnectTimeout(5000);// 设置链接超时的时间
+            // 获取响应的状态码 404 200 505 302
+            if (urlConnection.getResponseCode() == 200) {
+                // 获取响应的输入流对象
+                return dealResponseResult(urlConnection.getInputStream());
             }
-        } catch (IOException e) {
+            } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

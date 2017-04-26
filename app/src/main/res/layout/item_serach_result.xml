@@ -50,7 +50,7 @@
     android:layout_margin="@dimen/layout_padding"
     android:layout_centerInParent="true"
     android:layout_alignParentRight="true"
-    android:src="@mipmap/back"
+    android:src="@mipmap/me_next"
     android:scaleType="fitXY"
     />
 <ImageView
