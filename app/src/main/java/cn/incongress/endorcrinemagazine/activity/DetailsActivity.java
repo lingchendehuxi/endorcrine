@@ -3,46 +3,75 @@ package cn.incongress.endorcrinemagazine.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.net.http.SslError;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Message;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import cn.incongress.endorcrinemagazine.R;
+import cn.incongress.endorcrinemagazine.base.BaseActivity;
 import cn.incongress.endorcrinemagazine.base.Constants;
 import cn.incongress.endorcrinemagazine.utils.ProgressWebView;
 
-public class DetailsActivity extends AppCompatActivity {
-    private int userState = 1;
+public class DetailsActivity extends BaseActivity {
+    private int userState ;
+    private String USERID;
     private ProgressWebView mOnlyWebview;
+    @BindView(R.id.activity_title)
+    TextView mTitle;
+    @BindView(R.id.details_title)
+    TextView mDetailTitle;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-        TextView tv = (TextView) findViewById(R.id.activity_title);
-        TextView title = (TextView) findViewById(R.id.details_title);
-        tv.setText(getIntent().getStringExtra("notestitle"));
+    protected void initializeViews(Bundle savedInstanceState) {
+        mTitle.setText(getIntent().getStringExtra("notestitle"));
+
         mOnlyWebview = (ProgressWebView)findViewById(R.id.details_web);
-        if(0 == userState){
-            title.setText("登录后查看原文");
-        }else if(1 == userState){
-            title.setText("收藏");
+        USERID = getSPStringValue(Constants.USER_USER_ID);
+        if("".equals(USERID)){
+            userState = 0;
+            mDetailTitle.setText("登录后查看原文");
+        }else {
+            userState = 1;
+            mDetailTitle.setText("收藏");
+
         }
         initialWebViewSetting();
         loadUrl(Constants.TEST_SERVICE+Constants.DETAILS+"&notesId="+getIntent().getStringExtra("notesid")+"&userState="+userState);
 //
+        mDetailTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if("收藏".equals(mDetailTitle.getText().toString())){
+                    mDetailTitle.setText("取消收藏");
+
+                }else if("取消收藏".equals(mDetailTitle.getText().toString())){
+
+                    mDetailTitle.setText("收藏");
+                }else if("登录后查看原文".equals(mDetailTitle.getText().toString())){
+                    startActivity(new Intent(getApplication(),LoginActivity.class));
+                    finish();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void initializeEvents() {
+
+    }
+
+    @Override
+    protected void initializeData(Bundle savedInstanceState) {
+
     }
 
     private void loadUrl(String url) {
@@ -137,6 +166,19 @@ public class DetailsActivity extends AppCompatActivity {
         clearCache();
         mOnlyWebview.reload();
     }
+
+    @Override
+    protected void setContentView(Bundle savedInstanceState) {
+
+        setContentView(R.layout.activity_details);
+    }
+
+
+    @Override
+    protected void handleDetailMsg(Message msg) {
+
+    }
+
     public void back(View view){
         finish();
     }

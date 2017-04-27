@@ -31,14 +31,18 @@ dependencies {
     //注解
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.jakewharton:butterknife:8.2.1'
+    compile 'cn.finalteam:galleryfinal:1.4.6'
+    compile 'com.android.support:support-v4:25.1.1'
+    compile 'com.zhy:okhttputils:2.3.8'
     //图片加载器
     compile 'com.github.bumptech.glide:glide:3.7.0'
     /*
-            //materialDesign主题适配到2.2+
-            compile 'com.github.navasmdc:MaterialDesign:1.5@aar'*/
+                //materialDesign主题适配到2.2+
+                compile 'com.github.navasmdc:MaterialDesign:1.5@aar'*/
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile project(path: ':library')
     compile 'com.android.support:design:25.2.0'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
 }

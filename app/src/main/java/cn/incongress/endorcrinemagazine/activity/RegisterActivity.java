@@ -2,6 +2,7 @@ package cn.incongress.endorcrinemagazine.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,8 +62,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     EditText mEditPhone;
     @BindView(R.id.regist_city)
     EditText mCity;
-    @BindView(R.id.regist_city_qx)
-    EditText mCityQX;
     @BindView(R.id.regist_dw)
     EditText mDanWei;
     @BindView(R.id.regist_dwdj)
@@ -111,8 +110,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private String mCurrentZhiWu;
 
     /** 请求列表变量**/
-    private String mName,mPhone,mEmail,mCityQuXian,province,city,mHospital,mHospitalId,cityId,provinceId;
-    private String USERID = "-1";
+    private String mName,mPhone,mEmail,province,city,mHospital,mHospitalId,cityId,provinceId,userPic;
+    private String USERID ;
     @Override
     protected void setContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_register);
@@ -131,9 +130,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mRegister.setOnClickListener(this);
         AssetsDatabaseManager.initManager(RegisterActivity.this);
         if(1 == getIntent().getIntExtra("type",-1)){
-
+            hand.sendEmptyMessage(1);
         }else{
-
+            hand.sendEmptyMessage(2);
         }
          //性别初始化
         for (int i = 0; i < mSexs.length; i++) {
@@ -203,9 +202,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 mName = mEditName.getText().toString();
                 mPhone = mEditPhone.getText().toString();
                 mEmail = mEditEmail.getText().toString();
-                mCityQuXian = mCityQX.getText().toString();
                 mHospital = mDanWei.getText().toString();
-                if(!"".equals(mName)&&!"".equals(mPhone)&&!"".equals(mEmail)&&!"".equals(mCityQuXian)&&
+                if(!"".equals(mName)&&!"".equals(mPhone)&&!"".equals(mEmail)&&
                         !"".equals(city)&&!"".equals(mHospital)&&!"".equals(mCurrentZhiWu)&&
                         !"".equals(mCurrentZhiCheng)&& !"".equals(mCurrentSex)&&!"".equals(mCurrentDWGrade)
                         &&!"".equals(mCurrentKeshi)){
@@ -233,15 +231,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         params.put("hospital", mHospitalId);params.put("hospitalName", mHospital);
                         params.put("hospitalLevel", mCurrentDWGrade);params.put("keshi", mCurrentKeshi);
                         params.put("zhicheng", mCurrentZhiCheng);params.put("zhiwu", mCurrentZhiWu);
-                Log.e("GYW",Constants.TEST_SERVICE + Constants.REGISTER+"?proId="+"18"+"&lan="+"cn"+"&userId="+"-1"+"&trueName="+mName
-                        +"&sex="+mCurrentSex+"&mobilePhone="+mPhone+"&email="+mEmail+"&province="+provinceId+"&provinceName="+province+
-                        "&city="+cityId+"&cityName="+city+"&hospital="+mHospitalId+"&hospitalName="+mHospital
-                        +"&hospitalLevel="+mCurrentDWGrade+"&keshi="+mCurrentKeshi+"&zhicheng="+mCurrentZhiCheng+"&zhiwu="+mCurrentZhiWu);
-                        try {
+                try {
                             JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.REGISTER, params, "GBK"));
                             Log.e("GYW",jsonObject.toString());
-                            if(0==jsonObject.getInt("state")){
-                            }else{
+                            if(1==jsonObject.getInt("state")){
+                                hand.sendEmptyMessage(3);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -251,6 +245,46 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }.start();
     }
 
+    Handler hand = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    USERID = "-1";
+                break;
+                case 2:
+                    USERID = getSPStringValue(Constants.USER_USER_ID);
+                     mEditName.setText(getSPStringValue(Constants.USER_TRUE_NAME));
+                     mSex.setText(getSPStringValue(Constants.USER_SEX));
+                     mEditEmail.setText(getSPStringValue(Constants.USER_EMAIL));
+                     mEditPhone.setText(getSPStringValue(Constants.USER_MOBILE));
+                     mCity.setText(getSPStringValue(Constants.USER_CITY_NAME)+getString(R.string.info_blank)+getSPStringValue(Constants.USER_PROVINCE_NAME));
+                     mDanWei.setText(getSPStringValue(Constants.USER_HOSPITAL_NAME));
+                     mDanWeiDJ.setText(getSPStringValue(Constants.USER_HOSPITAL_LEVEL));
+                     mKeShi.setText(getSPStringValue(Constants.USER_KESHI));
+                     mZhiCheng.setText(getSPStringValue(Constants.USER_ZHICHENG));
+                     mZhiWu.setText(getSPStringValue(Constants.USER_ZHIWU));
+                break;
+                case 3:
+                    setSPStringValue(Constants.USER_USER_ID,USERID);
+                    setSPStringValue(Constants.USER_PIC,"");
+                    setSPStringValue(Constants.USER_TRUE_NAME,mName);
+                    setSPStringValue(Constants.USER_SEX,mCurrentSex);
+                    setSPStringValue(Constants.USER_MOBILE,mPhone);
+                    setSPStringValue(Constants.USER_EMAIL,mEmail);
+                    setSPStringValue(Constants.USER_KESHI,mCurrentKeshi);
+                    setSPStringValue(Constants.USER_ZHICHENG,mCurrentZhiCheng);
+                    setSPStringValue(Constants.USER_PROVINCE_NAME,province);
+                    setSPStringValue(Constants.USER_CITY_NAME,city);
+                    setSPStringValue(Constants.USER_HOSPITAL_NAME,mHospital);
+                    setSPStringValue(Constants.USER_HOSPITAL_LEVEL,mCurrentDWGrade);
+                    setSPStringValue(Constants.USER_ZHIWU,mCurrentZhiWu);
+                    finish();
+                    break;
+            }
+        }
+    };
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

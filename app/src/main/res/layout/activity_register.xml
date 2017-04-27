@@ -71,8 +71,9 @@
                     android:hint="@string/register_sex2"
                     />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>
@@ -162,38 +163,10 @@
                     android:singleLine="true"
                     />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/me_next"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
-                >
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/register_district1"
-                    />
-                <EditText
-                    android:id="@+id/regist_city_qx"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:hint="@string/register_district2"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     />
             </LinearLayout>
             <LinearLayout
@@ -225,8 +198,9 @@
                     />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>
@@ -258,8 +232,9 @@
                     android:hint="@string/register_danwgrades2"
                     />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>
@@ -292,8 +267,9 @@
                     />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>
@@ -326,8 +302,9 @@
                     />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>
@@ -360,8 +337,9 @@
                     />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>

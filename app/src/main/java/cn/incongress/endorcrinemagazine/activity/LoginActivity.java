@@ -116,7 +116,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             super.handleMessage(msg);
             switch (msg.what){
                 case 0:
-
+                    setSPStringValue(Constants.USER_USER_ID,userId);
+                    setSPStringValue(Constants.USER_PIC,userPic);
+                    setSPStringValue(Constants.USER_TRUE_NAME,truenName);
+                    setSPStringValue(Constants.USER_SEX,sex);
+                    setSPStringValue(Constants.USER_MOBILE,mobilePhone);
+                    setSPStringValue(Constants.USER_EMAIL,email);
+                    setSPStringValue(Constants.USER_KESHI,keshi);
+                    setSPStringValue(Constants.USER_ZHICHENG,zhicheng);
+                    setSPStringValue(Constants.USER_PROVINCE_NAME,provinceName);
+                    setSPStringValue(Constants.USER_CITY_NAME,cityName);
+                    setSPStringValue(Constants.USER_HOSPITAL_NAME,hospitalName);
+                    setSPStringValue(Constants.USER_HOSPITAL_LEVEL,hospitalLever);
+                    setSPStringValue(Constants.USER_ZHIWU,zhiwu);
+                    finish();
                     break;
                 case 1:
                     Toast.makeText(getApplication(),mMsg,Toast.LENGTH_SHORT).show();
@@ -124,6 +137,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             }
         }
     };
+    private String userId,truenName,sex,mobilePhone,email,keshi,zhicheng,provinceName
+            ,cityName,hospitalName,hospitalLever,zhiwu,userPic;
     private void initHttp(boolean that) {
         if(that) {
             new Thread() {
@@ -138,13 +153,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     try {
                         JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.LOGIN, params, "GBK"));
                         Log.e("GYW",jsonObject.toString());
-                        mMsg = jsonObject.getString("msg");
-                        if(0==jsonObject.getInt("state")){
+                        if(0 ==jsonObject.getInt("state")){
+                            mMsg = jsonObject.getString("msg");
                             hand.sendEmptyMessage(1);
-                        }else{
-
+                        }else if(1==jsonObject.getInt("state")){
+                            Log.e("GYW","zoule 1");
+                            userId = jsonObject.getString("userId");
+                            userPic = jsonObject.getString("userPic");
+                            truenName= jsonObject.getString("trueName");
+                            sex= jsonObject.getString("sex");
+                            mobilePhone= jsonObject.getString("mobilePhone");
+                            email= jsonObject.getString("email");
+                            keshi= jsonObject.getString("keshi");
+                            zhicheng= jsonObject.getString("zhicheng");
+                            provinceName= jsonObject.getString("provinceName");
+                            cityName= jsonObject.getString("cityName");
+                            hospitalName= jsonObject.getString("hospitalName");
+                            hospitalLever= jsonObject.getString("hospitalLevel");
+                            zhiwu= jsonObject.getString("zhiwu");
+                            Log.e("GYW","zoule 2");
+                            hand.sendEmptyMessage(0);
                         }
-                        hand.sendEmptyMessage(0);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

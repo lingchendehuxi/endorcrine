@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -89,6 +90,7 @@ public class PastDetailsActivity extends BaseActivity {
                             Intent intent = new Intent(getApplication(), DetailsActivity.class);
                             intent.putExtra("notesid",current_list.get(groupPosition).getList().get(childPosition).getNotesId());
                             intent.putExtra("notestitle",current_list.get(groupPosition).getList().get(childPosition).getNotesTitle());
+                            intent.putExtra("lanmu",current_list.get(groupPosition).getList().get(childPosition).getLanmu());
                             startActivity(intent);
                             return false;
                         }
@@ -115,6 +117,7 @@ public class PastDetailsActivity extends BaseActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE+Constants.PERIOD_LIST,params, "GBK"));
                     JSONArray array = jsonObject.getJSONArray("lanmuArray");
+                    Log.e("GYW",jsonObject.toString());
                     for (int i = 0;i<array.length();i++){
                         JSONObject object = array.getJSONObject(i);
                         CurrentBean current = new CurrentBean();

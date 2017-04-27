@@ -46,8 +46,8 @@
     <string name="register_next">下一步</string>
     <string name="choose_area_first">请先选择您所处的地区哦</string>
 
-    <string name="info_blank">&#160;</string>"
-    <string name="info_hospital">医院</string>"
+    <string name="info_blank">&#160;</string>
+    <string name="info_hospital">医院</string>
 
     <!--搜索-->
     <string name="search_search">搜    索</string>
@@ -64,6 +64,7 @@
 
 
     <!-- 常用 -->
+    <string name="back">退出登录</string>
     <string name="feedback">意见反馈</string>
     <string name="copy">复制</string>
     <string name="delete">删除</string>
@@ -71,6 +72,8 @@
     <string name="deleting">正在删除…</string>
     <string name="delete_success">删除成功</string>
     <string name="delete_faile">删除失败</string>
+    <string name="fail_reason">失败原因:%1$s</string>
+
 
     <string name="me_feedback">http://weixin.incongress.cn/xhy/xhyHtml5/html/feedback.html?userId=%1$s&#038;project=%2$s
 </string>

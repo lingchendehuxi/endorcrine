@@ -100,6 +100,11 @@ public class Constants {
     String hospitalLevel,String keshi,String zhicheng,String zhiwu*/
     public static final String REGISTER = "/notesApi.do?method=regOrUpdateUser";
 
+    /*修改头像
+    输入参数：int proId,Integer userId userImg
+    返回参数：state,imgUrl*/
+    public static final String IMGURL = "/notesApi.do?method=uploadHead";
+
     /*验证码
     输入参数：String mobilePhone,String lan,Integer proId;*/
     public static final String LOGINYZM = "/notesApi.do?method=getSmsMobile";
@@ -129,6 +134,8 @@ public class Constants {
     public static String USER_CITY_ID = "city";
     public static String USER_HOSPITAL_ID = "hospital";
     public static String USER_HOSPITAL_NAME = "hospitalName";
+    public static String USER_HOSPITAL_LEVEL = "hospitalLevel";
+    public static String USER_ZHIWU = "zhiwu";
     public static String USER_UNIV = "univ";
     public static String USER_UNIV_ID = "univsId";
     public static String USER_UNIV_YEAR = "univYear";

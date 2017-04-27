@@ -310,6 +310,7 @@ public class SearchActivity extends BaseActivity {
                             Intent intent = new Intent(getApplication(), DetailsActivity.class);
                             intent.putExtra("notesid",mResultList.get(position).getNotesId());
                             intent.putExtra("notestitle",mResultList.get(position).getNotesTitle());
+                            intent.putExtra("lanmu",mResultList.get(position).getLanmu());
                             startActivity(intent);
                         }
                     });

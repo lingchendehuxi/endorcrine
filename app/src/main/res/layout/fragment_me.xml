@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
 <TextView
     android:layout_width="match_parent"
     android:layout_height="50dp"
@@ -12,25 +18,56 @@
     android:text="我"
     android:gravity="center"
     android:textSize="18dp"
-    android:background="@color/red"
+    android:background="@color/details"
     />
-    <ImageView
-        android:id="@+id/img_tx"
-        android:layout_marginTop="10dp"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher"
-        />
-    <Button
-        android:id="@+id/btn_me_login"
-        android:layout_marginTop="10dp"
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:text="登 录"
-        android:textSize="18dp"
-        android:textColor="@color/black"
-        android:background="@drawable/btn_me_login"
-        />
+        <cn.incongress.endorcrinemagazine.utils.CircleImageView
+            android:id="@+id/img_tx"
+            android:layout_marginTop="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/item_vvtalk_professor_head_default"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            >
+            <LinearLayout
+                android:id="@+id/login_xs"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/loginName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:layout_marginBottom="8dp"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:id="@+id/loginSet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="编辑个人信息"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_me_login"
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:text="登 录"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/black"
+                android:background="@drawable/btn_me_login"
+                />
+        </RelativeLayout>
     <ImageView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -121,4 +158,20 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"/>
-</LinearLayout>
+    </LinearLayout>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btn_login_back"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/btn_login_activity"
+        android:textColor="@color/white"
+        android:text="@string/back"
+        android:textSize="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+</RelativeLayout>

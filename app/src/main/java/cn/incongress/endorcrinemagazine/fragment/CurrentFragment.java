@@ -85,6 +85,7 @@ public class CurrentFragment extends BaseLazyFragment {
                             Intent intent = new Intent(getActivity(), DetailsActivity.class);
                             intent.putExtra("notesid",current_list.get(groupPosition).getList().get(childPosition).getNotesId());
                             intent.putExtra("notestitle",current_list.get(groupPosition).getList().get(childPosition).getNotesTitle());
+                            intent.putExtra("lanmu",current_list.get(groupPosition).getList().get(childPosition).getLanmu());
                             startActivity(intent);
                             return false;
                         }

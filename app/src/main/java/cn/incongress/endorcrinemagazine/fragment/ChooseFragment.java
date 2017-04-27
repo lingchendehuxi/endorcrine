@@ -113,6 +113,7 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
                 intent.putExtra("notesid",mAdapter.getList().get(postion).getNotesId());
                 intent.putExtra("notestitle",mAdapter.getList().get(postion).getNotesTitle());
+                intent.putExtra("lanmu",mAdapter.getList().get(postion).getLanmu());
                 startActivity(intent);
             }
         });

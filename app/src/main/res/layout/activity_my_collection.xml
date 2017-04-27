@@ -8,8 +8,11 @@
     tools:context="cn.incongress.endorcrinemagazine.activity.MyCollectionActivity">
 <include layout="@layout/activity_title"/>
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/collection_recl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:cacheColorHint="@null"
+        android:scrollbars="vertical" >
 
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>
