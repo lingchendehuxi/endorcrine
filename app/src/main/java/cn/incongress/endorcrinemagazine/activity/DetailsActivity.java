@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Message;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -14,48 +15,94 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import cn.incongress.endorcrinemagazine.R;
 import cn.incongress.endorcrinemagazine.base.BaseActivity;
 import cn.incongress.endorcrinemagazine.base.Constants;
+import cn.incongress.endorcrinemagazine.bean.CollectionBean;
+import cn.incongress.endorcrinemagazine.utils.ListDataSave;
 import cn.incongress.endorcrinemagazine.utils.ProgressWebView;
 
 public class DetailsActivity extends BaseActivity {
     private int userState ;
     private String USERID;
+    private String NOTESID;
     private ProgressWebView mOnlyWebview;
     @BindView(R.id.activity_title)
     TextView mTitle;
     @BindView(R.id.details_title)
     TextView mDetailTitle;
 
-
+    private ListDataSave dataSave;
+    private List<CollectionBean> mCollectionList;
+    private boolean mIsFromCollection;
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
-        mTitle.setText(getIntent().getStringExtra("notestitle"));
+        mIsFromCollection = getIntent().getBooleanExtra("fromCollection",false);
 
         mOnlyWebview = (ProgressWebView)findViewById(R.id.details_web);
         USERID = getSPStringValue(Constants.USER_USER_ID);
+        mTitle.setText(getIntent().getStringExtra("notestitle"));
+        NOTESID = getIntent().getStringExtra("notesid");
+
+        dataSave = new ListDataSave(mContext, "collection");
+
+        mCollectionList = new ArrayList<CollectionBean>();
+
+        mCollectionList = dataSave.getDataList("All");
+
+        Log.e("GYW","$$$$"+mCollectionList.size()+"&&&&"+mCollectionList.toString());
         if("".equals(USERID)){
             userState = 0;
             mDetailTitle.setText("登录后查看原文");
         }else {
             userState = 1;
-            mDetailTitle.setText("收藏");
+            if(mCollectionList.size()>0){
+                for (int i=0;i<mCollectionList.size();i++){
+                    CollectionBean map = mCollectionList.get(i);
+                    if( map.getNotesId().equals(NOTESID)){
+                        mDetailTitle.setText("取消收藏");
+                        break;
+                    }else {
+                        mDetailTitle.setText("收藏");
+                    }
+                }
 
+            }else{
+                mDetailTitle.setText("收藏");
+            }
         }
         initialWebViewSetting();
-        loadUrl(Constants.TEST_SERVICE+Constants.DETAILS+"&notesId="+getIntent().getStringExtra("notesid")+"&userState="+userState);
+        loadUrl(Constants.TEST_SERVICE+Constants.DETAILS+"&notesId="+NOTESID+"&userState="+userState);
 //
         mDetailTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if("收藏".equals(mDetailTitle.getText().toString())){
                     mDetailTitle.setText("取消收藏");
+                    //新收藏一条数据
+                    CollectionBean collectionBean = new CollectionBean();
+                    collectionBean.setNotesTitle(getIntent().getStringExtra("notestitle"));
+                    collectionBean.setNotesId(NOTESID);
+                    collectionBean.setLanmu(getIntent().getStringExtra("lanmu"));
+                    collectionBean.setWhether(true);
+                    mCollectionList.add(collectionBean);
 
+                    dataSave.setDataList("All",mCollectionList);
                 }else if("取消收藏".equals(mDetailTitle.getText().toString())){
-
                     mDetailTitle.setText("收藏");
+                    for (int i=0;i<mCollectionList.size();i++){
+                        CollectionBean map = mCollectionList.get(i);
+                        if(map.getNotesId().equals(NOTESID)){
+                            mCollectionList.remove(i);
+                        }
+                    }
+                    dataSave.setDataList("All",mCollectionList);
                 }else if("登录后查看原文".equals(mDetailTitle.getText().toString())){
                     startActivity(new Intent(getApplication(),LoginActivity.class));
                     finish();
@@ -63,7 +110,6 @@ public class DetailsActivity extends BaseActivity {
             }
         });
     }
-
     @Override
     protected void initializeEvents() {
 
@@ -180,6 +226,15 @@ public class DetailsActivity extends BaseActivity {
     }
 
     public void back(View view){
+        if(mIsFromCollection)
+            setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(mIsFromCollection)
+            setResult(RESULT_OK);
     }
 }

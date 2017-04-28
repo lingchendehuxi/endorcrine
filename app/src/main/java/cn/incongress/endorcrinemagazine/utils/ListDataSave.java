@@ -6,8 +6,11 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.incongress.endorcrinemagazine.bean.CollectionBean;
 
 /**
  * Created by Admin on 2017/4/27.
@@ -27,8 +30,8 @@ public class ListDataSave {
      * @param tag
      * @param datalist
      */
-    public <T> void setDataList(String tag, List<T> datalist) {
-        if (null == datalist || datalist.size() <= 0)
+    public void setDataList(String tag, List<CollectionBean> datalist) {
+        if (null == datalist || datalist.size() < 0)
             return;
 
         Gson gson = new Gson();
@@ -45,15 +48,14 @@ public class ListDataSave {
      * @param tag
      * @return
      */
-    public <T> List<T> getDataList(String tag) {
-        List<T> datalist=new ArrayList<T>();
+    public List<CollectionBean> getDataList(String tag) {
+        List<CollectionBean> datalist=new ArrayList<CollectionBean>();
         String strJson = preferences.getString(tag, null);
         if (null == strJson) {
             return datalist;
         }
         Gson gson = new Gson();
-        datalist = gson.fromJson(strJson, new TypeToken<List<T>>() {
-        }.getType());
+        datalist = gson.fromJson(strJson, new TypeToken<List<CollectionBean>>() {}.getType());
         return datalist;
 
     }

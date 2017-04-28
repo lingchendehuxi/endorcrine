@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/login_name1"
                     />
                 <EditText
@@ -44,6 +44,7 @@
                     android:focusableInTouchMode="true"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
@@ -58,40 +59,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/register_sex1"
-                    />
-                <EditText
-                    android:id="@+id/regist_sex"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:focusable="false"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/register_sex2"
-                    />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/me_next"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
-                >
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_email1"
                     />
                 <EditText
@@ -120,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_phone1"
                     />
                 <EditText
@@ -149,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_region1"
                     />
                 <EditText
@@ -183,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_danw1"
                     />
                 <EditText
@@ -204,6 +172,7 @@
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
@@ -218,41 +187,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/register_danwgrades1"
-                    />
-                <EditText
-                    android:id="@+id/regist_dwdj"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:focusable="false"
-                    android:hint="@string/register_danwgrades2"
-                    />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/me_next"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
-                >
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_keshi1"
                     />
                 <EditText
@@ -273,41 +208,7 @@
                     android:src="@mipmap/me_next"
                     />
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
-                >
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/register_title1"
-                    />
-                <EditText
-                    android:id="@+id/regist_zc"
-                    android:layout_width="0dp"
-                    android:focusable="false"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/register_title2"
-                    android:singleLine="true"
-                    />
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
-                    android:src="@mipmap/me_next"
-                    />
-            </LinearLayout>
             <LinearLayout
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
@@ -322,8 +223,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/register_post1"
+                    android:paddingLeft="@dimen/layout_padding"
+                    android:text="@string/register_title1"
                     />
                 <EditText
                     android:id="@+id/regist_zw"
@@ -332,7 +233,7 @@
                     android:focusable="false"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="@string/register_post2"
+                    android:hint="@string/register_title2"
                     android:singleLine="true"
                     />
 

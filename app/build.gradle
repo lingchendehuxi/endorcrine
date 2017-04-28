@@ -19,6 +19,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+       Magazine_Key {
+           keyAlias 'incongress'
+           keyPassword 'incongress'
+           storeFile file('D:/appkey/zazhiyi.jks')
+//            storeFile file('D:/A-Workspace_New/Keys/chy/Key_Incongress')
+//            storeFile file('F:/C-Keys/参会易Android_key/Key_Incongress')
+           storePassword 'incongress'
+       }
+   }
+
+   buildTypes {
+       debug {
+           signingConfig signingConfigs.Magazine_Key
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+       }
+       release {
+           signingConfig signingConfigs.Magazine_Key
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'),'proguard-rules.pro'
+       }
+   }
+
 }
 
 dependencies {

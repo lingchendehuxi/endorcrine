@@ -40,7 +40,9 @@ import cn.incongress.endorcrinemagazine.activity.MyCollectionActivity;
 import cn.incongress.endorcrinemagazine.activity.RegisterActivity;
 import cn.incongress.endorcrinemagazine.base.BaseLazyFragment;
 import cn.incongress.endorcrinemagazine.base.Constants;
+import cn.incongress.endorcrinemagazine.bean.CollectionBean;
 import cn.incongress.endorcrinemagazine.utils.CircleImageView;
+import cn.incongress.endorcrinemagazine.utils.ListDataSave;
 import cn.incongress.endorcrinemagazine.utils.LogUtils;
 import cn.incongress.endorcrinemagazine.utils.PicUtils;
 import cn.incongress.endorcrinemagazine.utils.ShareUtils;
@@ -61,11 +63,13 @@ import static android.content.Context.MODE_PRIVATE;
 public class MeFragment extends BaseLazyFragment implements View.OnClickListener{
     private CircleImageView tx_img;
     private Button login_btn,login_back;
-    private TextView loginName,loginSet;
+    private TextView loginSet,loginName,mCollectionsize;
     private LinearLayout myCollection,recommend,feedback,loginXS;
     private String USERID;
     private SharedPreferences mSp;
     private PhotoPopupWindow mPhotoPopupWindow;
+    private ListDataSave mDataSave;
+    private List<CollectionBean> mResultList;
 
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
@@ -82,13 +86,14 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
-
+        mResultList = mDataSave.getDataList("All");
+        mCollectionsize.setText(""+mResultList.size());
         USERID = mSp.getString(Constants.USER_USER_ID,"");
+        loginName.setText(mSp.getString(Constants.USER_TRUE_NAME,""));
         if(!"".equals(USERID)){
             login_btn.setVisibility(View.GONE);
             login_back.setVisibility(View.VISIBLE);
             loginXS.setVisibility(View.VISIBLE);
-            loginName.setText(mSp.getString(Constants.USER_TRUE_NAME,""));
             updatePersonUserIcon();
         }
     }
@@ -102,6 +107,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
         mSp = getActivity().getSharedPreferences("personInfo", MODE_PRIVATE);
+        mDataSave = new ListDataSave(mContext, "collection");
+        USERID = mSp.getString(Constants.USER_USER_ID,"");
         myCollection = (LinearLayout) view.findViewById(R.id.myCollection);
         feedback = (LinearLayout) view.findViewById(R.id.feedback);
         recommend = (LinearLayout) view.findViewById(R.id.recommend);
@@ -111,6 +118,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         login_back = (Button) view.findViewById(R.id.btn_login_back);
         loginName = (TextView) view.findViewById(R.id.loginName);
         loginSet = (TextView) view.findViewById(R.id.loginSet);
+        mCollectionsize = (TextView) view.findViewById(R.id.myCollection_size);
         myCollection.setOnClickListener(this);
         feedback.setOnClickListener(this);
         recommend.setOnClickListener(this);
@@ -118,7 +126,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         login_btn.setOnClickListener(this);
         loginSet.setOnClickListener(this);
         login_back.setOnClickListener(this);
-
         updatePersonUserIcon();
         return view;
     }
@@ -143,160 +150,173 @@ private UMShareListener listener = new UMShareListener() {
 
     @Override
     public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
+        Log.e("GYW",share_media.toString());
     }
 
     @Override
     public void onCancel(SHARE_MEDIA share_media) {
-
+        Log.e("GYW",share_media.toString());
     }
 };
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.myCollection:
-                startActivity( new Intent(getActivity(), MyCollectionActivity.class));
+                if(!"".equals(USERID)) {
+                    startActivity(new Intent(getActivity(), MyCollectionActivity.class));
+                }else{
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                }
                 break;
             case R.id.feedback:
-                startActivity( new Intent(getActivity(), FeedbackActivity.class));
+                if(!"".equals(USERID)) {
+                    startActivity(new Intent(getActivity(), FeedbackActivity.class));
+                }else{
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                }
                 break;
             case R.id.recommend:
               new ShareUtils().shareTextWithUrl(getActivity(),"分享","分享内容","http://www.baidu.com",listener);
                 break;
             case R.id.img_tx:
-                mPhotoPopupWindow = new PhotoPopupWindow(getActivity(), new PhotoPopupWindow.OnTakePhotoListener() {
-                    @Override
-                    public void takePhotoListen() {
+                if(!"".equals(USERID)) {
+                    mPhotoPopupWindow = new PhotoPopupWindow(getActivity(), new PhotoPopupWindow.OnTakePhotoListener() {
+                        @Override
+                        public void takePhotoListen() {
 
-                        GalleryFinal.openCamera(REQUEST_CODE_CAMERA, new GalleryFinal.OnHanlderResultCallback() {
-                            @Override
-                            public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                                if(mPhotoPopupWindow!= null && mPhotoPopupWindow.isShowing())
-                                    mPhotoPopupWindow.dismiss();
-                                String photoPath = "";
-                                if (reqeustCode == REQUEST_CODE_GALLERY) {
-                                    photoPath = resultList.get(0).getPhotoPath();
-                                    LogUtils.println("photo:" + photoPath);
-                                } else if (reqeustCode == REQUEST_CODE_CAMERA) {
-                                    photoPath = resultList.get(0).getPhotoPath();
-                                    LogUtils.println("photo:" + photoPath);
-                                }
-                                //图片进行压缩
-                                String filePhth = "";
-                                try {
-                                    filePhth = PicUtils.saveFile(PicUtils.getSmallBitmap(photoPath));
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                XhyGo.goUploadUserIcon(getActivity(), USERID, System.currentTimeMillis() + "", new File(filePhth), new StringCallback() {
-                                    @Override
-                                    public void onAfter() {
-                                        super.onAfter();
+                            GalleryFinal.openCamera(REQUEST_CODE_CAMERA, new GalleryFinal.OnHanlderResultCallback() {
+                                @Override
+                                public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+                                    if (mPhotoPopupWindow != null && mPhotoPopupWindow.isShowing())
+                                        mPhotoPopupWindow.dismiss();
+                                    String photoPath = "";
+                                    if (reqeustCode == REQUEST_CODE_GALLERY) {
+                                        photoPath = resultList.get(0).getPhotoPath();
+                                        LogUtils.println("photo:" + photoPath);
+                                    } else if (reqeustCode == REQUEST_CODE_CAMERA) {
+                                        photoPath = resultList.get(0).getPhotoPath();
+                                        LogUtils.println("photo:" + photoPath);
                                     }
-
-                                    @Override
-                                    public void onBefore(Request request) {
-                                        super.onBefore(request);
+                                    //图片进行压缩
+                                    String filePhth = "";
+                                    try {
+                                        filePhth = PicUtils.saveFile(PicUtils.getSmallBitmap(photoPath));
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
                                     }
-
-                                    @Override
-                                    public void onError(Call call, Exception e) {
-
-                                    }
-
-                                    @Override
-                                    public void onResponse(String response) {
-                                        //更新头像
-                                        try {
-                                            JSONObject obj = new JSONObject(response);
-                                            Log.e("GYW","****"+obj.toString());
-                                            if (obj.getInt("state") == 1) {
-                                                SharedPreferences.Editor edit = mSp.edit();
-                                                edit.putString(Constants.USER_PIC,obj.getString("imgUrl"));
-                                                edit.commit();
-                                                updatePersonUserIcon();
-                                            } else {
-
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                    XhyGo.goUploadUserIcon(getActivity(), USERID, System.currentTimeMillis() + "", new File(filePhth), new StringCallback() {
+                                        @Override
+                                        public void onAfter() {
+                                            super.onAfter();
                                         }
-                                    }
-                                });
-                            }
-                            @Override
-                            public void onHanlderFailure(int requestCode, String errorMsg) {
-                             //   ToastUtils.showShortToast(getString(R.string.fail_reason, errorMsg), getActivity());
-                            }
-                        });
-                    }
-                }, new PhotoPopupWindow.OnAlbumListener() {
-                    @Override
-                    public void albumListen() {
-                        FunctionConfig config = new FunctionConfig.Builder().setMutiSelectMaxSize(1).build();
-                        GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY, config, new GalleryFinal.OnHanlderResultCallback() {
-                            @Override
-                            public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-                                if(mPhotoPopupWindow!= null && mPhotoPopupWindow.isShowing())
-                                    mPhotoPopupWindow.dismiss();
-                                String photoPath = "";
-                                if (reqeustCode == REQUEST_CODE_GALLERY) {
-                                    photoPath = resultList.get(0).getPhotoPath();
-                                    LogUtils.println("photo:" + photoPath);
-                                } else if (reqeustCode == REQUEST_CODE_CAMERA) {
-                                    photoPath = resultList.get(0).getPhotoPath();
-                                    LogUtils.println("photo:" + photoPath);
-                                }
-                                //图片进行压缩
-                                String filePhth = "";
-                                try {
-                                    filePhth = PicUtils.saveFile(PicUtils.getSmallBitmap(photoPath));
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                XhyGo.goUploadUserIcon(getActivity(), USERID, System.currentTimeMillis() + "", new File(filePhth), new StringCallback() {
-                                    @Override
-                                    public void onAfter() {
-                                        super.onAfter();
-                                    }
 
-                                    @Override
-                                    public void onBefore(Request request) {
-                                        super.onBefore(request);
-                                    }
-
-                                    @Override
-                                    public void onError(Call call, Exception e) {
-
-                                    }
-
-                                    @Override
-                                    public void onResponse(String response) {
-                                        //更新头像
-                                        try {
-                                            JSONObject obj = new JSONObject(response);
-                                            if (obj.getInt("state") == 1) {
-                                                SharedPreferences.Editor edit = mSp.edit();
-                                                edit.putString(Constants.USER_PIC,obj.getString("imgUrl"));
-                                                edit.commit();
-                                                updatePersonUserIcon();
-                                            } else {
-
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                        @Override
+                                        public void onBefore(Request request) {
+                                            super.onBefore(request);
                                         }
+
+                                        @Override
+                                        public void onError(Call call, Exception e) {
+
+                                        }
+
+                                        @Override
+                                        public void onResponse(String response) {
+                                            //更新头像
+                                            try {
+                                                JSONObject obj = new JSONObject(response);
+                                                if (obj.getInt("state") == 1) {
+                                                    SharedPreferences.Editor edit = mSp.edit();
+                                                    edit.putString(Constants.USER_PIC, obj.getString("imgUrl"));
+                                                    edit.commit();
+                                                    updatePersonUserIcon();
+                                                } else {
+
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onHanlderFailure(int requestCode, String errorMsg) {
+                                    //   ToastUtils.showShortToast(getString(R.string.fail_reason, errorMsg), getActivity());
+                                }
+                            });
+                        }
+                    }, new PhotoPopupWindow.OnAlbumListener() {
+                        @Override
+                        public void albumListen() {
+                            FunctionConfig config = new FunctionConfig.Builder().setMutiSelectMaxSize(1).build();
+                            GalleryFinal.openGalleryMuti(REQUEST_CODE_GALLERY, config, new GalleryFinal.OnHanlderResultCallback() {
+                                @Override
+                                public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+                                    if (mPhotoPopupWindow != null && mPhotoPopupWindow.isShowing())
+                                        mPhotoPopupWindow.dismiss();
+                                    String photoPath = "";
+                                    if (reqeustCode == REQUEST_CODE_GALLERY) {
+                                        photoPath = resultList.get(0).getPhotoPath();
+                                        LogUtils.println("photo:" + photoPath);
+                                    } else if (reqeustCode == REQUEST_CODE_CAMERA) {
+                                        photoPath = resultList.get(0).getPhotoPath();
+                                        LogUtils.println("photo:" + photoPath);
                                     }
-                                });
-                            }
-                            @Override
-                            public void onHanlderFailure(int requestCode, String errorMsg) {
-                                ToastUtils.showShortToast(getString(R.string.fail_reason, errorMsg), getActivity());
-                            }
-                        });
-                    }
-                });
-                mPhotoPopupWindow.showPopupWindow();
+                                    //图片进行压缩
+                                    String filePhth = "";
+                                    try {
+                                        filePhth = PicUtils.saveFile(PicUtils.getSmallBitmap(photoPath));
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    XhyGo.goUploadUserIcon(getActivity(), USERID, System.currentTimeMillis() + "", new File(filePhth), new StringCallback() {
+                                        @Override
+                                        public void onAfter() {
+                                            super.onAfter();
+                                        }
+
+                                        @Override
+                                        public void onBefore(Request request) {
+                                            super.onBefore(request);
+                                        }
+
+                                        @Override
+                                        public void onError(Call call, Exception e) {
+
+                                        }
+
+                                        @Override
+                                        public void onResponse(String response) {
+                                            //更新头像
+                                            try {
+                                                JSONObject obj = new JSONObject(response);
+                                                if (obj.getInt("state") == 1) {
+                                                    SharedPreferences.Editor edit = mSp.edit();
+                                                    edit.putString(Constants.USER_PIC, obj.getString("imgUrl"));
+                                                    edit.commit();
+                                                    updatePersonUserIcon();
+                                                } else {
+
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onHanlderFailure(int requestCode, String errorMsg) {
+                                    ToastUtils.showShortToast(getString(R.string.fail_reason, errorMsg), getActivity());
+                                }
+                            });
+                        }
+                    });
+                    mPhotoPopupWindow.showPopupWindow();
+                }else{
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                }
                 break;
             case R.id.btn_me_login:
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -322,6 +342,7 @@ private UMShareListener listener = new UMShareListener() {
                 login_back.setVisibility(View.GONE);
                 loginXS.setVisibility(View.GONE);
                 tx_img.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
+                USERID = mSp.getString(Constants.USER_USER_ID,"");
                 break;
             case R.id.loginSet:
                 Intent it= new Intent(getActivity(),RegisterActivity.class);

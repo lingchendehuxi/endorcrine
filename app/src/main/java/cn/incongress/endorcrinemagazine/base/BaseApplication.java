@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UmengTool;
 
 import cn.finalteam.galleryfinal.CoreConfig;
 import cn.finalteam.galleryfinal.FunctionConfig;
@@ -27,8 +28,8 @@ public class BaseApplication extends Application {
         _context = getApplicationContext();;
 
         /** 微信分享初始化 **/
-        PlatformConfig.setWeixin("wx959030923745168b", "b01a343ebccbf1107e80c36e098f032c");
-
+        PlatformConfig.setWeixin("wx5847e4cb0685bfbc", "9165983519c2f2236ae02cbdbab9fc36");
+//        UmengTool.checkWx(this);
 
         //设置主题
         //ThemeConfig.CYAN

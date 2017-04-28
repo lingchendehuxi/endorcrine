@@ -40,8 +40,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     Button mLogin;
     @BindView(R.id.login_yzm)
     EditText mYzm;
-    @BindView(R.id.login_name)
-    EditText mName;
     @BindView(R.id.login_phone)
     EditText mPhone;
     private String phone,name,code;
@@ -86,7 +84,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             case R.id.login_haveyzm:
                 phone = mPhone.getText().toString();
                 if(!"".equals(phone)) {
-                    if(isMobileNO(phone)) {
+                    if(phone.length() == 11) {
                         CountDownButtonHelper helper = new CountDownButtonHelper(mHaveYzm, "重新发送", 60, 1);
                         helper.start();
                         initHttp(false);
@@ -98,7 +96,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.btn_login:
-                name = mName.getText().toString();
+                phone = mPhone.getText().toString();
                 code = mYzm.getText().toString();
                 if(!"".equals(phone)&&!"".equals(name)&&!"".equals(code)){
                     initHttp(true);
@@ -119,16 +117,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     setSPStringValue(Constants.USER_USER_ID,userId);
                     setSPStringValue(Constants.USER_PIC,userPic);
                     setSPStringValue(Constants.USER_TRUE_NAME,truenName);
-                    setSPStringValue(Constants.USER_SEX,sex);
                     setSPStringValue(Constants.USER_MOBILE,mobilePhone);
                     setSPStringValue(Constants.USER_EMAIL,email);
                     setSPStringValue(Constants.USER_KESHI,keshi);
-                    setSPStringValue(Constants.USER_ZHICHENG,zhicheng);
                     setSPStringValue(Constants.USER_PROVINCE_NAME,provinceName);
                     setSPStringValue(Constants.USER_CITY_NAME,cityName);
                     setSPStringValue(Constants.USER_HOSPITAL_NAME,hospitalName);
-                    setSPStringValue(Constants.USER_HOSPITAL_LEVEL,hospitalLever);
                     setSPStringValue(Constants.USER_ZHIWU,zhiwu);
+                    setSPStringValue(Constants.USER_CITY_ID,cityId);
+                    setSPStringValue(Constants.USER_HOSPITAL_ID,hospitalId);
+                    setSPStringValue(Constants.USER_PROVINCE_ID,provinceId);
                     finish();
                     break;
                 case 1:
@@ -137,8 +135,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             }
         }
     };
-    private String userId,truenName,sex,mobilePhone,email,keshi,zhicheng,provinceName
-            ,cityName,hospitalName,hospitalLever,zhiwu,userPic;
+    private String userId,truenName,cityId,mobilePhone,email,keshi,provinceId,provinceName
+            ,cityName,hospitalName,hospitalId,zhiwu,userPic;
     private void initHttp(boolean that) {
         if(that) {
             new Thread() {
@@ -146,7 +144,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 public void run() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("mobilePhone", phone);
-                    params.put("trueName", name);
                     params.put("sms", code);
                     params.put("proId", "18");
                     params.put("lan", "cn");
@@ -161,15 +158,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                             userId = jsonObject.getString("userId");
                             userPic = jsonObject.getString("userPic");
                             truenName= jsonObject.getString("trueName");
-                            sex= jsonObject.getString("sex");
+                            cityId= jsonObject.getString("city");
                             mobilePhone= jsonObject.getString("mobilePhone");
                             email= jsonObject.getString("email");
                             keshi= jsonObject.getString("keshi");
-                            zhicheng= jsonObject.getString("zhicheng");
+                            provinceId= jsonObject.getString("province");
                             provinceName= jsonObject.getString("provinceName");
                             cityName= jsonObject.getString("cityName");
                             hospitalName= jsonObject.getString("hospitalName");
-                            hospitalLever= jsonObject.getString("hospitalLevel");
+                            hospitalId= jsonObject.getString("hospital");
                             zhiwu= jsonObject.getString("zhiwu");
                             Log.e("GYW","zoule 2");
                             hand.sendEmptyMessage(0);
@@ -202,11 +199,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    public static boolean isMobileNO(String mobiles) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[0-9])|(18[0-9]))\\d{8}$");
-        Matcher m = p.matcher(mobiles);
-        return m.matches();
-    }
     public void back(View view){
         finish();
     }

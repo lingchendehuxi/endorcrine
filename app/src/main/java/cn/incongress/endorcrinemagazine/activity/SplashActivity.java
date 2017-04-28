@@ -1,6 +1,7 @@
 package cn.incongress.endorcrinemagazine.activity;
 
 import android.app.Activity;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class SplashActivity extends BaseActivity {
     protected void setContentView(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+        handler.sendEmptyMessageDelayed(1,2000);
     }
 
     @Override
@@ -31,14 +33,15 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initializeEvents() {
-        mTvVersion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityUtils.startActivity(SplashActivity.this, HomeActivity.class);
-                finish();
-            }
-        });
     }
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            ActivityUtils.startActivity(SplashActivity.this, HomeActivity.class);
+            finish();
+        }
+    };
 
     @Override
     protected void initializeData(Bundle savedInstanceState) {

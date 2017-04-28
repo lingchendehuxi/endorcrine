@@ -2,6 +2,9 @@ package cn.incongress.endorcrinemagazine.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,10 +59,11 @@ public class PastAdapter extends RecyclerView.Adapter<PastAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        String s = mArrayList.get(position);
+               String s = mArrayList.get(position);
         String a = s.substring(0,4);
-        String b = "第"+s.substring(5)+"期";
-        holder.tv.setText(a+b);
+        String b = s.substring(5);
+        holder.year.setText(a);
+        holder.moth.setText(b);
 
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {
@@ -81,11 +85,12 @@ public class PastAdapter extends RecyclerView.Adapter<PastAdapter.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv;
+        TextView year,moth;
 
         public MyViewHolder(View view) {
             super(view);
-            tv = (TextView) view.findViewById(R.id.past_itemtxt);
+            year = (TextView) view.findViewById(R.id.past_itemtxt_year);
+            moth = (TextView) view.findViewById(R.id.past_itemtxt_moth);
         }
     }
 }

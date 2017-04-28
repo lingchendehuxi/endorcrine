@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.incongress.endorcrinemagazine.R;
-import cn.incongress.endorcrinemagazine.bean.ChooseBean;
+import cn.incongress.endorcrinemagazine.bean.CollectionBean;
 
 /**
  * Created by Admin on 2017/4/27.
@@ -20,13 +20,13 @@ import cn.incongress.endorcrinemagazine.bean.ChooseBean;
 public class CollectionAdapater extends RecyclerView.Adapter<CollectionAdapater.SearchViewHolder> {
     //
     private Context mContext;
-    private List<ChooseBean> mArrayList = new ArrayList<>();
+    private List<CollectionBean> mArrayList = new ArrayList<>();
 
     public CollectionAdapater(Context mContext) {
         this.mContext = mContext;
     }
 
-    public void setData(List<ChooseBean> mArrayList) {
+    public void setData(List<CollectionBean> mArrayList) {
         this.mArrayList = mArrayList;
     }
 
@@ -44,13 +44,19 @@ public class CollectionAdapater extends RecyclerView.Adapter<CollectionAdapater.
         void onItemClick(View view, int position);
 
     }
+    public interface onLongItemClickLitener{
+        void onLongItemClick(View view, int position);
+    }
 
     private CollectionAdapater.OnItemClickLitener mOnItemClickLitener;
+    private CollectionAdapater.onLongItemClickLitener mOnLongItemClickLitener;
 
     public void setOnItemClickLitener(CollectionAdapater.OnItemClickLitener mOnItemClickLitener) {
         this.mOnItemClickLitener = mOnItemClickLitener;
     }
-
+    public void setOnLongItemClickLitener(CollectionAdapater.onLongItemClickLitener mOnLongItemClickLitener){
+        this.mOnLongItemClickLitener = mOnLongItemClickLitener;
+    }
     @Override
     public void onBindViewHolder(final CollectionAdapater.SearchViewHolder holder, final int position) {
 
@@ -63,6 +69,18 @@ public class CollectionAdapater extends RecyclerView.Adapter<CollectionAdapater.
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
                     mOnItemClickLitener.onItemClick(holder.itemView, pos);
+                }
+            });
+        }
+
+        if (mOnLongItemClickLitener != null) {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnLongItemClickLitener.onLongItemClick(holder.itemView, pos);
+                    return true;
                 }
             });
         }

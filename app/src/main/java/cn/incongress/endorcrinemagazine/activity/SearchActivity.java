@@ -177,7 +177,7 @@ public class SearchActivity extends BaseActivity {
                     params.put("years", years);
                     params.put("lan", "cn");
                     try {
-                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.SEARCH, params, "utf-8"));
+                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.SEARCH, params, "GBK"));
                         if(jsonObject.getInt("state")==1){
                             JSONArray array = jsonObject.getJSONArray("notesArray");
                             for(int i = 0;i<array.length();i++){
@@ -291,7 +291,7 @@ public class SearchActivity extends BaseActivity {
                         mPgb.setVisibility(View.VISIBLE);
                         initHttp(false);
                     }else{
-                        Toast.makeText(getApplication(),"请选择搜索内容",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(),"请选择或输入搜索内容",Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case 3:

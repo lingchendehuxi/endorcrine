@@ -54,8 +54,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     TextView mTitle;
     @BindView(R.id.regist_name)
     EditText mEditName;
-    @BindView(R.id.regist_sex)
-    EditText mSex;
     @BindView(R.id.regist_email)
     EditText mEditEmail;
     @BindView(R.id.regist_phone)
@@ -64,28 +62,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     EditText mCity;
     @BindView(R.id.regist_dw)
     EditText mDanWei;
-    @BindView(R.id.regist_dwdj)
-    EditText mDanWeiDJ;
     @BindView(R.id.regist_ks)
     EditText mKeShi;
-    @BindView(R.id.regist_zc)
-    EditText mZhiCheng;
     @BindView(R.id.regist_zw)
     EditText mZhiWu;
     @BindView(R.id.btn_regist_next)
     Button mRegister;
 
-    /** 性别选择器 **/
-    private PopupWindow mSexPopupWindow;
-    private ArrayList<String> mSexList= new ArrayList<>();
-    private String[] mSexs = {"男", "女"};
-    private String mCurrentSex;
-    /** 单位等级选择器 **/
-    private PopupWindow mDWGradePopupWindow;
-    private ArrayList<String> mDWGradeList= new ArrayList<>();
-    private String[] mDWGrades = {"三级甲等", "二级甲等", "一级甲等", "三级乙等", "二级乙等", "一级乙等"
-            ,"三级丙等","二级丙等","一级丙等"};
-    private String mCurrentDWGrade;
+
 
     /** 科室选择器 **/
     private PopupWindow mKeShiPopupWindow;
@@ -97,12 +81,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             "生殖医学科","男科","病理科","皮肤性病科","眼科","神经内科","神经外科","精神心理科","老年医学科","耳鼻咽喉头颈科","肝胆外科","营养科","肾脏内科","肿瘤科","胸外科",
             "药剂科","血液内科","血液外科","计划生育科","超声科","野战外科","风湿免疫科","骨科","中医科","预防保健科","输血科","透析科","其他"};
     private String mCurrentKeshi;
-    /** 职称选择器 **/
-    private PopupWindow mZhiChengPopupWindow;
-    private ArrayList<String> mZhiChengList= new ArrayList<>();
-    private String[] mZhiChengs = {"初级", "中级", "高级"};
-    private String mCurrentZhiCheng;
-
     /** 职务选择器 **/
     private PopupWindow mZhiWuPopupWindow;
     private ArrayList<String> mZhiWuList= new ArrayList<>();
@@ -110,7 +88,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private String mCurrentZhiWu;
 
     /** 请求列表变量**/
-    private String mName,mPhone,mEmail,province,city,mHospital,mHospitalId,cityId,provinceId,userPic;
+    private String mName,mPhone,mEmail,province,city,mHospital,mHospitalId,cityId,provinceId,mzhiwu,mKeshi;
     private String USERID ;
     @Override
     protected void setContentView(Bundle savedInstanceState) {
@@ -119,48 +97,31 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
-        mTitle.setText(R.string.register_rgs);
-        mSex.setOnClickListener(this);
         mCity.setOnClickListener(this);
         mDanWei.setOnClickListener(this);
-        mDanWeiDJ.setOnClickListener(this);
         mKeShi.setOnClickListener(this);
-        mZhiCheng.setOnClickListener(this);
         mZhiWu.setOnClickListener(this);
         mRegister.setOnClickListener(this);
         AssetsDatabaseManager.initManager(RegisterActivity.this);
         if(1 == getIntent().getIntExtra("type",-1)){
+            mTitle.setText(R.string.register_rgs);
             hand.sendEmptyMessage(1);
         }else{
+            mTitle.setText(R.string.register_user);
             hand.sendEmptyMessage(2);
-        }
-         //性别初始化
-        for (int i = 0; i < mSexs.length; i++) {
-            mSexList.add(mSexs[i]);
-        }
-        //科室初始化
-        for (int i = 0; i < mDWGrades.length; i++) {
-            mDWGradeList.add(mDWGrades[i]);
         }
 
         //科室初始化
         for (int i = 0; i < mKeShis.length; i++) {
             mKeShiList.add(mKeShis[i]);
         }
-        //职称初始化
-        for (int i = 0; i < mZhiChengs.length; i++) {
-            mZhiChengList.add(mZhiChengs[i]);
-        }
 
         //职务初始化
         for (int i = 0; i < mZhiWus.length; i++) {
             mZhiWuList.add(mZhiWus[i]);
         }
-        initSexPopupwindow();
-        initDWGradePopupwindow();
         initKeShiPopupwindow();
         initZhiWuPopupwindow();
-        initZhiChengPopupwindow();
 
     }
 
@@ -172,26 +133,18 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.regist_sex:
-                mSexPopupWindow.showAtLocation(RegisterActivity.this.findViewById(R.id.ll_whole_area),
-                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                break;
             case R.id.regist_city:
                 startActivityForResult(new Intent(RegisterActivity.this, InfoEditLocationActivity.class) ,GET_CITYID);
                 break;
             case R.id.regist_dw:
-                startActivityForResult(new Intent(RegisterActivity.this, InfoEditHospitalActivity.class), GET_HOSPITAL);
-                break;
-            case R.id.regist_dwdj:
-                mDWGradePopupWindow.showAtLocation(RegisterActivity.this.findViewById(R.id.ll_whole_area),
-                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                if (StringUtils.isEmpty(getSPStringValue(Constants.USER_CITY_ID))  || ! (Integer.parseInt(getSPStringValue(Constants.USER_CITY_ID)) > 0)) {
+                    ToastUtils.showShortToast("请先选择地区",getApplication());
+                } else {
+                    startActivityForResult(new Intent(RegisterActivity.this, InfoEditHospitalActivity.class), GET_HOSPITAL);
+                }
                 break;
             case R.id.regist_ks:
                 mKeShiPopupWindow.showAtLocation(RegisterActivity.this.findViewById(R.id.ll_whole_area),
-                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                break;
-            case R.id.regist_zc:
-                mZhiChengPopupWindow.showAtLocation(RegisterActivity.this.findViewById(R.id.ll_whole_area),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.regist_zw:
@@ -199,14 +152,23 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
             case R.id.btn_regist_next:
-                mName = mEditName.getText().toString();
-                mPhone = mEditPhone.getText().toString();
-                mEmail = mEditEmail.getText().toString();
+                mName = mEditName.getText().toString().trim();
+                mPhone = mEditPhone.getText().toString().trim();
+                mEmail = mEditEmail.getText().toString().trim();
+                mHospital = getSPStringValue(Constants.USER_HOSPITAL_NAME);
+                mzhiwu = getSPStringValue(Constants.USER_ZHIWU);
+                mKeshi = getSPStringValue(Constants.USER_KESHI);
+                provinceId = getSPStringValue(Constants.USER_PROVINCE_ID);
+                province = getSPStringValue(Constants.USER_PROVINCE_NAME);
+                city = getSPStringValue(Constants.USER_CITY_NAME);
+                cityId = getSPStringValue(Constants.USER_CITY_ID);
+                mHospitalId = getSPStringValue(Constants.USER_HOSPITAL_ID);
+
+
                 mHospital = mDanWei.getText().toString();
                 if(!"".equals(mName)&&!"".equals(mPhone)&&!"".equals(mEmail)&&
-                        !"".equals(city)&&!"".equals(mHospital)&&!"".equals(mCurrentZhiWu)&&
-                        !"".equals(mCurrentZhiCheng)&& !"".equals(mCurrentSex)&&!"".equals(mCurrentDWGrade)
-                        &&!"".equals(mCurrentKeshi)){
+                        !"".equals(city)&&!"".equals(mHospital)&&!"".equals(mzhiwu)
+                        &&!"".equals(mKeshi)){
                     initHttp();
                 }else{
                     Toast.makeText(getApplication(),"请填写完整信息",Toast.LENGTH_SHORT).show();
@@ -217,6 +179,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initHttp() {
+        Log.e("GYW","userId"+USERID+"trueName"+mName+"mobilePhone"+mPhone+"email"+ mEmail
+        +"province"+provinceId+"provinceName"+ province+"city"+cityId
+        +"cityName"+city+"hospital"+mHospitalId+"hospitalName"+mHospital+"keshi"+mKeshi+"zhiwu"+mzhiwu);
         new Thread(){
             @Override
             public void run() {
@@ -224,13 +189,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         params.put("proId", "18");
                         params.put("lan", "cn");
                         params.put("userId", USERID);
-                        params.put("trueName", mName);params.put("sex", mCurrentSex);
+                        params.put("trueName", mName);
                         params.put("mobilePhone", mPhone);params.put("email", mEmail);
                         params.put("province", provinceId);params.put("provinceName", province);
                         params.put("city", cityId);params.put("cityName", city);
                         params.put("hospital", mHospitalId);params.put("hospitalName", mHospital);
-                        params.put("hospitalLevel", mCurrentDWGrade);params.put("keshi", mCurrentKeshi);
-                        params.put("zhicheng", mCurrentZhiCheng);params.put("zhiwu", mCurrentZhiWu);
+                        params.put("keshi", mKeshi);
+                        params.put("zhiwu", mzhiwu);
                 try {
                             JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.REGISTER, params, "GBK"));
                             Log.e("GYW",jsonObject.toString());
@@ -254,32 +219,30 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     USERID = "-1";
                 break;
                 case 2:
-                    USERID = getSPStringValue(Constants.USER_USER_ID);
+                     USERID = getSPStringValue(Constants.USER_USER_ID);
                      mEditName.setText(getSPStringValue(Constants.USER_TRUE_NAME));
-                     mSex.setText(getSPStringValue(Constants.USER_SEX));
                      mEditEmail.setText(getSPStringValue(Constants.USER_EMAIL));
                      mEditPhone.setText(getSPStringValue(Constants.USER_MOBILE));
                      mCity.setText(getSPStringValue(Constants.USER_CITY_NAME)+getString(R.string.info_blank)+getSPStringValue(Constants.USER_PROVINCE_NAME));
                      mDanWei.setText(getSPStringValue(Constants.USER_HOSPITAL_NAME));
-                     mDanWeiDJ.setText(getSPStringValue(Constants.USER_HOSPITAL_LEVEL));
                      mKeShi.setText(getSPStringValue(Constants.USER_KESHI));
-                     mZhiCheng.setText(getSPStringValue(Constants.USER_ZHICHENG));
                      mZhiWu.setText(getSPStringValue(Constants.USER_ZHIWU));
                 break;
                 case 3:
                     setSPStringValue(Constants.USER_USER_ID,USERID);
                     setSPStringValue(Constants.USER_PIC,"");
                     setSPStringValue(Constants.USER_TRUE_NAME,mName);
-                    setSPStringValue(Constants.USER_SEX,mCurrentSex);
                     setSPStringValue(Constants.USER_MOBILE,mPhone);
                     setSPStringValue(Constants.USER_EMAIL,mEmail);
-                    setSPStringValue(Constants.USER_KESHI,mCurrentKeshi);
-                    setSPStringValue(Constants.USER_ZHICHENG,mCurrentZhiCheng);
+                    setSPStringValue(Constants.USER_KESHI,mKeshi);
                     setSPStringValue(Constants.USER_PROVINCE_NAME,province);
                     setSPStringValue(Constants.USER_CITY_NAME,city);
+                    setSPStringValue(Constants.USER_CITY_ID,cityId);
+                    setSPStringValue(Constants.USER_HOSPITAL_ID,mHospitalId);
+                    setSPStringValue(Constants.USER_PROVINCE_ID,provinceId);
+                    setSPStringValue(Constants.USER_PROVINCE_NAME,province);
                     setSPStringValue(Constants.USER_HOSPITAL_NAME,mHospital);
-                    setSPStringValue(Constants.USER_HOSPITAL_LEVEL,mCurrentDWGrade);
-                    setSPStringValue(Constants.USER_ZHIWU,mCurrentZhiWu);
+                    setSPStringValue(Constants.USER_ZHIWU,mzhiwu);
                     finish();
                     break;
             }
@@ -290,13 +253,19 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == RESULT_OK) {
-            city = getSPStringValue(Constants.USER_CITY_NAME);
-            province = getSPStringValue(Constants.USER_PROVINCE_NAME);
-            cityId = getSPStringValue(Constants.USER_CITY_ID);
-            provinceId = getSPStringValue(Constants.USER_PROVINCE_ID);
-            mCity.setText(city+getString(R.string.info_blank)+province);
-            mDanWei.setText(getSPStringValue(Constants.USER_HOSPITAL_NAME ));
-            mHospitalId = getSPStringValue(Constants.USER_HOSPITAL_ID);
+            if(requestCode == GET_CITYID){
+                city = getSPStringValue(Constants.USER_CITY_NAME);
+                province = getSPStringValue(Constants.USER_PROVINCE_NAME);
+                cityId = getSPStringValue(Constants.USER_CITY_ID);
+                provinceId = getSPStringValue(Constants.USER_PROVINCE_ID);
+                mCity.setText(city+getString(R.string.info_blank)+province);
+                mDanWei.setText("");
+                mKeShi.setText("");
+                mZhiWu.setText("");
+            }else if(requestCode == GET_HOSPITAL){
+                mDanWei.setText(getSPStringValue(Constants.USER_HOSPITAL_NAME ));
+                mHospitalId = getSPStringValue(Constants.USER_HOSPITAL_ID);
+            }
         }
     }
 
@@ -423,176 +392,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mZhiWuPopupWindow.setFocusable(true);
         mZhiWuPopupWindow.setTouchable(true);
         mZhiWuPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-    }
-    private void initZhiChengPopupwindow() {
-
-        View educationPicker = getLayoutInflater().inflate(R.layout.time_select_view, null);
-
-        final WheelView wheel = (WheelView)educationPicker.findViewById(R.id.time_picker);
-        TextView mTvSave = (TextView)educationPicker.findViewById(R.id.tv_time_save);
-        TextView mTvCancel = (TextView)educationPicker.findViewById(R.id.tv_time_cancel);
-
-        mTvSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mZhiChengPopupWindow.dismiss();
-                mCurrentZhiCheng = wheel.getSelectedText();
-
-                setSPStringValue(Constants.USER_ZHICHENG, mCurrentZhiCheng);
-                mZhiCheng.setText(mCurrentZhiCheng);
-            }
-        });
-
-        mTvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mZhiChengPopupWindow.dismiss();
-            }
-        });
-
-        wheel.setData(mZhiChengList);
-        wheel.setDefault(0);
-
-        wheel.setOnSelectListener(new WheelView.OnSelectListener() {
-            @Override
-            public void endSelect(int id, String text) {
-
-            }
-
-            @Override
-            public void selecting(int id, String text) {
-
-            }
-        });
-
-        wheel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        mZhiChengPopupWindow = new PopupWindow(educationPicker, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-
-        ColorDrawable dw = new ColorDrawable(0x77000000);
-        mZhiChengPopupWindow.setBackgroundDrawable(dw);
-        mZhiChengPopupWindow.setOutsideTouchable(true);
-        mZhiChengPopupWindow.setFocusable(true);
-        mZhiChengPopupWindow.setTouchable(true);
-        mZhiChengPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-    }
-
-    private void initSexPopupwindow(){
-        View educationPicker = getLayoutInflater().inflate(R.layout.time_select_view, null);
-
-        final WheelView wheel = (WheelView)educationPicker.findViewById(R.id.time_picker);
-        TextView mTvSave = (TextView)educationPicker.findViewById(R.id.tv_time_save);
-        TextView mTvCancel = (TextView)educationPicker.findViewById(R.id.tv_time_cancel);
-
-        mTvSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSexPopupWindow.dismiss();
-                mCurrentSex = wheel.getSelectedText();
-
-                setSPStringValue(Constants.USER_ZHICHENG, mCurrentSex);
-                mSex.setText(mCurrentSex);
-            }
-        });
-
-        mTvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mSexPopupWindow.dismiss();
-            }
-        });
-
-        wheel.setData(mSexList);
-        wheel.setDefault(0);
-
-        wheel.setOnSelectListener(new WheelView.OnSelectListener() {
-            @Override
-            public void endSelect(int id, String text) {
-
-            }
-
-            @Override
-            public void selecting(int id, String text) {
-
-            }
-        });
-
-        wheel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        mSexPopupWindow = new PopupWindow(educationPicker, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-
-        ColorDrawable dw = new ColorDrawable(0x77000000);
-        mSexPopupWindow.setBackgroundDrawable(dw);
-        mSexPopupWindow.setOutsideTouchable(true);
-        mSexPopupWindow.setFocusable(true);
-        mSexPopupWindow.setTouchable(true);
-        mSexPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-    }
-    private void  initDWGradePopupwindow(){
-        View educationPicker = getLayoutInflater().inflate(R.layout.time_select_view, null);
-
-        final WheelView wheel = (WheelView)educationPicker.findViewById(R.id.time_picker);
-        TextView mTvSave = (TextView)educationPicker.findViewById(R.id.tv_time_save);
-        TextView mTvCancel = (TextView)educationPicker.findViewById(R.id.tv_time_cancel);
-
-        mTvSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDWGradePopupWindow.dismiss();
-                mCurrentDWGrade = wheel.getSelectedText();
-
-                setSPStringValue(Constants.USER_ZHICHENG, mCurrentDWGrade);
-                mDanWeiDJ.setText(mCurrentDWGrade);
-            }
-        });
-
-        mTvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDWGradePopupWindow.dismiss();
-            }
-        });
-
-        wheel.setData(mDWGradeList);
-        wheel.setDefault(0);
-
-        wheel.setOnSelectListener(new WheelView.OnSelectListener() {
-            @Override
-            public void endSelect(int id, String text) {
-
-            }
-
-            @Override
-            public void selecting(int id, String text) {
-
-            }
-        });
-
-        wheel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-
-        mDWGradePopupWindow = new PopupWindow(educationPicker, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-
-        ColorDrawable dw = new ColorDrawable(0x77000000);
-        mDWGradePopupWindow.setBackgroundDrawable(dw);
-        mDWGradePopupWindow.setOutsideTouchable(true);
-        mDWGradePopupWindow.setFocusable(true);
-        mDWGradePopupWindow.setTouchable(true);
-        mDWGradePopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
     }
     public void back(View view){
         finish();

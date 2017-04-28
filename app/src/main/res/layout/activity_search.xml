@@ -54,8 +54,7 @@
         android:layout_marginRight="10dp"
         android:textColor="@color/search_back"
         android:text="@string/search_back"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:textSize="16dp"
         />
 </LinearLayout>
     <TextView
@@ -64,10 +63,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textSize="30dp"
-        android:textStyle="bold"
+        android:textSize="20dp"
         android:textColor="@color/search_back"
-        android:text="未找到匹配数据\n请点击重新搜索"
+        android:text="没有结果\n请点击重新搜索"
         />
     <android.support.v7.widget.RecyclerView
         android:visibility="gone"
@@ -97,9 +95,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search_column"
                 android:layout_marginLeft="5dp"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:textColor="@color/search_back"
-                android:textStyle="bold"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 />
@@ -112,11 +109,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_year"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:gravity="center"
             android:layout_marginLeft="5dp"
             android:textColor="@color/search_back"
-            android:textStyle="bold"
             />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -128,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/search_search"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textColor="@color/search_back"
             android:background="@drawable/btn_me_login"
             android:layout_gravity="center_horizontal"

@@ -56,7 +56,6 @@ public class MonthFragment extends Fragment {
     }
 
     public  void setData(ArrayList<String> list) {
-        mArrayList = new ArrayList<>();
         mArrayList = list;
     }
 }

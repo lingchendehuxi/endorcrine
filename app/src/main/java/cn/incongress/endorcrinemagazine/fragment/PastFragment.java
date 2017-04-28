@@ -114,13 +114,15 @@ public class PastFragment extends BaseLazyFragment {
                 case 1:
                     mPgb.setVisibility(View.GONE);
                     MyViewPagerAdapter viewPagerAdapter = new MyViewPagerAdapter(getActivity().getSupportFragmentManager());
-                    Log.e("GYW","----1-"+pastList.size());
+
                     for(int i = 0;i<pastList.size();i++){
                         PastBean bean = pastList.get(i);
                         ArrayList<String> s = (ArrayList<String>) bean.getMonth().get(bean.getYear());
                         MonthFragment demo =  new MonthFragment();
                         demo.setData(s);
+                        Log.e("wq",s.toString());
                         viewPagerAdapter.addFragment(demo , bean.getYear());//添加Fragment
+                        Log.e("wq",bean.getYear()+"年");
                         tab.addTab(tab.newTab().setText(bean.getYear()+"年"));
                     }
                     vpg.setAdapter(viewPagerAdapter);

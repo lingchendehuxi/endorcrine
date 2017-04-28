@@ -3,10 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:layout_marginTop="5dp"
         android:id="@+id/current_notesTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:textColor="@color/black"
         />
 
@@ -14,12 +15,13 @@
         android:id="@+id/current_authors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/gray"
-        android:textSize="14dp"
+        android:textSize="12dp"
         />
     <RelativeLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -30,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:layout_alignParentLeft="true"
             />
         />
@@ -39,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/gray"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:layout_alignParentRight="true"
             />
 

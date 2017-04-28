@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:gravity="center"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="bottom|center"
     android:background="@drawable/item_past"
     android:layout_margin="10dp"
     android:layout_height="55dp">
 <TextView
-    android:id="@+id/past_itemtxt"
+    android:id="@+id/past_itemtxt_year"
+    android:textSize="16sp"
+    android:textColor="@color/gray"
+    android:text="2017"
     android:layout_width="wrap_content"
+    android:layout_marginTop="15dp"
     android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pastmoth"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        />
+    <TextView
+        android:id="@+id/past_itemtxt_moth"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="12"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:text="@string/choose_piecemeal_text2"
+        />
 </LinearLayout>
