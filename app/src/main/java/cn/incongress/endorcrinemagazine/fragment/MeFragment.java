@@ -63,8 +63,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class MeFragment extends BaseLazyFragment implements View.OnClickListener{
     private CircleImageView tx_img;
     private Button login_btn,login_back;
-    private TextView loginSet,loginName,mCollectionsize;
-    private LinearLayout myCollection,recommend,feedback,loginXS;
+    private TextView loginName,mCollectionsize;
+    private LinearLayout myCollection,recommend,feedback,loginXS,loginSet;
     private String USERID;
     private SharedPreferences mSp;
     private PhotoPopupWindow mPhotoPopupWindow;
@@ -117,7 +117,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         login_btn = (Button) view.findViewById(R.id.btn_me_login);
         login_back = (Button) view.findViewById(R.id.btn_login_back);
         loginName = (TextView) view.findViewById(R.id.loginName);
-        loginSet = (TextView) view.findViewById(R.id.loginSet);
+        loginSet = (LinearLayout) view.findViewById(R.id.loginSet);
         mCollectionsize = (TextView) view.findViewById(R.id.myCollection_size);
         myCollection.setOnClickListener(this);
         feedback.setOnClickListener(this);

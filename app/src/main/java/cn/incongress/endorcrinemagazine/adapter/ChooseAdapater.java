@@ -1,6 +1,11 @@
 package cn.incongress.endorcrinemagazine.adapter;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +26,7 @@ import cn.incongress.endorcrinemagazine.bean.ChooseBean;
 
 public class ChooseAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<ChooseBean> list;
+    private Context mContext;
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
@@ -39,8 +45,9 @@ public class ChooseAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return list;
     }
 
-    public ChooseAdapater() {
+    public ChooseAdapater(Context c) {
         list = new ArrayList<ChooseBean>();
+        this.mContext = c;
     }
 
     @Override
@@ -60,11 +67,20 @@ public class ChooseAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ItemViewHolder) {
-            ((ItemViewHolder) holder).notesTitle.setText(list.get(position).getNotesTitle());
+            //((ItemViewHolder) holder).notesTitle.setText(list.get(position).getNotesTitle());
             ((ItemViewHolder) holder).notesType.setText(list.get(position).getNotesType());
             ((ItemViewHolder) holder).authors.setText(list.get(position).getAuthors());
             ((ItemViewHolder) holder).lanmu.setText(list.get(position).getLanmu());
             ((ItemViewHolder) holder).readCount.setText(list.get(position).getReadCount());
+
+
+            SpannableString spanText = new SpannableString("图"+mContext.getString(R.string.info_blank)+list.get(position).getNotesTitle());
+            Drawable d = mContext.getResources().getDrawable(R.mipmap.biaoti_icon);
+            // 左上右下 控制图片大小
+            d.setBounds(0, 0, 20, 40);
+            // 替换0,1的字符
+            spanText.setSpan(new ImageSpan(d), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            ((ItemViewHolder) holder).notesTitle.append(spanText);
         }
     }
 

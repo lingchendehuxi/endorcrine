@@ -119,11 +119,14 @@ public class PastFragment extends BaseLazyFragment {
                         PastBean bean = pastList.get(i);
                         ArrayList<String> s = (ArrayList<String>) bean.getMonth().get(bean.getYear());
                         MonthFragment demo =  new MonthFragment();
-                        demo.setData(s);
-                        Log.e("wq",s.toString());
-                        viewPagerAdapter.addFragment(demo , bean.getYear());//添加Fragment
-                        Log.e("wq",bean.getYear()+"年");
-                        tab.addTab(tab.newTab().setText(bean.getYear()+"年"));
+                        if(s.size()<0){
+                            demo.setData((ArrayList<String>)bean.getMonth().get(bean.getYear()));
+                        }else{
+                            demo.setData(s);
+                        }
+                        String bt = bean.getYear()+"年";
+                        viewPagerAdapter.addFragment(demo , bt);//添加Fragment
+                        tab.addTab(tab.newTab().setText(bt));
                     }
                     vpg.setAdapter(viewPagerAdapter);
                     tab.setupWithViewPager(vpg);

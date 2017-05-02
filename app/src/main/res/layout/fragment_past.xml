@@ -6,11 +6,24 @@
     android:layout_height="match_parent">
 <include layout="@layout/search_title"
     android:id="@+id/past_ictitle"/>
+
+    <TextView
+        android:id="@+id/textasdasdasd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="过刊期次"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        />
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/gray"
+        app:tabTextColor="@color/umeng_divide"
         android:layout_below="@+id/past_ictitle"
         android:background="@null" />
     <LinearLayout

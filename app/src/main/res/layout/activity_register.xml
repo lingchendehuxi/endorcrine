@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="cn.incongress.endorcrinemagazine.activity.RegisterActivity">
-    <include layout="@layout/activity_title"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +28,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/login_name1"
                     />
@@ -38,6 +38,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:textSize="14dp"
                     android:hint="@string/login_name2"
                     android:singleLine="true"
                     android:focusable="true"
@@ -58,7 +59,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_email1"
                     />
@@ -69,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_email2"
+                    android:textSize="14dp"
                     android:singleLine="true"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -87,7 +89,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_phone1"
                     />
@@ -98,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_phone2"
+                    android:textSize="14dp"
                     android:singleLine="true"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
@@ -116,7 +119,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_region1"
                     />
@@ -124,6 +127,7 @@
                     android:id="@+id/regist_city"
                     android:layout_width="0dp"
                     android:focusable="false"
+                    android:textSize="14dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -150,7 +154,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_danw1"
                     />
@@ -161,6 +165,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:focusable="false"
+                    android:textSize="14dp"
                     android:hint="@string/register_danw2"
                     android:singleLine="true"
                     />
@@ -186,7 +191,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_keshi1"
                     />
@@ -198,6 +203,7 @@
                     android:background="@null"
                     android:singleLine="true"
                     android:focusable="false"
+                    android:textSize="14dp"
                     android:hint="@string/register_keshi2"
                     />
 
@@ -222,7 +228,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="14dp"
                     android:paddingLeft="@dimen/layout_padding"
                     android:text="@string/register_title1"
                     />
@@ -234,6 +240,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/register_title2"
+                    android:textSize="14dp"
                     android:singleLine="true"
                     />
 
@@ -249,15 +256,17 @@
                 android:id="@+id/btn_regist_next"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
                 android:text="@string/register_next"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:background="@drawable/btn_login_activity"/>
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/activity_title"/>
 </LinearLayout>

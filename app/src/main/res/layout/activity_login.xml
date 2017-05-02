@@ -25,7 +25,7 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:text="@string/login_phone1"
             android:gravity="center"
             />
@@ -34,8 +34,10 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:numeric="integer"
+            android:textSize="16dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:textColorHint="@color/umeng_divide"
             android:hint="@string/login_phone2"
             />
     </LinearLayout>
@@ -60,7 +62,7 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="14dp"
             android:text="@string/login_yz1"
             android:gravity="center"
             />
@@ -71,6 +73,8 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:numeric="integer"
+            android:textSize="16dp"
+            android:textColorHint="@color/umeng_divide"
             android:hint="@string/login_yz2"
             />
         </LinearLayout>
@@ -102,7 +106,7 @@
     android:gravity="center"
     android:text="@string/login_log"
     android:textColor="@color/white"
-    android:textSize="20dp"
+    android:textSize="18dp"
     android:background="@drawable/btn_login_activity"/>
     <TextView
         android:id="@+id/login_register"
@@ -113,8 +117,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/login_reg"
-        android:textColor="@color/gray"
-        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         android:background="@null"/>
 </LinearLayout>
 </RelativeLayout>

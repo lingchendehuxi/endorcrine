@@ -299,7 +299,7 @@ public class SearchActivity extends BaseActivity {
                     mRecyclerView.setVisibility(View.VISIBLE);
                     mRecyclerView.setLayoutManager(new GridLayoutManager(getApplication(), 1));
                     //实例化适配器--
-                    mResultAdapater = new SearchResultAdapater(getApplication());
+                    mResultAdapater = new SearchResultAdapater(getApplication(),text,TEXTTYPE);
                     //将适配器和RecyclerView绑定
                     mRecyclerView.setAdapter(mResultAdapater);
                     //给适配器设置数据源

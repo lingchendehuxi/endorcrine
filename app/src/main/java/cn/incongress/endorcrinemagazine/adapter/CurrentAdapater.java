@@ -2,6 +2,7 @@ package cn.incongress.endorcrinemagazine.adapter;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +93,11 @@ public class CurrentAdapater implements ExpandableListAdapter {
         }
         String title = currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1);
         holder.lanmu_text.setText(title);
+
+        Drawable img = context.getResources().getDrawable(R.mipmap.ic_launcher);
+        // 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
+        img.setBounds(0, 0, 30, 30);
+        holder.lanmu_text.setCompoundDrawables(img,null,img,null);
 
         return convertView;
     }

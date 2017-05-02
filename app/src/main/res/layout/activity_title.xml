@@ -5,24 +5,33 @@
     android:gravity="center_vertical"
     android:background="@color/white"
     >
+    <LinearLayout
+        android:onClick="back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/me_back"/>
         <TextView
-            android:onClick="back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
             android:text="@string/title_back"
-            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:textColor="@color/black"
             />
-
+</LinearLayout>
 <TextView
     android:id="@+id/activity_title"
     android:layout_width="200dp"
     android:gravity="center"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
-    android:text="@string/login_log"
     android:singleLine="true"
     android:ellipsize="end"
     android:textSize="18dp"

@@ -36,4 +36,5 @@
     <color name="details">#FD075A</color>
     <color name="search_back">#4A4A4A</color>
     <color name="search_gray">#EFEFEF</color>
+    <color name="login_back">#1B293A</color>
 </resources>

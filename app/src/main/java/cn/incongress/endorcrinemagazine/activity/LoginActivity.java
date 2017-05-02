@@ -32,6 +32,8 @@ import cn.incongress.endorcrinemagazine.utils.CountDownButtonHelper;
 import cn.incongress.endorcrinemagazine.utils.HttpUtils;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
+    @BindView(R.id.activity_title)
+    TextView mTitle;
     @BindView(R.id.login_register)
     TextView mRegister;
     @BindView(R.id.login_haveyzm)
@@ -52,6 +54,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
+        mTitle.setText(mContext.getString(R.string.login_log));
         mHaveYzm.setOnClickListener(this);
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);

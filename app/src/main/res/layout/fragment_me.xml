@@ -22,13 +22,14 @@
     />
         <cn.incongress.endorcrinemagazine.utils.CircleImageView
             android:id="@+id/img_tx"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@mipmap/item_vvtalk_professor_head_default"/>
+            android:src="@mipmap/toux"/>
         <RelativeLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             >
             <LinearLayout
                 android:id="@+id/login_xs"
@@ -42,26 +43,38 @@
                     android:id="@+id/loginName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="18dp"
                     android:layout_marginBottom="8dp"
                     android:textColor="@color/black"
                     />
-                <TextView
-                    android:id="@+id/loginSet"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="编辑个人信息"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    />
+                    android:orientation="horizontal"
+                    android:id="@+id/loginSet"
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="编辑个人信息"
+                        android:textSize="15dp"
+                        android:textColor="@color/gray"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
             <Button
                 android:id="@+id/btn_me_login"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:text="登 录"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/black"
@@ -72,25 +85,27 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"/>
+        android:background="@color/umeng_divide"/>
     <LinearLayout
         android:id="@+id/myCollection"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         >
         <ImageView
             android:layout_width="25dp"
+            android:layout_marginRight="10dp"
             android:layout_height="25dp"
+            android:src="@mipmap/collection"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="我的收藏"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textColor="@color/black"
             />
         <TextView
@@ -113,30 +128,27 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"/>
-    <ImageView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"/>
+        android:background="@color/umeng_divide"/>
     <LinearLayout
         android:id="@+id/recommend"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         >
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:src="@mipmap/fenx"
+            android:layout_marginRight="10dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="向朋友或同道推荐此应用"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textColor="@color/black"
             />
 
@@ -152,30 +164,27 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"/>
-    <ImageView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"/>
+        android:background="@color/umeng_divide"/>
     <LinearLayout
         android:id="@+id/feedback"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         >
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:src="@mipmap/feedback"
+            android:layout_marginRight="10dp"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="意见反馈"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textColor="@color/black"
             />
 
@@ -191,7 +200,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"/>
+        android:background="@color/umeng_divide"/>
     </LinearLayout>
     <Button
         android:visibility="gone"
@@ -201,10 +210,10 @@
         android:gravity="center"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:background="@drawable/btn_login_activity"
+        android:background="@drawable/btn_login_back"
         android:textColor="@color/white"
         android:text="@string/back"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/layout_padding"
         />

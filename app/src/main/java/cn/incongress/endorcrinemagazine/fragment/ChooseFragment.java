@@ -131,7 +131,7 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
          */
         mSwipeRefreshWidget.setColorSchemeResources(R.color.red, R.color.red, R.color.red, R.color.red);
         mSwipeRefreshWidget.setOnRefreshListener(this);
-        mAdapter = new ChooseAdapater();
+        mAdapter = new ChooseAdapater(mContext);
 
         return view;
     }

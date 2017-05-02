@@ -31,6 +31,9 @@
             android:padding="5dp"
             app:tabText="@string/home_bottomChoose"
             app:tabTextSize="@dimen/text_size_media"
+            app:tabIconNormal="@mipmap/choose"
+            app:tabIconSelected="@mipmap/chooseselect"
+            app:badgeBackgroundColor="@color/white"
             app:textColorNormal="@color/gray"
             app:textColorSelected="@color/black" />
 
@@ -39,7 +42,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-
+            app:tabIconNormal="@mipmap/current"
+            app:tabIconSelected="@mipmap/currentselect"
+            app:badgeBackgroundColor="@color/white"
             app:tabText="@string/home_bottomCurrent"
             app:tabTextSize="@dimen/text_size_media"
             app:textColorNormal="@color/gray"
@@ -51,6 +56,9 @@
             android:layout_weight="1"
             android:padding="5dp"
             app:tabText="@string/home_bottomPast"
+            app:tabIconNormal="@mipmap/past"
+            app:tabIconSelected="@mipmap/pastselect"
+            app:badgeBackgroundColor="@color/white"
             app:tabTextSize="@dimen/text_size_media"
             app:textColorNormal="@color/gray"
             app:textColorSelected="@color/black" />
@@ -61,6 +69,9 @@
             android:layout_weight="1"
             android:padding="5dp"
             app:tabText="@string/home_bottomMe"
+            app:tabIconNormal="@mipmap/me"
+            app:tabIconSelected="@mipmap/meselect"
+            app:badgeBackgroundColor="@color/white"
             app:tabTextSize="@dimen/text_size_media"
             app:textColorNormal="@color/gray"
             app:textColorSelected="@color/black" />
