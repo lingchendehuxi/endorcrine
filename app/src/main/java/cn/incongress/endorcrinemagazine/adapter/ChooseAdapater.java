@@ -78,9 +78,11 @@ public class ChooseAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Drawable d = mContext.getResources().getDrawable(R.mipmap.biaoti_icon);
             // 左上右下 控制图片大小
             d.setBounds(0, 0, 20, 40);
+
             // 替换0,1的字符
             spanText.setSpan(new ImageSpan(d), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-            ((ItemViewHolder) holder).notesTitle.append(spanText);
+
+            ((ItemViewHolder) holder).notesTitle.setText(spanText);
         }
     }
 
