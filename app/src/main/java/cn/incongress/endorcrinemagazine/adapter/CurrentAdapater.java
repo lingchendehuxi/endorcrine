@@ -91,7 +91,7 @@ public class CurrentAdapater implements ExpandableListAdapter {
         } else {
             holder = (CurrentHolder) convertView.getTag();
         }
-        String title = context.getString(R.string.info_blank)+currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1)+context.getString(R.string.info_blank);
+       /* String title = context.getString(R.string.info_blank)+currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1)+context.getString(R.string.info_blank);
         holder.lanmu_text.setText(title);
 
         Drawable left = context.getResources().getDrawable(R.mipmap.left);
@@ -99,8 +99,8 @@ public class CurrentAdapater implements ExpandableListAdapter {
         // 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
         left.setBounds(0, 2, 15, 40);
         right.setBounds(0, 2, 15, 40);
-        holder.lanmu_text.setCompoundDrawables(left,null,right,null);
-
+        holder.lanmu_text.setCompoundDrawables(left,null,right,null);*/
+        holder.lanmu_text.setText(currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1));
         return convertView;
     }
     @Override

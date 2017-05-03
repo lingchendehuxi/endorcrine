@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EndorcrineMagazine</string>
+    <string name="app_name">CJEM</string>
 
     <string name="splash_versionName">———— V %1$s ————</string>
 
@@ -75,6 +75,7 @@
     <string name="delete_faile">删除失败</string>
     <string name="fail_reason">失败原因:%1$s</string>
 
+    <string name="choose_title">&#160;&#160;&#160;%1$s</string>
 
     <string name="me_feedback">http://weixin.incongress.cn/xhy/xhyHtml5/html/feedback.html?userId=%1$s&#038;project=%2$s
 </string>

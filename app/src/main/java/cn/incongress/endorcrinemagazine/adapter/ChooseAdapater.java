@@ -19,6 +19,7 @@ import java.util.List;
 import cn.incongress.endorcrinemagazine.R;
 import cn.incongress.endorcrinemagazine.base.MyItemClickListener;
 import cn.incongress.endorcrinemagazine.bean.ChooseBean;
+import cn.incongress.endorcrinemagazine.utils.DensityUtil;
 
 /**
  * Created by Admin on 2017/4/7.
@@ -74,15 +75,15 @@ public class ChooseAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ItemViewHolder) holder).readCount.setText(list.get(position).getReadCount());
 
 
-            SpannableString spanText = new SpannableString("图"+mContext.getString(R.string.info_blank)+mContext.getString(R.string.info_blank)+list.get(position).getNotesTitle());
+            /*SpannableString spanText = new SpannableString("图"+mContext.getString(R.string.info_blank)+mContext.getString(R.string.info_blank)+list.get(position).getNotesTitle());
             Drawable d = mContext.getResources().getDrawable(R.mipmap.biaoti_icon);
             // 左上右下 控制图片大小
-            d.setBounds(0, -20, 20, 30);
+            d.setBounds(5, 10, DensityUtil.dip2px(mContext,0), DensityUtil.dip2px(mContext,0));
 
             // 替换0,1的字符
-            spanText.setSpan(new ImageSpan(d), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            spanText.setSpan(new ImageSpan(d), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);*/
 
-            ((ItemViewHolder) holder).notesTitle.setText(spanText);
+            ((ItemViewHolder) holder).notesTitle.setText(mContext.getString(R.string.choose_title,list.get(position).getNotesTitle()));
         }
     }
 
