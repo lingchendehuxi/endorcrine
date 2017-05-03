@@ -2,6 +2,7 @@ package cn.incongress.endorcrinemagazine.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -81,7 +82,16 @@ public class SearchResultAdapater extends RecyclerView.Adapter<SearchResultAdapa
     @Override
     public void onBindViewHolder(final SearchResultAdapater.SearchViewHolder holder, final int position) {
 
-        holder.search_lanmu.setText(mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1));
+        String title =mContext.getString(R.string.info_blank)+mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1)+mContext.getString(R.string.info_blank);
+        holder.search_lanmu.setText(title);
+
+        Drawable left = mContext.getResources().getDrawable(R.mipmap.left);
+        Drawable right = mContext.getResources().getDrawable(R.mipmap.right);
+        // 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
+        left.setBounds(0, 2, 15, 40);
+        right.setBounds(0, 2, 15, 40);
+        holder.search_lanmu.setCompoundDrawables(left,null,right,null);
+
         if(!"".equals(mSearchs)&&"1".equals(that)){
             holder.notesTitle.setText(setKeyWordColor(mArrayList.get(position).getNotesTitle(),mSearchs));
             holder.search_authors.setText(mArrayList.get(position).getAuthors());

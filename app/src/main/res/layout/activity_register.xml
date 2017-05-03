@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="cn.incongress.endorcrinemagazine.activity.RegisterActivity">
-
+<include layout="@layout/activity_title"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

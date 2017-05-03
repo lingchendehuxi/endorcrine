@@ -91,13 +91,15 @@ public class CurrentAdapater implements ExpandableListAdapter {
         } else {
             holder = (CurrentHolder) convertView.getTag();
         }
-        String title = currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1);
+        String title = context.getString(R.string.info_blank)+currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1)+context.getString(R.string.info_blank);
         holder.lanmu_text.setText(title);
 
-        Drawable img = context.getResources().getDrawable(R.mipmap.ic_launcher);
+        Drawable left = context.getResources().getDrawable(R.mipmap.left);
+        Drawable right = context.getResources().getDrawable(R.mipmap.right);
         // 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
-        img.setBounds(0, 0, 30, 30);
-        holder.lanmu_text.setCompoundDrawables(img,null,img,null);
+        left.setBounds(0, 2, 15, 40);
+        right.setBounds(0, 2, 15, 40);
+        holder.lanmu_text.setCompoundDrawables(left,null,right,null);
 
         return convertView;
     }

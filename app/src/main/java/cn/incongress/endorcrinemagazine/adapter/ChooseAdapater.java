@@ -74,10 +74,10 @@ public class ChooseAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ItemViewHolder) holder).readCount.setText(list.get(position).getReadCount());
 
 
-            SpannableString spanText = new SpannableString("图"+mContext.getString(R.string.info_blank)+list.get(position).getNotesTitle());
+            SpannableString spanText = new SpannableString("图"+mContext.getString(R.string.info_blank)+mContext.getString(R.string.info_blank)+list.get(position).getNotesTitle());
             Drawable d = mContext.getResources().getDrawable(R.mipmap.biaoti_icon);
             // 左上右下 控制图片大小
-            d.setBounds(0, 0, 20, 40);
+            d.setBounds(0, -20, 20, 30);
 
             // 替换0,1的字符
             spanText.setSpan(new ImageSpan(d), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);

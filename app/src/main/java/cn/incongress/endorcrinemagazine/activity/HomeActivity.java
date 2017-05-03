@@ -45,6 +45,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
+
         mChooseFragment = new ChooseFragment();
         mCurrentFragment = new CurrentFragment();
         mPastFragment = new PastFragment();
@@ -59,12 +60,7 @@ public class HomeActivity extends BaseActivity {
         mHomeAdapter = new HomeFragmentAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mHomeAdapter);
         mIndicator.setViewPager(mViewPager);
-        mIndicator.setOnTabChangedListner(new OnTabChangedListner() {
-            @Override
-            public void onTabSelected(int tabNum) {
-                mViewPager.setCurrentItem(tabNum);
-            }
-        });
+
     }
 
 

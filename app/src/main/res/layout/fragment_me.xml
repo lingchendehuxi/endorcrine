@@ -54,9 +54,11 @@
                     android:id="@+id/loginSet"
                     >
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/me_text"
                         />
                     <TextView
                         android:layout_width="wrap_content"

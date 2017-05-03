@@ -13,6 +13,8 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,7 +38,11 @@ public class DetailsActivity extends BaseActivity {
     @BindView(R.id.activity_title)
     TextView mTitle;
     @BindView(R.id.details_title)
-    TextView mDetailTitle;
+    LinearLayout mDetailTitle;
+    @BindView(R.id.details_text)
+    TextView mText;
+    @BindView(R.id.details_img)
+    ImageView mImg;
 
     private ListDataSave dataSave;
     private List<CollectionBean> mCollectionList;
@@ -56,25 +62,25 @@ public class DetailsActivity extends BaseActivity {
 
         mCollectionList = dataSave.getDataList("All");
 
-        Log.e("GYW","$$$$"+mCollectionList.size()+"&&&&"+mCollectionList.toString());
         if("".equals(USERID)){
             userState = 0;
-            mDetailTitle.setText("登录后查看原文");
+            mImg.setVisibility(View.GONE);
+            mText.setText("登录后查看原文");
         }else {
             userState = 1;
             if(mCollectionList.size()>0){
                 for (int i=0;i<mCollectionList.size();i++){
                     CollectionBean map = mCollectionList.get(i);
                     if( map.getNotesId().equals(NOTESID)){
-                        mDetailTitle.setText("取消收藏");
+                        mText.setText("取消收藏");
                         break;
                     }else {
-                        mDetailTitle.setText("收藏");
+                        mText.setText("收藏");
                     }
                 }
 
             }else{
-                mDetailTitle.setText("收藏");
+                mText.setText("收藏");
             }
         }
         initialWebViewSetting();
@@ -83,8 +89,8 @@ public class DetailsActivity extends BaseActivity {
         mDetailTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if("收藏".equals(mDetailTitle.getText().toString())){
-                    mDetailTitle.setText("取消收藏");
+                if("收藏".equals(mText.getText().toString())){
+                    mText.setText("取消收藏");
                     //新收藏一条数据
                     CollectionBean collectionBean = new CollectionBean();
                     collectionBean.setNotesTitle(getIntent().getStringExtra("notestitle"));
@@ -94,8 +100,8 @@ public class DetailsActivity extends BaseActivity {
                     mCollectionList.add(collectionBean);
 
                     dataSave.setDataList("All",mCollectionList);
-                }else if("取消收藏".equals(mDetailTitle.getText().toString())){
-                    mDetailTitle.setText("收藏");
+                }else if("取消收藏".equals(mText.getText().toString())){
+                    mText.setText("收藏");
                     for (int i=0;i<mCollectionList.size();i++){
                         CollectionBean map = mCollectionList.get(i);
                         if(map.getNotesId().equals(NOTESID)){
@@ -103,7 +109,7 @@ public class DetailsActivity extends BaseActivity {
                         }
                     }
                     dataSave.setDataList("All",mCollectionList);
-                }else if("登录后查看原文".equals(mDetailTitle.getText().toString())){
+                }else if("登录后查看原文".equals(mText.getText().toString())){
                     startActivity(new Intent(getApplication(),LoginActivity.class));
                     finish();
                 }

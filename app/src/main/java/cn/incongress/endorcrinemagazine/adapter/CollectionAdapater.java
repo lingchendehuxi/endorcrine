@@ -1,6 +1,7 @@
 package cn.incongress.endorcrinemagazine.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,16 @@ public class CollectionAdapater extends RecyclerView.Adapter<CollectionAdapater.
     @Override
     public void onBindViewHolder(final CollectionAdapater.SearchViewHolder holder, final int position) {
 
-        holder.search_lanmu.setText(mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1));
+        String title = mContext.getString(R.string.info_blank)+mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1)+mContext.getString(R.string.info_blank);
+        holder.search_lanmu.setText(title);
+
+        Drawable left = mContext.getResources().getDrawable(R.mipmap.left);
+        Drawable right = mContext.getResources().getDrawable(R.mipmap.right);
+        // 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
+        left.setBounds(0, 2, 15, 40);
+        right.setBounds(0, 2, 15, 40);
+        holder.search_lanmu.setCompoundDrawables(left,null,right,null);
+
         holder.notesTitle.setText(mArrayList.get(position).getNotesTitle());
 
         if (mOnItemClickLitener != null) {

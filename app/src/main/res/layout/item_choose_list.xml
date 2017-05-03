@@ -6,6 +6,7 @@
     android:id="@+id/notesTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:lineSpacingExtra="3dp"
     android:textSize="16dp"
     android:textColor="@color/black"
     />

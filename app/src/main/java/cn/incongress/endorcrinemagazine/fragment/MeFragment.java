@@ -176,7 +176,7 @@ private UMShareListener listener = new UMShareListener() {
                 }
                 break;
             case R.id.recommend:
-              new ShareUtils().shareTextWithUrl(getActivity(),"分享","分享内容","http://www.baidu.com",listener);
+              new ShareUtils().shareTextWithUrl(getActivity(),"分享","中华内分泌杂志","http://app.incongress.cn/zhnfm",listener);
                 break;
             case R.id.img_tx:
                 if(!"".equals(USERID)) {
