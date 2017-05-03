@@ -60,10 +60,10 @@ public class SearchResultAdapater extends RecyclerView.Adapter<SearchResultAdapa
         SpannableString s = new SpannableString(content);
         Pattern p = Pattern.compile(keyword);
         Matcher m = p.matcher(s);
-        while (m.find()){
+        while (m.find()){ 
             int start = m.start();
             int end = m.end();
-            s.setSpan(new ForegroundColorSpan(mContext.getColor(R.color.details)),start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            s.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.details)),start,end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return s;
     }
@@ -82,15 +82,6 @@ public class SearchResultAdapater extends RecyclerView.Adapter<SearchResultAdapa
     @Override
     public void onBindViewHolder(final SearchResultAdapater.SearchViewHolder holder, final int position) {
 
-       /* String title =mContext.getString(R.string.info_blank)+mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1)+mContext.getString(R.string.info_blank);
-        holder.search_lanmu.setText(title);
-
-        Drawable left = mContext.getResources().getDrawable(R.mipmap.left);
-        Drawable right = mContext.getResources().getDrawable(R.mipmap.right);
-        // 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
-        left.setBounds(0, 2, 15, 40);
-        right.setBounds(0, 2, 15, 40);
-        holder.search_lanmu.setCompoundDrawables(left,null,right,null);*/
         holder.search_lanmu.setText(mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1));
         if(!"".equals(mSearchs)&&"1".equals(that)){
             holder.notesTitle.setText(setKeyWordColor(mArrayList.get(position).getNotesTitle(),mSearchs));

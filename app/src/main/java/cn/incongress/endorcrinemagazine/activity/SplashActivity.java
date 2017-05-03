@@ -5,9 +5,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import cn.incongress.endorcrinemagazine.R;
@@ -52,4 +54,11 @@ public class SplashActivity extends BaseActivity {
     protected void handleDetailMsg(Message msg) {
 
     }
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+
+        return false;
+    }
+
 }
