@@ -3,11 +3,13 @@ package cn.incongress.endorcrinemagazine.adapter;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -49,7 +51,6 @@ public class CurrentAdapater implements ExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        Log.e("GYW","----父级"+list.size());
         return list.size();
     }
 
@@ -71,11 +72,15 @@ public class CurrentAdapater implements ExpandableListAdapter {
 
     @Override
     public long getGroupId(int groupPosition) {
+
+        Log.e("GYW","----点击3");
         return groupPosition;
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
+
+        Log.e("GYW","----点击4");
         return childPosition;
     }
 
@@ -87,19 +92,15 @@ public class CurrentAdapater implements ExpandableListAdapter {
             holder = new CurrentHolder();
             convertView = inflater.inflate(R.layout.item_current, parent, false);
             holder.lanmu_text = (TextView) convertView.findViewById(R.id.current_title);
+            holder.current_direction = (ImageView) convertView.findViewById(R.id.current_direction);
             convertView.setTag(holder);
         } else {
             holder = (CurrentHolder) convertView.getTag();
         }
-       /* String title = context.getString(R.string.info_blank)+currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1)+context.getString(R.string.info_blank);
-        holder.lanmu_text.setText(title);
-
-        Drawable left = context.getResources().getDrawable(R.mipmap.left);
-        Drawable right = context.getResources().getDrawable(R.mipmap.right);
-        // 调用setCompoundDrawables时，必须调用Drawable.setBounds()方法,否则图片不显示
-        left.setBounds(0, 2, 15, 40);
-        right.setBounds(0, 2, 15, 40);
-        holder.lanmu_text.setCompoundDrawables(left,null,right,null);*/
+        if(isExpanded){
+            holder.current_direction.setImageResource(R.drawable.me_bottom);
+        }else{
+            holder.current_direction.setImageResource(R.mipmap.me_next); }
         holder.lanmu_text.setText(currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1));
         return convertView;
     }
@@ -120,7 +121,7 @@ public class CurrentAdapater implements ExpandableListAdapter {
         }
 
         holder.authors_text.setText(chooseBean.getAuthors());
-        holder.notesTitle_text.setText(chooseBean.getNotesTitle());
+        holder.notesTitle_text.setText(Html.fromHtml(context.getString(R.string.choose_title,chooseBean.getNotesTitle())));
         holder.notesType_text.setText(chooseBean.getNotesType()+context.getString(R.string.choose_piecemeal_text2));
         holder.readCount_text.setText(chooseBean.getReadCount()+context.getString(R.string.choose_piecemeal_text4));
 
@@ -174,7 +175,7 @@ public class CurrentAdapater implements ExpandableListAdapter {
     }
 
     private static class CurrentHolder {
-        TextView lanmu_text;
+        TextView lanmu_text;ImageView current_direction;
     }
 
 }

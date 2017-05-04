@@ -13,8 +13,7 @@
         android:id="@+id/past_details_expandable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/layout_padding"
-        android:paddingRight="@dimen/layout_padding"
+        android:divider="@null"
         android:layout_below="@+id/past_details_ictitle" />
     <ProgressBar
         android:id="@+id/past_details_pgb"

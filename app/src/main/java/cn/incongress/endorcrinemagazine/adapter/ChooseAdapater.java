@@ -3,6 +3,7 @@ package cn.incongress.endorcrinemagazine.adapter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
@@ -83,7 +84,7 @@ public class ChooseAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder
             // 替换0,1的字符
             spanText.setSpan(new ImageSpan(d), 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);*/
 
-            ((ItemViewHolder) holder).notesTitle.setText(mContext.getString(R.string.choose_title,list.get(position).getNotesTitle()));
+            ((ItemViewHolder) holder).notesTitle.setText(Html.fromHtml(mContext.getString(R.string.choose_title,list.get(position).getNotesTitle())));
         }
     }
 

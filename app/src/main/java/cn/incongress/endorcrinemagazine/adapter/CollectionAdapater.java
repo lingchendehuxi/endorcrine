@@ -3,6 +3,7 @@ package cn.incongress.endorcrinemagazine.adapter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class CollectionAdapater extends RecyclerView.Adapter<CollectionAdapater.
         holder.search_lanmu.setCompoundDrawables(left,null,right,null);*/
 
         holder.search_lanmu.setText(mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1));
-        holder.notesTitle.setText(mArrayList.get(position).getNotesTitle());
+        holder.notesTitle.setText(Html.fromHtml(mArrayList.get(position).getNotesTitle()));
 
         if (mOnItemClickLitener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/layout_padding"
+    android:paddingRight="@dimen/layout_padding"
+    >
+    <RelativeLayout
+        android:layout_marginTop="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_marginTop="2dp"
+        android:layout_width="6dp"
+        android:layout_height="18dp"
+        android:src="@mipmap/biaoti_icon"
+        />
     <TextView
-        android:layout_marginTop="5dp"
         android:id="@+id/current_notesTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:textColor="@color/black"
         />
-
+    </RelativeLayout>
     <TextView
         android:id="@+id/current_authors"
         android:layout_width="match_parent"
@@ -46,4 +58,9 @@
             />
 
     </RelativeLayout>
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/umeng_divide"/>
 </LinearLayout>

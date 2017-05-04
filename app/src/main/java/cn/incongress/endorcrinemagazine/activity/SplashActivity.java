@@ -18,8 +18,8 @@ import cn.incongress.endorcrinemagazine.utils.ActivityUtils;
 import cn.incongress.endorcrinemagazine.utils.TDevice;
 
 public class SplashActivity extends BaseActivity {
-    @BindView(R.id.tv_appversion)
-    TextView mTvVersion;
+    /*@BindView(R.id.tv_appversion)
+    TextView mTvVersion;*/
 
     @Override
     protected void setContentView(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
-        mTvVersion.setText(getString(R.string.splash_versionName,TDevice.getVersionName()));
+       // mTvVersion.setText(getString(R.string.splash_versionName,TDevice.getVersionName()));
     }
 
     @Override

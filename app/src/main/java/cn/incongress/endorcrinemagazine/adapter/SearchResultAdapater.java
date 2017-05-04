@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -84,13 +85,13 @@ public class SearchResultAdapater extends RecyclerView.Adapter<SearchResultAdapa
 
         holder.search_lanmu.setText(mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1));
         if(!"".equals(mSearchs)&&"1".equals(that)){
-            holder.notesTitle.setText(setKeyWordColor(mArrayList.get(position).getNotesTitle(),mSearchs));
+            holder.notesTitle.setText(Html.fromHtml(setKeyWordColor(mArrayList.get(position).getNotesTitle(),mSearchs).toString()));
             holder.search_authors.setText(mArrayList.get(position).getAuthors());
         }else if(!"".equals(mSearchs)&&"2".equals(that)){
-            holder.notesTitle.setText(mArrayList.get(position).getNotesTitle());
+            holder.notesTitle.setText(Html.fromHtml(mArrayList.get(position).getNotesTitle()));
             holder.search_authors.setText(setKeyWordColor(mArrayList.get(position).getAuthors(),mSearchs));
         }else if("".equals(mSearchs)){
-            holder.notesTitle.setText(mArrayList.get(position).getNotesTitle());
+            holder.notesTitle.setText(Html.fromHtml(mArrayList.get(position).getNotesTitle()));
             holder.search_authors.setText(mArrayList.get(position).getAuthors());
         }
         holder.notesType.setText(mArrayList.get(position).getNotesType());

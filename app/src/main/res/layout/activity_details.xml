@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_details"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="cn.incongress.endorcrinemagazine.activity.DetailsActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
     <include layout="@layout/activity_title"/>
 <cn.incongress.endorcrinemagazine.utils.ProgressWebView
     android:id="@+id/details_web"
@@ -25,8 +28,7 @@
             android:id="@+id/details_img"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginRight="5dp"
-            android:src="@mipmap/collection"/>
+            android:layout_marginRight="5dp"/>
         <TextView
             android:id="@+id/details_text"
             android:layout_width="wrap_content"
@@ -36,5 +38,13 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
-
-</LinearLayout>
+    </LinearLayout>
+    <com.bm.library.PhotoView
+        android:id="@+id/photoview"
+        android:visibility="gone"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:src="@mipmap/default_load_bg"
+        android:scaleType="fitCenter"
+        android:layout_height="match_parent" />
+</RelativeLayout>

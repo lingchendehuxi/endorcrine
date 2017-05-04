@@ -78,6 +78,7 @@ public class CurrentFragment extends BaseLazyFragment {
                     adapter.setData(current_list);
                     mExpandableListView.setAdapter(adapter);
 
+
                     mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                         @Override
                         public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,12 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bm.library.PhotoView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,19 +50,24 @@ public class DetailsActivity extends BaseActivity {
     TextView mText;
     @BindView(R.id.details_img)
     ImageView mImg;
+    @BindView(R.id.photoview)
+    PhotoView mPhotoView;
 
     private ListDataSave dataSave;
     private List<CollectionBean> mCollectionList;
     private boolean mIsFromCollection;
+    private String mLanmu ,mtitle;
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
         mIsFromCollection = getIntent().getBooleanExtra("fromCollection",false);
 
         mOnlyWebview = (ProgressWebView)findViewById(R.id.details_web);
         USERID = getSPStringValue(Constants.USER_USER_ID);
-        mTitle.setText(getIntent().getStringExtra("notestitle"));
+        mtitle = getIntent().getStringExtra("notestitle");
         NOTESID = getIntent().getStringExtra("notesid");
-
+        mLanmu = getIntent().getStringExtra("lanmu");
+        mTitle.setText(mtitle);
+        mPhotoView.enable();
         dataSave = new ListDataSave(mContext, "collection");
 
         mCollectionList = new ArrayList<CollectionBean>();
@@ -73,9 +85,11 @@ public class DetailsActivity extends BaseActivity {
                     CollectionBean map = mCollectionList.get(i);
                     if( map.getNotesId().equals(NOTESID)){
                         mText.setText("取消收藏");
+                        mImg.setImageResource(R.mipmap.collection);
                         break;
                     }else {
                         mText.setText("收藏");
+                        mImg.setImageResource(R.mipmap.cancelcollection);
                     }
                 }
 
@@ -83,25 +97,27 @@ public class DetailsActivity extends BaseActivity {
                 mText.setText("收藏");
             }
         }
-        initialWebViewSetting();
         loadUrl(Constants.TEST_SERVICE+Constants.DETAILS+"&notesId="+NOTESID+"&userState="+userState);
+        initialWebViewSetting();
 //
         mDetailTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if("收藏".equals(mText.getText().toString())){
                     mText.setText("取消收藏");
+                    mImg.setImageResource(R.mipmap.collection);
                     //新收藏一条数据
                     CollectionBean collectionBean = new CollectionBean();
-                    collectionBean.setNotesTitle(getIntent().getStringExtra("notestitle"));
+                    collectionBean.setNotesTitle(mtitle);
                     collectionBean.setNotesId(NOTESID);
-                    collectionBean.setLanmu(getIntent().getStringExtra("lanmu"));
+                    collectionBean.setLanmu(mLanmu);
                     collectionBean.setWhether(true);
                     mCollectionList.add(collectionBean);
 
                     dataSave.setDataList("All",mCollectionList);
                 }else if("取消收藏".equals(mText.getText().toString())){
                     mText.setText("收藏");
+                    mImg.setImageResource(R.mipmap.cancelcollection);
                     for (int i=0;i<mCollectionList.size();i++){
                         CollectionBean map = mCollectionList.get(i);
                         if(map.getNotesId().equals(NOTESID)){
@@ -113,6 +129,12 @@ public class DetailsActivity extends BaseActivity {
                     startActivity(new Intent(getApplication(),LoginActivity.class));
                     finish();
                 }
+            }
+        });
+        mPhotoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPhotoView.setVisibility(View.GONE);
             }
         });
     }
@@ -139,7 +161,6 @@ public class DetailsActivity extends BaseActivity {
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             mOnlyWebview.getSettings().setPluginState(WebSettings.PluginState.ON);
         }
-
         mOnlyWebview.getSettings().setAllowFileAccess(true);
         mOnlyWebview.getSettings().setLoadWithOverviewMode(true);
         mOnlyWebview.getSettings().setSupportZoom(true);
@@ -154,11 +175,16 @@ public class DetailsActivity extends BaseActivity {
         mOnlyWebview.getSettings().setDomStorageEnabled(true);
         mOnlyWebview.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
 
+        Log.e("GYW",mOnlyWebview.getTitle().toString());
+        mTitle.setText(mOnlyWebview.getTitle());
         String appCachePath = getApplication().getCacheDir().getAbsolutePath();
         mOnlyWebview.getSettings().setAppCachePath(appCachePath);
         mOnlyWebview.getSettings().setAllowFileAccess(true);
         mOnlyWebview.getSettings().setAppCacheEnabled(true);
         mOnlyWebview.getSettings().setJavaScriptEnabled(true);
+
+        mOnlyWebview.addJavascriptInterface(new LanmuInterface(), "LanmuInterface");
+        mOnlyWebview.addJavascriptInterface(new GetImgUrl(),"GetImgUrl");
 
         mOnlyWebview.setWebViewClient(new WebViewClient() {
             @Override
@@ -170,6 +196,30 @@ public class DetailsActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                mTitle.setText(view.getTitle());
+                if("".equals(USERID)){
+                    userState = 0;
+                    mImg.setVisibility(View.GONE);
+                    mText.setText("登录后查看原文");
+                }else {
+                    userState = 1;
+                    if(mCollectionList.size()>0){
+                        for (int i=0;i<mCollectionList.size();i++){
+                            CollectionBean map = mCollectionList.get(i);
+                            if( map.getNotesId().equals(NOTESID)){
+                                mText.setText("取消收藏");
+                                mImg.setImageResource(R.mipmap.collection);
+                                break;
+                            }else {
+                                mText.setText("收藏");
+                                mImg.setImageResource(R.mipmap.cancelcollection);
+                            }
+                        }
+
+                    }else{
+                        mText.setText("收藏");
+                    }
+                }
             }
 
             @Override
@@ -191,15 +241,6 @@ public class DetailsActivity extends BaseActivity {
                 return false;
             }
         });
-
-        mOnlyWebview.addJavascriptInterface(new Object() {
-            @JavascriptInterface
-            @SuppressLint("JavascriptInterface")
-            public void imgZoom(String imgUrl) {
-                String[] imgs = {imgUrl};
-            }
-        }, "androidJS");
-
     }
 
     /**
@@ -212,6 +253,24 @@ public class DetailsActivity extends BaseActivity {
             e.printStackTrace();
         }
     }
+
+    public class LanmuInterface{
+        @JavascriptInterface
+        public void getLanmu(String id_,String title_,String lanmu_){
+            mLanmu = lanmu_;
+            NOTESID = id_;
+            mtitle = title_;
+
+        }
+    }
+    public class GetImgUrl{
+        @JavascriptInterface
+        public void getUrl(String Imgurl){
+            mImgUrl = Imgurl;
+            hand.sendEmptyMessage(1);
+        }
+    }
+private String mImgUrl;
     @Override
     public void onPause() {
         super.onPause();
@@ -219,6 +278,24 @@ public class DetailsActivity extends BaseActivity {
         mOnlyWebview.reload();
     }
 
+    Handler hand = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    Log.e("GYW","地址："+mImgUrl);
+                    mPhotoView.setVisibility(View.VISIBLE);
+                    Glide.with(DetailsActivity.this).load(mImgUrl).placeholder(R.mipmap.default_load_bg).into(new SimpleTarget<GlideDrawable>() {
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                            mPhotoView.setImageDrawable(resource);
+                        }
+                    });
+                    break;
+            }
+        }
+    };
     @Override
     protected void setContentView(Bundle savedInstanceState) {
 
