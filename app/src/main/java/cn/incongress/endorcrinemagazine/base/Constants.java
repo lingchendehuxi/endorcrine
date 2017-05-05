@@ -135,7 +135,7 @@ public class Constants {
     public static String USER_HOSPITAL_ID = "hospital";
     public static String USER_HOSPITAL_NAME = "hospitalName";
     public static String USER_HOSPITAL_LEVEL = "hospitalLevel";
-    public static String USER_ZHIWU = "zhiwu";
+
     public static String USER_UNIV = "univ";
     public static String USER_UNIV_ID = "univsId";
     public static String USER_UNIV_YEAR = "univYear";

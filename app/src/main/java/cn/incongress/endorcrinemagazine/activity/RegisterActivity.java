@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -22,6 +23,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import cn.incongress.endorcrinemagazine.R;
@@ -70,7 +73,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     Button mRegister;
 
 
-
     /** 科室选择器 **/
     private PopupWindow mKeShiPopupWindow;
     private ArrayList<String> mKeShiList = new ArrayList<>();
@@ -98,9 +100,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
         mCity.setOnClickListener(this);
-        mDanWei.setOnClickListener(this);
         mKeShi.setOnClickListener(this);
         mZhiWu.setOnClickListener(this);
+        mDanWei.setOnClickListener(this);
         mRegister.setOnClickListener(this);
         AssetsDatabaseManager.initManager(RegisterActivity.this);
         if(1 == getIntent().getIntExtra("type",-1)){
@@ -141,8 +143,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     ToastUtils.showShortToast("请先选择地区",getApplication());
                 } else {
                     startActivityForResult(new Intent(RegisterActivity.this, InfoEditHospitalActivity.class), GET_HOSPITAL);
-                }
-                break;
+                }break;
             case R.id.regist_ks:
                 mKeShiPopupWindow.showAtLocation(RegisterActivity.this.findViewById(R.id.ll_whole_area),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -151,25 +152,32 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 mZhiWuPopupWindow.showAtLocation(RegisterActivity.this.findViewById(R.id.ll_whole_area),
                         Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 break;
+
             case R.id.btn_regist_next:
                 mName = mEditName.getText().toString().trim();
                 mPhone = mEditPhone.getText().toString().trim();
                 mEmail = mEditEmail.getText().toString().trim();
                 mHospital = getSPStringValue(Constants.USER_HOSPITAL_NAME);
-                mzhiwu = getSPStringValue(Constants.USER_ZHIWU);
+                mzhiwu = getSPStringValue(Constants.USER_ZHICHENG);
                 mKeshi = getSPStringValue(Constants.USER_KESHI);
                 provinceId = getSPStringValue(Constants.USER_PROVINCE_ID);
                 province = getSPStringValue(Constants.USER_PROVINCE_NAME);
                 city = getSPStringValue(Constants.USER_CITY_NAME);
                 cityId = getSPStringValue(Constants.USER_CITY_ID);
                 mHospitalId = getSPStringValue(Constants.USER_HOSPITAL_ID);
-
-
-                mHospital = mDanWei.getText().toString();
+                Log.e("GYW","注册"+mName+mPhone+mEmail+city+mHospital+mzhiwu+mKeshi);
                 if(!"".equals(mName)&&!"".equals(mPhone)&&!"".equals(mEmail)&&
                         !"".equals(city)&&!"".equals(mHospital)&&!"".equals(mzhiwu)
                         &&!"".equals(mKeshi)){
-                    initHttp();
+                    if(isEmail(mEmail)){
+                        if(mPhone.length() == 11) {
+                            initHttp();
+                        }else{
+                            Toast.makeText(getApplication(),"手机号码格式不正确",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplication(),"邮箱格式错误",Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(getApplication(),"请填写完整信息",Toast.LENGTH_SHORT).show();
                 }
@@ -177,7 +185,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
         }
     }
+    public boolean isEmail(String email) {
+        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+        Pattern p = Pattern.compile(str);
+        Matcher m = p.matcher(email);
 
+        return m.matches();
+    }
     private void initHttp() {
         Log.e("GYW","userId"+USERID+"trueName"+mName+"mobilePhone"+mPhone+"email"+ mEmail
         +"province"+provinceId+"provinceName"+ province+"city"+cityId
@@ -226,7 +240,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                      mCity.setText(getSPStringValue(Constants.USER_CITY_NAME)+getString(R.string.info_blank)+getSPStringValue(Constants.USER_PROVINCE_NAME));
                      mDanWei.setText(getSPStringValue(Constants.USER_HOSPITAL_NAME));
                      mKeShi.setText(getSPStringValue(Constants.USER_KESHI));
-                     mZhiWu.setText(getSPStringValue(Constants.USER_ZHIWU));
+                     mZhiWu.setText(getSPStringValue(Constants.USER_ZHICHENG));
                 break;
                 case 3:
                     setSPStringValue(Constants.USER_USER_ID,USERID);
@@ -242,7 +256,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     setSPStringValue(Constants.USER_PROVINCE_ID,provinceId);
                     setSPStringValue(Constants.USER_PROVINCE_NAME,province);
                     setSPStringValue(Constants.USER_HOSPITAL_NAME,mHospital);
-                    setSPStringValue(Constants.USER_ZHIWU,mzhiwu);
+                    setSPStringValue(Constants.USER_ZHICHENG,mzhiwu);
                     finish();
                     break;
             }

@@ -100,7 +100,7 @@ public class CurrentAdapater implements ExpandableListAdapter {
         if(isExpanded){
             holder.current_direction.setImageResource(R.drawable.me_bottom);
         }else{
-            holder.current_direction.setImageResource(R.mipmap.me_next); }
+            holder.current_direction.setImageResource(R.drawable.me_nexttwo); }
         holder.lanmu_text.setText(currentBean.getLanmu().substring(1,currentBean.getLanmu().length()-1));
         return convertView;
     }

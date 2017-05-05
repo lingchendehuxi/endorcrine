@@ -126,7 +126,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     setSPStringValue(Constants.USER_PROVINCE_NAME,provinceName);
                     setSPStringValue(Constants.USER_CITY_NAME,cityName);
                     setSPStringValue(Constants.USER_HOSPITAL_NAME,hospitalName);
-                    setSPStringValue(Constants.USER_ZHIWU,zhiwu);
+                    setSPStringValue(Constants.USER_ZHICHENG,zhiwu);
                     setSPStringValue(Constants.USER_CITY_ID,cityId);
                     setSPStringValue(Constants.USER_HOSPITAL_ID,hospitalId);
                     setSPStringValue(Constants.USER_PROVINCE_ID,provinceId);

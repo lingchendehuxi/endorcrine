@@ -130,7 +130,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         return view;
     }
     private void updatePersonUserIcon() {
-        Glide.with(getActivity()).load(mSp.getString(Constants.USER_PIC,"")).placeholder(R.mipmap.item_vvtalk_professor_head_default).into(new SimpleTarget<GlideDrawable>() {
+        Glide.with(getActivity()).load(mSp.getString(Constants.USER_PIC,"")).placeholder(R.mipmap.toux).into(new SimpleTarget<GlideDrawable>() {
             @Override
             public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
                 tx_img.setImageDrawable(resource);
@@ -324,24 +324,26 @@ private UMShareListener listener = new UMShareListener() {
                 break;
             case R.id.btn_login_back:
                 SharedPreferences.Editor edit = mSp.edit();
-                edit.putString(Constants.USER_USER_ID,"");
-                edit.putString(Constants.USER_PIC,"");
-                edit.putString(Constants.USER_TRUE_NAME,"");
-                edit.putString(Constants.USER_SEX,"");
-                edit.putString(Constants.USER_MOBILE,"");
-                edit.putString(Constants.USER_EMAIL,"");
-                edit.putString(Constants.USER_KESHI,"");
-                edit.putString(Constants.USER_ZHICHENG,"");
-                edit.putString(Constants.USER_PROVINCE_NAME,"");
-                edit.putString(Constants.USER_CITY_NAME,"");
-                edit.putString(Constants.USER_HOSPITAL_NAME,"");
-                edit.putString(Constants.USER_HOSPITAL_LEVEL,"");
-                edit.putString(Constants.USER_ZHIWU,"");
+//                edit.putString(Constants.USER_USER_ID,"");
+//                edit.putString(Constants.USER_PIC,"");
+//                edit.putString(Constants.USER_TRUE_NAME,"");
+//                edit.putString(Constants.USER_SEX,"");
+//                edit.putString(Constants.USER_MOBILE,"");
+//                edit.putString(Constants.USER_EMAIL,"");
+//                edit.putString(Constants.USER_KESHI,"");
+//                edit.putString(Constants.USER_ZHICHENG,"");
+//
+//
+//                edit.putString(Constants.USER_PROVINCE_NAME,"");
+//                edit.putString(Constants.USER_CITY_NAME,"");
+//                edit.putString(Constants.USER_HOSPITAL_NAME,"");
+//                edit.putString(Constants.USER_HOSPITAL_LEVEL,"");
+                edit.clear();
                 edit.commit();
                 login_btn.setVisibility(View.VISIBLE);
                 login_back.setVisibility(View.GONE);
                 loginXS.setVisibility(View.GONE);
-                tx_img.setImageResource(R.mipmap.item_vvtalk_professor_head_default);
+                tx_img.setImageResource(R.mipmap.toux);
                 USERID = mSp.getString(Constants.USER_USER_ID,"");
                 break;
             case R.id.loginSet:

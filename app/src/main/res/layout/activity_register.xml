@@ -107,6 +107,7 @@
                     />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/regist_city_layout"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="15dp"
@@ -142,6 +143,7 @@
                     />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/regist_danwei_layout"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="15dp"
@@ -179,6 +181,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/regist_keshi_layout"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="15dp"
@@ -216,6 +219,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/regist_zhiwu_layout"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="15dp"
