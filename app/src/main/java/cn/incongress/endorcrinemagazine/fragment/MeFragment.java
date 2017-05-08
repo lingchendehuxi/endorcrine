@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -96,6 +97,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
             loginXS.setVisibility(View.VISIBLE);
             updatePersonUserIcon();
         }
+        MobclickAgent.onPageStart(Constants.UMENG_ME);
     }
 
     @Override
@@ -355,6 +357,10 @@ private UMShareListener listener = new UMShareListener() {
                 break;
         }
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(Constants.UMENG_ME);
+    }
 
 }

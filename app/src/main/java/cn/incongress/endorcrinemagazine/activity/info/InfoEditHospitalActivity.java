@@ -88,17 +88,21 @@ public class InfoEditHospitalActivity extends BaseActivity {
                 case 1:
                     Gson gson = new Gson();
                     HospitalBean2 hospitalBean2 = gson.fromJson(response, HospitalBean2.class);
-
-                    if(hospitalBean2.getState() == 1) {
-                        List<HospitalBean2.HospitalArrayBean> hospitalArray = hospitalBean2.getHospitalArray();
-                        for (int i = 0; i < hospitalArray.size(); i++) {
-                            HospitalBean2.HospitalArrayBean hospitalArrayBean = hospitalArray.get(i);
-                            mBeans.add(new HospitalBean(Integer.parseInt(mCityId), hospitalArrayBean.getHospitalId(), hospitalArrayBean.getHospitalName()));
+                    if(hospitalBean2 != null){
+                        if(hospitalBean2.getState() == 1) {
+                            List<HospitalBean2.HospitalArrayBean> hospitalArray = hospitalBean2.getHospitalArray();
+                            for (int i = 0; i < hospitalArray.size(); i++) {
+                                HospitalBean2.HospitalArrayBean hospitalArrayBean = hospitalArray.get(i);
+                                mBeans.add(new HospitalBean(Integer.parseInt(mCityId), hospitalArrayBean.getHospitalId(), hospitalArrayBean.getHospitalName()));
+                            }
+                            mAdapter = new HospitalAdapter();
+                            mListView.setAdapter(mAdapter);
+                        }else {
+                            ToastUtils.showShortToast("请先选择您的所在地区", InfoEditHospitalActivity.this);
                         }
-                        mAdapter = new HospitalAdapter();
-                        mListView.setAdapter(mAdapter);
-                    }else {
-                        ToastUtils.showShortToast("请先选择您的所在地区", InfoEditHospitalActivity.this);
+                    }else{
+                        ToastUtils.showShortToast("医院信息加载失败，请重新进入", InfoEditHospitalActivity.this);
+                        finish();
                     }
                     break;
             }

@@ -32,8 +32,9 @@ public class FeedbackActivity extends BaseActivity {
 
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
+
         mTitle.setText(getApplication().getString(R.string.feedback));
-        mOnlyWebview.loadUrl(getString(R.string.me_feedback,"-1", "zhnfbzz"));
+        mOnlyWebview.loadUrl(getString(R.string.me_feedback,getSPStringValue(Constants.USER_USER_ID), "zhnfm"));
        initialWebViewSetting();
     }
 

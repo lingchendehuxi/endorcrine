@@ -18,6 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -154,5 +156,15 @@ public class CurrentFragment extends BaseLazyFragment {
                 handler.sendEmptyMessage(1);
             }
         }.start();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(Constants.UMENG_CURRENT); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(Constants.UMENG_CURRENT);
     }
 }

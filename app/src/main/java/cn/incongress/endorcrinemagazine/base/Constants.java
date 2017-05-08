@@ -42,10 +42,10 @@ public class Constants {
 
     //所有接口再加一个输入参数：lan，中文传cn,英文传en
     //测试服：
-    public static final String TEST_SERVICE = "http://incongress.cn";
+    //public static final String TEST_SERVICE = "http://incongress.cn";
 
-    /*//正式服：
-    public static final String TEST_SERVICE = "http://xhy.incongress.cn";*/
+    //正式服：
+    public static final String TEST_SERVICE = "http://xhy.incongress.cn";
 
     //意见反馈
     public static final String FEEDBACK = "http://weixin.incongress.cn/xhy/xhyHtml5/html/feedback.html";//  ?userId=&project=
@@ -145,6 +145,16 @@ public class Constants {
     public static final String SP_RECIPIENT_MOBILE ="person_recipient_mobile";
     public static final String SP_RECIPIENT_ZIP_CODE = "person_recipient_zip_code";
     public static final String SP_RECIPIENT_ADDRESS = "person_recipient_address";
+
+    /**
+     * 友盟统计
+     */
+    public static String UMENG_HOME = "HOME";
+    public static String UMENG_CHOOSE = "CHOOSE";
+    public static String UMENG_CURRENT = "CURRENT";
+    public static String UMENG_PAST = "PAST";
+    public static String UMENG_ME = "ME";
+    public static String UMENG_DETAILS = "DETAILS";
 
     public static final String SP_IS_LOG_OUT = "is_log_out";
     /**

@@ -38,13 +38,13 @@
         >
         <ImageView
             android:id="@+id/current_direction"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             />
     </LinearLayout>
-</LinearLayout>
+</LinearLayout><!--
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/black"/>
+        android:background="@color/details"/>-->
 </LinearLayout>

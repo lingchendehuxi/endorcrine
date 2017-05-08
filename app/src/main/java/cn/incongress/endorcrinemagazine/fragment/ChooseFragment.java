@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -215,6 +217,16 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
         }
 
     };
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(Constants.UMENG_CHOOSE); //统计页面，"MainScreen"为页面名称，可自定义
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(Constants.UMENG_CHOOSE);
+    }
     @Override
     public void onRefresh() {
         handler.sendEmptyMessage(0);

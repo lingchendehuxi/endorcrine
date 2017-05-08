@@ -85,7 +85,8 @@ public class SearchResultAdapater extends RecyclerView.Adapter<SearchResultAdapa
 
         holder.search_lanmu.setText(mArrayList.get(position).getLanmu().substring(1,mArrayList.get(position).getLanmu().length()-1));
         if(!"".equals(mSearchs)&&"1".equals(that)){
-            holder.notesTitle.setText(setKeyWordColor(mArrayList.get(position).getNotesTitle(),mSearchs));
+            holder.notesTitle.setText(Html.fromHtml(mArrayList.get(position).getNotesTitle()));
+            holder.notesTitle.setText(setKeyWordColor(holder.notesTitle.getText().toString(),mSearchs));
             holder.search_authors.setText(mArrayList.get(position).getAuthors());
         }else if(!"".equals(mSearchs)&&"2".equals(that)){
             holder.notesTitle.setText(Html.fromHtml(mArrayList.get(position).getNotesTitle()));

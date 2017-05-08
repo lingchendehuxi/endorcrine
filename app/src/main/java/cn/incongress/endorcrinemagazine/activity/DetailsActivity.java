@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -246,13 +247,13 @@ public class DetailsActivity extends BaseActivity {
     /**
      * 缓存清理
      */
-    private void clearCache() {
+    /*private void clearCache() {
         try {
             mOnlyWebview.loadUrl("javascript:clearCachc()");
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public class LanmuInterface{
         @JavascriptInterface
@@ -274,8 +275,14 @@ private String mImgUrl;
     @Override
     public void onPause() {
         super.onPause();
-        clearCache();
-        mOnlyWebview.reload();
+        MobclickAgent.onPageEnd(Constants.UMENG_DETAILS); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(Constants.UMENG_DETAILS);
+        MobclickAgent.onResume(this);
     }
 
     Handler hand = new Handler(){
@@ -309,15 +316,15 @@ private String mImgUrl;
     }
 
     public void back(View view){
-        if(mIsFromCollection)
-            setResult(RESULT_OK);
+       /* if(mIsFromCollection)
+            setResult(RESULT_OK);*/
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        super.onBackPressed();/*
         if(mIsFromCollection)
-            setResult(RESULT_OK);
+            setResult(RESULT_OK);*/
     }
 }

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -134,4 +136,14 @@ public class PastFragment extends BaseLazyFragment {
             }
         }
     };
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(Constants.UMENG_PAST);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(Constants.UMENG_PAST);
+    }
 }

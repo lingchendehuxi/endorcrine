@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 
 
+import com.umeng.analytics.MobclickAgent;
 import com.yinglan.alphatabs.AlphaTabsIndicator;
 import com.yinglan.alphatabs.OnTabChangedListner;
 
@@ -18,6 +19,7 @@ import butterknife.BindView;
 import cn.incongress.endorcrinemagazine.R;
 import cn.incongress.endorcrinemagazine.adapter.HomeFragmentAdapter;
 import cn.incongress.endorcrinemagazine.base.BaseActivity;
+import cn.incongress.endorcrinemagazine.base.Constants;
 import cn.incongress.endorcrinemagazine.fragment.ChooseFragment;
 import cn.incongress.endorcrinemagazine.fragment.CurrentFragment;
 import cn.incongress.endorcrinemagazine.fragment.MeFragment;
@@ -65,6 +67,24 @@ public class HomeActivity extends BaseActivity {
 
     }
 
+  /*  public void onResume() {
+        super.onResume();
+                //统计时长
+    }*/
+
+    /*@Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(Constants.UMENG_HOME);
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(Constants.UMENG_HOME); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
+        MobclickAgent.onPause(this);
+    }*/
 
     @Override
     protected void initializeEvents() {

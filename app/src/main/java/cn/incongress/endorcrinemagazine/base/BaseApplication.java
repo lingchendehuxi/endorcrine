@@ -3,6 +3,7 @@ package cn.incongress.endorcrinemagazine.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UmengTool;
 
@@ -54,6 +55,7 @@ public class BaseApplication extends Application {
 
         //相册配置
         GalleryFinal.init(coreConfig);
+        MobclickAgent.openActivityDurationTrack(false);
     }
 
     public static BaseApplication getContext() {
