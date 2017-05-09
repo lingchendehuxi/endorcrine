@@ -211,13 +211,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         params.put("keshi", mKeshi);
                         params.put("zhiwu", mzhiwu);
                 try {
-                            JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.REGISTER, params, "GBK"));
+                            JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(mContext,Constants.TEST_SERVICE + Constants.REGISTER, params, "GBK"));
                             Log.e("GYW",jsonObject.toString());
                             if(1==jsonObject.getInt("state")){
                                 hand.sendEmptyMessage(3);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
+                    hand.sendEmptyMessage(4);
                         }
                 super.run();
             }
@@ -258,6 +259,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     setSPStringValue(Constants.USER_HOSPITAL_NAME,mHospital);
                     setSPStringValue(Constants.USER_ZHICHENG,mzhiwu);
                     finish();
+                    break;
+                case 4:
+                    Toast.makeText(mContext,getString(R.string.httpfail),Toast.LENGTH_LONG).show();
                     break;
             }
         }

@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 if(!"".equals(phone)&&!"".equals(name)&&!"".equals(code)){
                     initHttp(true);
                 }else{
-                    Toast.makeText(getApplication(),"请填写完整信息",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext,"请填写完整信息",Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -133,10 +133,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     setSPStringValue(Constants.USER_CITY_ID,cityId);
                     setSPStringValue(Constants.USER_HOSPITAL_ID,hospitalId);
                     setSPStringValue(Constants.USER_PROVINCE_ID,provinceId);
+                    setResult(RESULT_OK);
                     finish();
                     break;
                 case 1:
                     Toast.makeText(getApplication(),mMsg,Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Toast.makeText(mContext,getString(R.string.httpfail),Toast.LENGTH_LONG).show();
                     break;
             }
         }
@@ -154,7 +158,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     params.put("proId", "18");
                     params.put("lan", "cn");
                     try {
-                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.LOGIN, params, "GBK"));
+                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(mContext,Constants.TEST_SERVICE + Constants.LOGIN, params, "GBK"));
                         Log.e("GYW",jsonObject.toString());
                         if(0 ==jsonObject.getInt("state")){
                             mMsg = jsonObject.getString("msg");
@@ -179,6 +183,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
+                        hand.sendEmptyMessage(3);
                     }
                     super.run();
                 }
@@ -192,12 +197,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     params.put("proId", "18");
                     params.put("lan", "cn");
                     try {
-                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.LOGINYZM, params, "GBK"));
+                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(mContext,Constants.TEST_SERVICE + Constants.LOGINYZM, params, "GBK"));
                         Log.e("GYW", jsonObject.getString("code"));
                         mMsg = jsonObject.getString("msg");
                         hand.sendEmptyMessage(1);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        hand.sendEmptyMessage(3);
                     }
                     super.run();
                 }

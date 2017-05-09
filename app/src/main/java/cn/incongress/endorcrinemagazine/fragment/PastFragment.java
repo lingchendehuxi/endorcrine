@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 
@@ -83,7 +84,7 @@ public class PastFragment extends BaseLazyFragment {
                 params.put("proId", "18");
                 params.put("lan", "cn");
                 try {
-                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE+Constants.PREVIOUS_PERIOD,params, "utf8"));
+                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(getActivity(),Constants.TEST_SERVICE+Constants.PREVIOUS_PERIOD,params, "utf8"));
                     JSONArray array = jsonObject.getJSONArray("yearArray");
                     for(int i = 0;i<array.length();i++){
                         JSONObject object = array.getJSONObject(i);

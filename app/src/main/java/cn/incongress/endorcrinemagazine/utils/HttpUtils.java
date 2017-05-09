@@ -1,6 +1,8 @@
 package cn.incongress.endorcrinemagazine.utils;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,7 +25,7 @@ public class HttpUtils {
     * Param     :   params请求体内容，encode编码格式
     * Author    :   博客园-依旧淡然
     */
-    public static String submitPostData(String url1, Map<String, String> params, String encode) {
+    public static String submitPostData(Context context, String url1, Map<String, String> params, String encode) {
 
         try {
             url = new URL(url1);
@@ -48,7 +50,7 @@ public class HttpUtils {
             outputStream.write(data);
 
             int response = httpURLConnection.getResponseCode();            //获得服务器的响应码
-            Log.e("GYW","-----响应码"+response);
+            Log.e("GYW","-----响应码"+response+HttpURLConnection.HTTP_OK);
             if(response == HttpURLConnection.HTTP_OK) {
                 InputStream inptStream = httpURLConnection.getInputStream();
                 return dealResponseResult(inptStream);                     //处理服务器的响应结果

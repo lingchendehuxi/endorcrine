@@ -146,7 +146,7 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
                 params.put("lastNotesId", lastNotesId);
                 params.put("lan", "cn");
                 try {
-                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE+Constants.SELECTED,params, "utf8"));
+                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(getActivity(),Constants.TEST_SERVICE+Constants.SELECTED,params, "utf8"));
                     /*String console = "proId=18&lastNotesId=-1&lan=cn";
                     String result = HttpUtils.doPost(Constants.TEST_SERVICE+Constants.SELECTED,console);
                     JSONObject jsonObject = new JSONObject(result);*/

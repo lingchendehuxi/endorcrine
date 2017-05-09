@@ -58,6 +58,7 @@ public class DetailsActivity extends BaseActivity {
     private List<CollectionBean> mCollectionList;
     private boolean mIsFromCollection;
     private String mLanmu ,mtitle;
+
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
         mIsFromCollection = getIntent().getBooleanExtra("fromCollection",false);
@@ -74,30 +75,7 @@ public class DetailsActivity extends BaseActivity {
         mCollectionList = new ArrayList<CollectionBean>();
 
         mCollectionList = dataSave.getDataList("All");
-
-        if("".equals(USERID)){
-            userState = 0;
-            mImg.setVisibility(View.GONE);
-            mText.setText("登录后查看原文");
-        }else {
-            userState = 1;
-            if(mCollectionList.size()>0){
-                for (int i=0;i<mCollectionList.size();i++){
-                    CollectionBean map = mCollectionList.get(i);
-                    if( map.getNotesId().equals(NOTESID)){
-                        mText.setText("取消收藏");
-                        mImg.setImageResource(R.mipmap.collection);
-                        break;
-                    }else {
-                        mText.setText("收藏");
-                        mImg.setImageResource(R.mipmap.cancelcollection);
-                    }
-                }
-
-            }else{
-                mText.setText("收藏");
-            }
-        }
+        collection();
         loadUrl(Constants.TEST_SERVICE+Constants.DETAILS+"&notesId="+NOTESID+"&userState="+userState);
         initialWebViewSetting();
 //
@@ -127,9 +105,8 @@ public class DetailsActivity extends BaseActivity {
                     }
                     dataSave.setDataList("All",mCollectionList);
                 }else if("登录后查看原文".equals(mText.getText().toString())){
-                    startActivity(new Intent(getApplication(),LoginActivity.class));
-                    finish();
-                }
+                    startActivityForResult(new Intent(getApplication(),LoginActivity.class),1);
+                 }
             }
         });
         mPhotoView.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +116,41 @@ public class DetailsActivity extends BaseActivity {
             }
         });
     }
+
+    public void collection(){
+        USERID = getSPStringValue(Constants.USER_USER_ID);
+        if("".equals(USERID)){
+            userState = 0;
+            mImg.setVisibility(View.GONE);
+            mText.setText("登录后查看原文");
+        }else {
+            userState = 1;
+
+            if (mCollectionList.size() > 0) {
+                for (int i = 0; i < mCollectionList.size(); i++) {
+                    CollectionBean map = mCollectionList.get(i);
+                    if (map.getNotesId().equals(NOTESID)) {
+                        mText.setText("取消收藏");
+                        mImg.setImageResource(R.mipmap.collection);
+                        break;
+                    } else {
+                        mText.setText("收藏");
+                        mImg.setImageResource(R.mipmap.cancelcollection);
+                    }
+                }
+            }else{
+                mText.setText("收藏");
+            }
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK &&requestCode == 1) {
+            collection();
+        }
+    }
+
     @Override
     protected void initializeEvents() {
 
@@ -198,29 +210,7 @@ public class DetailsActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 mTitle.setText(view.getTitle());
-                if("".equals(USERID)){
-                    userState = 0;
-                    mImg.setVisibility(View.GONE);
-                    mText.setText("登录后查看原文");
-                }else {
-                    userState = 1;
-                    if(mCollectionList.size()>0){
-                        for (int i=0;i<mCollectionList.size();i++){
-                            CollectionBean map = mCollectionList.get(i);
-                            if( map.getNotesId().equals(NOTESID)){
-                                mText.setText("取消收藏");
-                                mImg.setImageResource(R.mipmap.collection);
-                                break;
-                            }else {
-                                mText.setText("收藏");
-                                mImg.setImageResource(R.mipmap.cancelcollection);
-                            }
-                        }
-
-                    }else{
-                        mText.setText("收藏");
-                    }
-                }
+               collection();
             }
 
             @Override

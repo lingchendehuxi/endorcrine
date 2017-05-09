@@ -126,7 +126,7 @@ public class CurrentFragment extends BaseLazyFragment {
                 params.put("state", "0");
                 params.put("lan", "cn");
                 try {
-                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE+Constants.PERIOD_LIST,params, "GBK"));
+                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(getActivity(),Constants.TEST_SERVICE+Constants.PERIOD_LIST,params, "GBK"));
                     JSONArray array = jsonObject.getJSONArray("lanmuArray");
                     for (int i = 0;i<array.length();i++){
                         JSONObject object = array.getJSONObject(i);

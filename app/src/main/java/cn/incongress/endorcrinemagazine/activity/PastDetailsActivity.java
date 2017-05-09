@@ -115,7 +115,7 @@ public class PastDetailsActivity extends BaseActivity {
                 params.put("notesType",notesType);
                 params.put("lan", "cn");
                 try {
-                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE+Constants.PERIOD_LIST,params, "GBK"));
+                    JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(mContext,Constants.TEST_SERVICE+Constants.PERIOD_LIST,params, "GBK"));
                     JSONArray array = jsonObject.getJSONArray("lanmuArray");
                     Log.e("GYW",jsonObject.toString());
                     for (int i = 0;i<array.length();i++){

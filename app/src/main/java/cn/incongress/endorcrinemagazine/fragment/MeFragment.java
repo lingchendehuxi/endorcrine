@@ -362,5 +362,4 @@ private UMShareListener listener = new UMShareListener() {
         super.onPause();
         MobclickAgent.onPageEnd(Constants.UMENG_ME);
     }
-
 }

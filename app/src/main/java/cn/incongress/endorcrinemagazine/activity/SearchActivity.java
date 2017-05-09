@@ -139,7 +139,7 @@ public class SearchActivity extends BaseActivity {
                     params.put("proId", "18");
                     params.put("lan", "cn");
                     try {
-                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.GET_COLUMN_YEAR, params, "GBK"));
+                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(mContext,Constants.TEST_SERVICE + Constants.GET_COLUMN_YEAR, params, "GBK"));
                         Log.e("GYW", jsonObject.toString());
                         JSONArray array = jsonObject.getJSONArray("years");
                         JSONArray jsonArray = jsonObject.getJSONArray("lanmuArray");
@@ -177,7 +177,7 @@ public class SearchActivity extends BaseActivity {
                     params.put("years", years);
                     params.put("lan", "cn");
                     try {
-                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(Constants.TEST_SERVICE + Constants.SEARCH, params, "GBK"));
+                        JSONObject jsonObject = new JSONObject(HttpUtils.submitPostData(mContext,Constants.TEST_SERVICE + Constants.SEARCH, params, "GBK"));
                         if(jsonObject.getInt("state")==1){
                             JSONArray array = jsonObject.getJSONArray("notesArray");
                             for(int i = 0;i<array.length();i++){
@@ -198,6 +198,7 @@ public class SearchActivity extends BaseActivity {
 
                     } catch (Exception e) {
                         e.printStackTrace();
+                        hand.sendEmptyMessage(6);
                     }
                     super.run();
                 }
@@ -331,6 +332,9 @@ public class SearchActivity extends BaseActivity {
                     mBack.setText("取消");
                     mResultNull.setVisibility(View.GONE);
                     mLinaearLayout.setVisibility(View.VISIBLE);
+                    break;
+                case 6:
+                    Toast.makeText(mContext,getString(R.string.httpfail),Toast.LENGTH_LONG).show();
                     break;
             }
         }
