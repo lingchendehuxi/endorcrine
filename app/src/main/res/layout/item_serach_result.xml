@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
-            android:textColor="@color/black"
+            android:textColor="@color/details"
             />
         <ImageView
             android:layout_marginLeft="3dp"
@@ -72,13 +72,13 @@
     android:layout_margin="@dimen/layout_padding"
     android:layout_centerInParent="true"
     android:layout_alignParentRight="true"
-    android:src="@mipmap/me_next"
+    android:src="@mipmap/me_next2"
     android:scaleType="fitXY"
     />
 <ImageView
     android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@color/search_gray"
+    android:layout_height="0.1dp"
+    android:background="@color/gray"
     android:layout_alignParentBottom="true"
     />
 </RelativeLayout>

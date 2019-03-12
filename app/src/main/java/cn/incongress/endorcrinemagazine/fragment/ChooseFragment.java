@@ -171,6 +171,7 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    handler.sendEmptyMessage(4);
                 }
                 super.run();
                 handler.sendEmptyMessage(2);
@@ -209,6 +210,9 @@ public class ChooseFragment extends BaseLazyFragment implements SwipeRefreshLayo
                     break;
                 case 3:
                     Toast.makeText(getActivity(),"暂无数据敬请期待···",Toast.LENGTH_SHORT).show();
+                    break;
+                case 4:
+                    Toast.makeText(getActivity(),getString(R.string.httpfail),Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;

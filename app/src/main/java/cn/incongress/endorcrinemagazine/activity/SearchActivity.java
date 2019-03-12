@@ -3,12 +3,15 @@ package cn.incongress.endorcrinemagazine.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -41,11 +44,14 @@ import cn.incongress.endorcrinemagazine.bean.ChooseBean;
 import cn.incongress.endorcrinemagazine.bean.SearchColumnBean;
 import cn.incongress.endorcrinemagazine.bean.SearchYearBean;
 import cn.incongress.endorcrinemagazine.utils.HttpUtils;
+import cn.incongress.endorcrinemagazine.utils.flow_layout.FlowLayout;
+import cn.incongress.endorcrinemagazine.utils.flow_layout.TagFlowLayout;
+import cn.incongress.endorcrinemagazine.widget.ClearEditText;
 
 public class SearchActivity extends BaseActivity {
 
     @BindView(R.id.search_column_recycler)
-    RecyclerView mColumnRecycler;
+    TagFlowLayout mColumnRecycler;
     @BindView(R.id.search_year_recycler)
     RecyclerView mYearRecycler;
     @BindView(R.id.search_expandable)
@@ -55,15 +61,17 @@ public class SearchActivity extends BaseActivity {
     @BindView(R.id.search_pgb)
     ProgressBar mPgb;
     @BindView(R.id.search_edit)
-    EditText mEdit;
-    @BindView(R.id.search_spinner)
-    Spinner mSpinner;
+    ClearEditText mEdit;
     @BindView(R.id.go_search)
     Button mGoSearch;
     @BindView(R.id.search_result_null)
     TextView mResultNull;
     @BindView(R.id.search_back)
     TextView mBack;
+    @BindView(R.id.search_title_text)
+    TextView mSearchTitle;
+    @BindView(R.id.search_author_text)
+    TextView mSearchAuthor;
 
     private SearchColumnAdapater mColumnAdapter;
     private SearchYearAdapater mYearAdapter;
@@ -73,7 +81,7 @@ public class SearchActivity extends BaseActivity {
     private List<SearchYearBean> mYearList = new ArrayList<>();
     private List<ChooseBean> mResultList;
 
-    private String TEXTTYPE;
+    private String TEXTTYPE = "1";
     private String lanmus = "",years ="",text;
     @Override
     protected void setContentView(Bundle savedInstanceState) {
@@ -82,6 +90,28 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void initializeViews(Bundle savedInstanceState) {
         initHttp(true);
+        mSearchTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEdit.setHint(mContext.getString(R.string.search_title_keyword));
+                mSearchTitle.setTextColor(mContext.getResources().getColor(R.color.white));
+                mSearchTitle.setBackground(mContext.getResources().getDrawable(R.drawable.search_item_bg_true));
+                mSearchAuthor.setBackground(mContext.getResources().getDrawable(R.drawable.search_item_bg_false));
+                mSearchAuthor.setTextColor(mContext.getResources().getColor(R.color.popup_bg));
+                TEXTTYPE = "1";
+            }
+        });
+        mSearchAuthor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEdit.setHint(mContext.getString(R.string.search_author_keyword));
+                mSearchTitle.setTextColor(mContext.getResources().getColor(R.color.popup_bg));
+                mSearchTitle.setBackground(mContext.getResources().getDrawable(R.drawable.search_item_bg_false));
+                mSearchAuthor.setBackground(mContext.getResources().getDrawable(R.drawable.search_item_bg_true));
+                mSearchAuthor.setTextColor(mContext.getResources().getColor(R.color.white));
+                TEXTTYPE = "2";
+            }
+        });
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +122,7 @@ public class SearchActivity extends BaseActivity {
                     lanmus = ""; years = "";
                     mLinaearLayout.setVisibility(View.VISIBLE);
                     mRecyclerView.setVisibility(View.GONE);
+                    mGoSearch.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -99,17 +130,6 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 hand.sendEmptyMessage(2);
-            }
-        });
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                TEXTTYPE = position+1+"";
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -213,14 +233,26 @@ public class SearchActivity extends BaseActivity {
             switch (msg.what){
                 case 0:
                     //设置布局管理器 --GridLayout效果--2行
-                    mColumnRecycler.setLayoutManager(new GridLayoutManager(getApplication(), 3));
+                    //mColumnRecycler.setLayoutManager(new GridLayoutManager(getApplication(), 3));
                     //实例化适配器--
-                    mColumnAdapter = new SearchColumnAdapater(getApplication());
+                    mColumnAdapter = new SearchColumnAdapater(getApplication(),mColumnList);
                     //将适配器和RecyclerView绑定
                     mColumnRecycler.setAdapter(mColumnAdapter);
                     //给适配器设置数据源
                     mColumnAdapter.setData(mColumnList);
-                    mColumnAdapter.setOnItemClickLitener(new SearchColumnAdapater.OnItemClickLitener() {
+                    mColumnRecycler.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+                        @Override
+                        public boolean onTagClick(View view, int position, FlowLayout parent) {
+                            if(mColumnList.get(position).isSelected()){
+                                mColumnList.get(position).setSelected(false);
+                            }else{
+                                mColumnList.get(position).setSelected(true);
+                            }
+                            mColumnAdapter.notifyDataChanged();
+                            return true;
+                        }
+                    });
+                    /*mColumnAdapter.setOnItemClickLitener(new SearchColumnAdapater.OnItemClickLitener() {
 
                         @Override
                         public void onItemClick(View view, int position) {
@@ -231,10 +263,10 @@ public class SearchActivity extends BaseActivity {
                             }
                             mColumnAdapter.notifyItemChanged(position);
                         }
-                    });
+                    });*/
                 case 1:
                     //设置布局管理器 --GridLayout效果--2行
-                    mYearRecycler.setLayoutManager(new GridLayoutManager(getApplication(), 4));
+                    mYearRecycler.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL,false));
                     //实例化适配器--
                     mYearAdapter = new SearchYearAdapater(getApplication());
                     //将适配器和RecyclerView绑定
@@ -297,6 +329,7 @@ public class SearchActivity extends BaseActivity {
                     break;
                 case 3:
                     mPgb.setVisibility(View.GONE);
+                    mGoSearch.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.VISIBLE);
                     mRecyclerView.setLayoutManager(new GridLayoutManager(getApplication(), 1));
                     //实例化适配器--
@@ -351,5 +384,40 @@ public class SearchActivity extends BaseActivity {
             return true;
         }
         return super.dispatchKeyEvent(event);
+    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // TODO Auto-generated method stub
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (isHideInput(view, ev)) {
+                HideSoftInput(view.getWindowToken());
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    // 判定是否需要隐藏
+    private boolean isHideInput(View v, MotionEvent ev) {
+        if (v != null && (v instanceof EditText)) {
+            int[] l = { 0, 0 };
+            v.getLocationInWindow(l);
+            int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left
+                    + v.getWidth();
+            if (ev.getX() > left && ev.getX() < right && ev.getY() > top
+                    && ev.getY() < bottom) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+    // 隐藏软键盘
+    private void HideSoftInput(IBinder token) {
+        if (token != null) {
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(token,
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

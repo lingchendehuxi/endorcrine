@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_my_collection"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="cn.incongress.endorcrinemagazine.activity.MyCollectionActivity">
-<include layout="@layout/activity_title"/>
+<include layout="@layout/activity_title"
+    android:id="@+id/activity_titlelayout"/>
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/activity_titlelayout"
         android:id="@+id/collection_recl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="@null"
         android:scrollbars="vertical" >
-
     </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/myCollectionNull"
+        android:layout_below="@+id/activity_titlelayout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/mycollection_null1"
+            android:textSize="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/mycollection_null2"
+            android:textSize="16dp"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "cn.incongress.endorcrinemagazine"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "0.9.2"
@@ -24,7 +24,7 @@ android {
        Magazine_Key {
            keyAlias 'incongress'
            keyPassword 'incongress'
-           storeFile file('D:/appkey/zazhiyi.jks')
+           storeFile file('D:/myKeystore/appkey/zazhiyi.jks')
 //            storeFile file('D:/A-Workspace_New/Keys/chy/Key_Incongress')
 //            storeFile file('F:/C-Keys/参会易Android_key/Key_Incongress')
            storePassword 'incongress'
@@ -72,4 +72,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.7.5'
     compile 'com.bm.photoview:library:1.3.6'
     compile 'com.umeng.analytics:umeng-analytics:5.4.1'
+    compile 'com.androidkun:XTabLayout:1.0.9'
 }

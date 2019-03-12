@@ -2,33 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<include
-    android:id="@+id/current_ictitle"
-    layout="@layout/search_title"/>
-<TextView
-    android:id="@+id/textasdasdasd"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="当期内容"
-    android:gravity="center"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:textSize="16dp"
-    android:textColor="@color/black"
-    android:layout_below="@+id/current_ictitle"
-    />
+
+    <include
+        android:id="@+id/current_ictitle"
+        layout="@layout/search_title" />
+
+    <TextView
+        android:id="@+id/textasdasdasd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/current_ictitle"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="当期内容"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
     <ExpandableListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"
-        android:layout_below="@+id/textasdasdasd" />
-    <ProgressBar
-    android:id="@+id/current_pgb"
-    android:layout_centerInParent="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+        android:layout_below="@+id/textasdasdasd"
+        android:divider="@null" />
 
+    <ProgressBar
+        android:id="@+id/current_pgb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
 
 </RelativeLayout>

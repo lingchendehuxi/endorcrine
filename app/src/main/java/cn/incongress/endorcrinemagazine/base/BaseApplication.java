@@ -55,6 +55,7 @@ public class BaseApplication extends Application {
 
         //相册配置
         GalleryFinal.init(coreConfig);
+
         MobclickAgent.openActivityDurationTrack(false);
     }
 

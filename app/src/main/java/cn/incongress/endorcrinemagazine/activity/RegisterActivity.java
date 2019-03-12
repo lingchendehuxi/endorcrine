@@ -1,13 +1,17 @@
 package cn.incongress.endorcrinemagazine.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,10 +110,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mRegister.setOnClickListener(this);
         AssetsDatabaseManager.initManager(RegisterActivity.this);
         if(1 == getIntent().getIntExtra("type",-1)){
-            mTitle.setText(R.string.register_rgs);
+            mTitle.setText(mContext.getString(R.string.register_rgs));
+            mRegister.setText(mContext.getString(R.string.register_next));
             hand.sendEmptyMessage(1);
         }else{
-            mTitle.setText(R.string.register_user);
+            mTitle.setText(mContext.getString(R.string.register_user));
+            mRegister.setText(mContext.getString(R.string.register_bc));
             hand.sendEmptyMessage(2);
         }
 
@@ -414,5 +420,39 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void back(View view){
         finish();
     }
-
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // TODO Auto-generated method stub
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (isHideInput(view, ev)) {
+                HideSoftInput(view.getWindowToken());
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    // 判定是否需要隐藏
+    private boolean isHideInput(View v, MotionEvent ev) {
+        if (v != null && (v instanceof EditText)) {
+            int[] l = { 0, 0 };
+            v.getLocationInWindow(l);
+            int left = l[0], top = l[1], bottom = top + v.getHeight(), right = left
+                    + v.getWidth();
+            if (ev.getX() > left && ev.getX() < right && ev.getY() > top
+                    && ev.getY() < bottom) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+    // 隐藏软键盘
+    private void HideSoftInput(IBinder token) {
+        if (token != null) {
+            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(token,
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 }

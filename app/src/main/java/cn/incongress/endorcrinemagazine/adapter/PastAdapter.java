@@ -63,7 +63,11 @@ public class PastAdapter extends RecyclerView.Adapter<PastAdapter.MyViewHolder> 
         String a = s.substring(0,4);
         String b = s.substring(5);
         holder.year.setText(a);
-        holder.moth.setText(b);
+        if("0".equals(s.substring(5,6))){
+            holder.moth.setText(s.substring(6).toString());
+        }else{
+            holder.moth.setText(b);
+        }
 
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {

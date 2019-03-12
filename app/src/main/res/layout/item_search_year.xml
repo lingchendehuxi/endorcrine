@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_margin="10dp"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:layout_margin="5dp"
     >
     <TextView
         android:id="@+id/search_choice_year"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="@dimen/layout_padding"
+        android:paddingLeft="@dimen/layout_padding"
+        android:background="@drawable/search_item_bg"
         android:layout_centerHorizontal="true"
         android:textSize="14dp"
-        android:background="@color/search_gray"
-        android:textColor="@color/search_back"
+        android:textColor="@color/popup_bg"
         android:gravity="center"
         />
 </RelativeLayout>

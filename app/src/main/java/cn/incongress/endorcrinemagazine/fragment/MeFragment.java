@@ -1,10 +1,12 @@
 package cn.incongress.endorcrinemagazine.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +65,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MeFragment extends BaseLazyFragment implements View.OnClickListener{
     private CircleImageView tx_img;
-    private Button login_btn,login_back;
+    private Button login_btn;
     private TextView loginName,mCollectionsize;
     private LinearLayout myCollection,recommend,feedback,loginXS,loginSet;
     private String USERID;
@@ -92,8 +94,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         USERID = mSp.getString(Constants.USER_USER_ID,"");
         loginName.setText(mSp.getString(Constants.USER_TRUE_NAME,""));
         if(!"".equals(USERID)){
-            login_btn.setVisibility(View.GONE);
-            login_back.setVisibility(View.VISIBLE);
+            login_btn.setText(getActivity().getString(R.string.back));
+            login_btn.setBackgroundColor(getActivity().getResources().getColor(R.color.umeng_divide));
             loginXS.setVisibility(View.VISIBLE);
             updatePersonUserIcon();
         }
@@ -117,7 +119,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         loginXS = (LinearLayout) view.findViewById(R.id.login_xs);
         tx_img = (CircleImageView) view.findViewById(R.id.img_tx);
         login_btn = (Button) view.findViewById(R.id.btn_me_login);
-        login_back = (Button) view.findViewById(R.id.btn_login_back);
         loginName = (TextView) view.findViewById(R.id.loginName);
         loginSet = (LinearLayout) view.findViewById(R.id.loginSet);
         mCollectionsize = (TextView) view.findViewById(R.id.myCollection_size);
@@ -127,7 +128,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         tx_img.setOnClickListener(this);
         login_btn.setOnClickListener(this);
         loginSet.setOnClickListener(this);
-        login_back.setOnClickListener(this);
         updatePersonUserIcon();
         return view;
     }
@@ -321,32 +321,26 @@ private UMShareListener listener = new UMShareListener() {
                 }
                 break;
             case R.id.btn_me_login:
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.btn_login_back:
-                SharedPreferences.Editor edit = mSp.edit();
-//                edit.putString(Constants.USER_USER_ID,"");
-//                edit.putString(Constants.USER_PIC,"");
-//                edit.putString(Constants.USER_TRUE_NAME,"");
-//                edit.putString(Constants.USER_SEX,"");
-//                edit.putString(Constants.USER_MOBILE,"");
-//                edit.putString(Constants.USER_EMAIL,"");
-//                edit.putString(Constants.USER_KESHI,"");
-//                edit.putString(Constants.USER_ZHICHENG,"");
-//
-//
-//                edit.putString(Constants.USER_PROVINCE_NAME,"");
-//                edit.putString(Constants.USER_CITY_NAME,"");
-//                edit.putString(Constants.USER_HOSPITAL_NAME,"");
-//                edit.putString(Constants.USER_HOSPITAL_LEVEL,"");
-                edit.clear();
-                edit.commit();
-                login_btn.setVisibility(View.VISIBLE);
-                login_back.setVisibility(View.GONE);
-                loginXS.setVisibility(View.GONE);
-                tx_img.setImageResource(R.mipmap.toux);
-                USERID = mSp.getString(Constants.USER_USER_ID,"");
+                if(getActivity().getString(R.string.login_me).equals(login_btn.getText().toString())){
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else if(getActivity().getString(R.string.back).equals(login_btn.getText().toString())){
+                    new AlertDialog.Builder(getActivity())//设置对话框标题
+                            .setMessage(getActivity().getString(R.string.back_ts))//设置显示的内容
+                            .setPositiveButton("确定",new DialogInterface.OnClickListener() {//添加确定按钮
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+                                    SharedPreferences.Editor edit = mSp.edit();
+                                    edit.clear();
+                                    edit.commit();
+                                    login_btn.setText(getActivity().getString(R.string.login_me));
+                                    login_btn.setBackgroundColor(getActivity().getResources().getColor(R.color.details));
+                                    loginXS.setVisibility(View.GONE);
+                                    tx_img.setImageResource(R.mipmap.toux);
+                                    USERID = mSp.getString(Constants.USER_USER_ID,"");
+                                }
+                            }).setNegativeButton("取消",null).show();//在按键响应事件中显示此对话框
+                }
                 break;
             case R.id.loginSet:
                 Intent it= new Intent(getActivity(),RegisterActivity.class);

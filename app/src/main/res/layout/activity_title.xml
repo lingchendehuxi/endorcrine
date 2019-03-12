@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:gravity="center_vertical"
-    android:background="@color/white"
+    android:background="@color/details"
     >
     <LinearLayout
         android:onClick="back"
@@ -13,17 +13,17 @@
         android:orientation="horizontal"
         >
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="10dp"
             android:src="@mipmap/me_back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:text="@string/title_back"
+            android:text="@string/info_blank"
             android:layout_centerVertical="true"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             />
 </LinearLayout>
 <TextView
@@ -35,11 +35,6 @@
     android:singleLine="true"
     android:ellipsize="end"
     android:textSize="18dp"
-    android:textColor="@color/black"
+    android:textColor="@color/white"
     />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/black"/>
 </RelativeLayout>

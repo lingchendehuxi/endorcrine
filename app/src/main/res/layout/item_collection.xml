@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12dp"
-        android:textColor="@color/black"
+        android:textColor="@color/details"
         />
     <ImageView
         android:layout_marginLeft="3dp"
@@ -51,7 +51,7 @@
         android:layout_margin="@dimen/layout_padding"
         android:layout_centerInParent="true"
         android:layout_alignParentRight="true"
-        android:src="@mipmap/me_next"
+        android:src="@mipmap/me_next2"
         android:scaleType="fitXY"
         />
     <ImageView

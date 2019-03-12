@@ -5,7 +5,12 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
-
+    <style name="TabLayoutTextStyle"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
+        >
+        <item name="android:textSize">14dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
     <declare-styleable name="CircleIndicator">
         <attr name="ci_radius" format="dimension"/>
         <attr name="ci_margin" format="dimension"/>

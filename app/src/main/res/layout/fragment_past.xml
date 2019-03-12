@@ -18,14 +18,21 @@
         android:textColor="@color/black"
         android:gravity="center"
         />
-    <android.support.design.widget.TabLayout
+    <com.androidkun.xtablayout.XTabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/gray"
-        app:tabTextColor="@color/umeng_divide"
         android:layout_below="@+id/past_ictitle"
+        app:xTabTextColor="@color/gray"
+        app:xTabSelectedTextColor="@color/details"
+        app:xTabTextSize="16sp"
+        app:xTabSelectedTextSize="20sp"
+        app:xTabIndicatorHeight="0dp"
         android:background="@null" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/umeng_divide"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

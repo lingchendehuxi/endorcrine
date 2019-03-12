@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="cn.incongress.endorcrinemagazine.activity.RegisterActivity">
 <include layout="@layout/activity_title"/>
     <ScrollView
@@ -22,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
+                android:background="@drawable/layout_register"
                 >
                 <TextView
                     android:layout_width="70dp"
@@ -53,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
+                android:background="@drawable/layout_register"
                 >
                 <TextView
                     android:layout_width="70dp"
@@ -83,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
+                android:background="@drawable/layout_register"
                 >
                 <TextView
                     android:layout_width="70dp"
@@ -114,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
+                android:background="@drawable/layout_register"
                 >
                 <TextView
                     android:layout_width="70dp"
@@ -150,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
+                android:background="@drawable/layout_register"
                 >
                 <TextView
                     android:layout_width="70dp"
@@ -188,7 +189,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
+                android:background="@drawable/layout_register"
                 >
                 <TextView
                     android:layout_width="70dp"
@@ -226,7 +227,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:background="@drawable/btn_me_login"
+                android:background="@drawable/layout_register"
                 >
                 <TextView
                     android:layout_width="70dp"

@@ -99,6 +99,9 @@ public class CurrentFragment extends BaseLazyFragment {
 
                     }
                     break;
+                case 2:
+                    Toast.makeText(mContext,getString(R.string.httpfail),Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     };
@@ -151,6 +154,7 @@ public class CurrentFragment extends BaseLazyFragment {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    handler.sendEmptyMessage(2);
                 }
                 super.run();
                 handler.sendEmptyMessage(1);

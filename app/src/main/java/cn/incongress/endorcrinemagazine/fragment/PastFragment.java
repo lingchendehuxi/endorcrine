@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.androidkun.xtablayout.XTabLayout;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -41,7 +42,7 @@ import cn.incongress.endorcrinemagazine.utils.HttpUtils;
 
 public class PastFragment extends BaseLazyFragment {
     private ViewPager vpg;
-    private TabLayout tab;
+    private XTabLayout tab;
     private List<PastBean> pastList;
     private ProgressBar mPgb;
     private LinearLayout mSearchLayout;
@@ -71,7 +72,7 @@ public class PastFragment extends BaseLazyFragment {
         View view = inflater.inflate(R.layout.fragment_past, container, false);
         mSearchLayout = (LinearLayout) view.findViewById(R.id.search_layout);
          vpg = (ViewPager) view.findViewById(R.id.viewpager);
-        tab = (TabLayout) view.findViewById(R.id.tabLayout);
+        tab = (XTabLayout) view.findViewById(R.id.tabLayout);
         mPgb = (ProgressBar) view.findViewById(R.id.past_pgb);
         return view;
     }
@@ -103,6 +104,7 @@ public class PastFragment extends BaseLazyFragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    hand.sendEmptyMessage(2);
                 }
                 super.run();
                 hand.sendEmptyMessage(1);
@@ -133,6 +135,9 @@ public class PastFragment extends BaseLazyFragment {
                     }
                     vpg.setAdapter(viewPagerAdapter);
                     tab.setupWithViewPager(vpg);
+                    break;
+                case 2:
+                    Toast.makeText(getActivity(),getString(R.string.httpfail),Toast.LENGTH_SHORT).show();
                     break;
             }
         }

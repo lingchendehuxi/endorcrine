@@ -83,7 +83,7 @@ public class Constants {
     public static final String GET_COLUMN_YEAR = "/notesApi.do?method=getNotesLmnf";
 
     /*搜索
-      输入参数：int proId,Integer textType,String text,String lanmus,String years
+      输入参数：int proId,Integer textType,String text,String· lanmus,String years
       返回参数：state,msg，name，notesArray
       notesArray：同接口1
     */

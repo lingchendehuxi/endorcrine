@@ -58,10 +58,10 @@ public class SearchYearAdapater extends RecyclerView.Adapter<SearchYearAdapater.
         holder.tv.setText(mArrayList.get(position).getYear());
         if(mArrayList.get(position).isSelected()) {
             holder.tv.setTextColor(mContext.getResources().getColor(R.color.white));
-            holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.details));
+            holder.tv.setEnabled(true);
         }else{
             holder.tv.setTextColor(mContext.getResources().getColor(R.color.search_back));
-            holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.search_gray));
+            holder.tv.setEnabled(false);
         }
         if (mOnItemClickLitener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

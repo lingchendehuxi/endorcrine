@@ -27,6 +27,8 @@ public class MyCollectionActivity extends BaseActivity {
     TextView mTitle;
     @BindView(R.id.collection_recl)
     RecyclerView mRecyclerView;
+    @BindView(R.id.myCollectionNull)
+    LinearLayout mCollectionNull;
 
     private LinearLayoutManager mLayoutManager;
     private ListDataSave mDataSave;
@@ -50,42 +52,53 @@ public class MyCollectionActivity extends BaseActivity {
         mDataSave = new ListDataSave(mContext, "collection");
 
         mResultList = mDataSave.getDataList("All");
+        if(mResultList.size()>0){
+            //给适配器设置数据源
+            collectionAdapater.setData(mResultList);
+            collectionAdapater.setOnItemClickLitener(new CollectionAdapater.OnItemClickLitener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Log.e("GYW",mResultList.get(position).getNotesId());
+                    Intent intent = new Intent(getApplication(), DetailsActivity.class);
+                    intent.putExtra("fromCollection",true);
+                    intent.putExtra("notesid",mResultList.get(position).getNotesId());
+                    intent.putExtra("notestitle",mResultList.get(position).getNotesTitle());
+                    startActivityForResult(intent,0x001);
+                }
+            });
+            collectionAdapater.setOnLongItemClickLitener(new CollectionAdapater.onLongItemClickLitener() {
+                @Override
+                public void onLongItemClick(View view, final int position) {
 
-        //给适配器设置数据源
-        collectionAdapater.setData(mResultList);
-        collectionAdapater.setOnItemClickLitener(new CollectionAdapater.OnItemClickLitener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Log.e("GYW",mResultList.get(position).getNotesId());
-                Intent intent = new Intent(getApplication(), DetailsActivity.class);
-                intent.putExtra("fromCollection",true);
-                intent.putExtra("notesid",mResultList.get(position).getNotesId());
-                intent.putExtra("notestitle",mResultList.get(position).getNotesTitle());
-                startActivityForResult(intent,0x001);
-            }
-        });
-        collectionAdapater.setOnLongItemClickLitener(new CollectionAdapater.onLongItemClickLitener() {
-            @Override
-            public void onLongItemClick(View view, final int position) {
+                    new AlertDialog.Builder(MyCollectionActivity.this).setTitle("")
+                            .setMessage("确认删除本条收藏记录？")
+                            .setPositiveButton("取消",new DialogInterface.OnClickListener() {//添加确定按钮
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
 
-                new AlertDialog.Builder(MyCollectionActivity.this).setTitle("")
-                        .setMessage("确认删除本条收藏记录？")
-                        .setPositiveButton("取消",new DialogInterface.OnClickListener() {//添加确定按钮
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
-
+                                }
+                            }).setNegativeButton("确认",new DialogInterface.OnClickListener() {//添加返回按钮
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {//响应事件
+                            Log.e("GYW",position+"移除数据");
+                            mResultList.remove(position);
+                            mDataSave.setDataList("All",mResultList);
+                            collectionAdapater.notifyItemRemoved(position);
+                            if(mResultList.size()==0){
+                                initView();
                             }
-                        }).setNegativeButton("确认",new DialogInterface.OnClickListener() {//添加返回按钮
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {//响应事件
-                        Log.e("GYW",position+"移除数据");
-                        mResultList.remove(position);
-                        mDataSave.setDataList("All",mResultList);
-                        collectionAdapater.notifyItemRemoved(position);
-                    }
-                }).show();//在按键响应事件中显示此对话框
-            }
-        });
+                        }
+                    }).show();//在按键响应事件中显示此对话框
+                }
+            });
+        }else{
+            initView();
+        }
+
+    }
+
+    private void initView() {
+        mCollectionNull.setVisibility(View.VISIBLE);
     }
 
     @Override

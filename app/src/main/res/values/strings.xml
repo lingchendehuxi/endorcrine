@@ -12,8 +12,10 @@
     <string name="title_back">返回</string>
 
     <!--登录界面-->
+    <string name="back_ts">退出后，部分模块将无法使用，是否确认退出？</string>
     <string name="login_log">登&#160;&#160;录</string>
-    <string name="login_reg">没有账号，去注册</string>
+    <string name="login_me">登&#160;录</string>
+    <string name="login_reg">没有账号?点此注册</string>
     <string name="login_name1">姓 名</string>
     <string name="login_name2">请输入您的姓名</string>
     <string name="login_phone1">手机号</string>
@@ -44,7 +46,8 @@
     <string name="register_title2">请选择您的职称</string>
     <string name="register_post1">职务</string>
     <string name="register_post2">请选择您的职务</string>
-    <string name="register_next">下一步</string>
+    <string name="register_next">注&#160;&#160;册</string>
+    <string name="register_bc">保&#160;&#160;存</string>
     <string name="choose_area_first">请先选择您所处的地区哦</string>
 
     <string name="info_blank">&#160;</string>
@@ -54,10 +57,15 @@
     <string name="search_back">取消</string>
     <string name="search_column">栏目</string>
     <string name="search_year">年份</string>
-    <string name="search_title">标题</string>
-    <string name="search_author">作者</string>
+    <string name="search_keyword">关键字</string>
+    <string name="search_title">按标题搜索</string>
+    <string name="search_author">按作者搜索</string>
+    <string name="search_title_keyword">搜索标题关键字</string>
+    <string name="search_author_keyword">搜索作者关键字</string>
 
     <string name="mycollection">我的收藏</string>
+    <string name="mycollection_null1">暂无收藏内容</string>
+    <string name="mycollection_null2">赶快收藏您喜爱的内容吧</string>
     <string name="choose_piecemeal_text2">&#160;期</string>
     <string name="choose_piecemeal_text3">&#160;▪&#160;</string>
     <string name="choose_piecemeal_text4">人查看</string>

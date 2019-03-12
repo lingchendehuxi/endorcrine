@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/md_divider_black"
     android:gravity="center_horizontal">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
 <TextView
     android:layout_width="match_parent"
     android:layout_height="50dp"
@@ -20,24 +15,28 @@
     android:textSize="18dp"
     android:background="@color/details"
     />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/white">
         <cn.incongress.endorcrinemagazine.utils.CircleImageView
             android:id="@+id/img_tx"
-            android:layout_marginTop="20dp"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:src="@mipmap/toux"/>
-        <RelativeLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            >
             <LinearLayout
+                android:layout_marginTop="-18dp"
                 android:id="@+id/login_xs"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:layout_marginBottom="@dimen/layout_padding"
                 >
                 <TextView
                     android:id="@+id/loginName"
@@ -68,30 +67,18 @@
                         android:textColor="@color/gray"
                         />
                 </LinearLayout>
-
             </LinearLayout>
-            <Button
-                android:id="@+id/btn_me_login"
-                android:layout_marginTop="15dp"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:text="登 录"
-                android:textSize="16dp"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/black"
-                android:background="@drawable/btn_me_login"
-                />
-        </RelativeLayout>
+        </LinearLayout>
     <ImageView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.1dp"
         android:background="@color/umeng_divide"/>
     <LinearLayout
         android:id="@+id/myCollection"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
@@ -128,11 +115,13 @@
             />
     </LinearLayout>
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/umeng_divide"/>
+        android:layout_width="10dp"
+        android:layout_height="0.1dp"
+        android:layout_gravity="left"
+        android:background="@color/white"/>
     <LinearLayout
         android:id="@+id/recommend"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -164,12 +153,14 @@
             />
     </LinearLayout>
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/umeng_divide"/>
+        android:layout_width="10dp"
+        android:layout_height="0.1dp"
+        android:layout_gravity="left"
+        android:background="@color/white"/>
     <LinearLayout
         android:id="@+id/feedback"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
@@ -201,22 +192,17 @@
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.1dp"
         android:background="@color/umeng_divide"/>
-    </LinearLayout>
+
     <Button
-        android:visibility="gone"
-        android:id="@+id/btn_login_back"
+        android:id="@+id/btn_me_login"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:background="@drawable/btn_login_back"
-        android:textColor="@color/white"
-        android:text="@string/back"
+        android:layout_height="50dp"
+        android:text="@string/login_me"
         android:textSize="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/layout_padding"
+        android:textColor="@color/white"
+        android:background="@color/details"
         />
-</RelativeLayout>
+</LinearLayout>

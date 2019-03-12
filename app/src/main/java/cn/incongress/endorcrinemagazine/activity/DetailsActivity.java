@@ -125,7 +125,7 @@ public class DetailsActivity extends BaseActivity {
             mText.setText("登录后查看原文");
         }else {
             userState = 1;
-
+            mImg.setVisibility(View.VISIBLE);
             if (mCollectionList.size() > 0) {
                 for (int i = 0; i < mCollectionList.size(); i++) {
                     CollectionBean map = mCollectionList.get(i);
